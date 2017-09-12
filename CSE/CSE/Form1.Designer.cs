@@ -31,6 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -51,18 +52,26 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(231, 274);
+            this.button2.Location = new System.Drawing.Point(219, 250);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(139, 29);
             this.button2.TabIndex = 2;
             this.button2.Text = "Upload";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(77, 22);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(497, 22);
+            this.textBox2.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(644, 464);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
@@ -79,6 +88,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 
