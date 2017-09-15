@@ -21,7 +21,7 @@ namespace CSE
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,7 +48,9 @@ namespace CSE
             try
             {
                 string text = File.ReadAllText(file);
-                label1.Text = text;
+                textBox2.Text = text;
+                panel2.Visible = true;
+                panel1.SendToBack();
             }
             catch (IOException)
             {
