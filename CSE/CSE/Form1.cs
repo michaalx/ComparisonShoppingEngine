@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace CSE
 {
     public partial class Form1 : Form
@@ -39,6 +38,9 @@ namespace CSE
                 catch (IOException)
                 {
                 }
+                catch(ArgumentNullException)
+                {
+                }
             }
             Console.WriteLine(result); //<--- for debugging
         }
@@ -47,12 +49,14 @@ namespace CSE
         {
             try
             {
-                string text = File.ReadAllText(file);
-                textBox2.Text = text;
+                textBox2.Text = TesseractOCR.ImageToText(file);
                 panel2.Visible = true;
                 panel1.SendToBack();
             }
             catch (IOException)
+            {
+            }
+            catch(ArgumentNullException)
             {
             }
 
