@@ -33,9 +33,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ifError = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.ifError = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -82,8 +83,18 @@
             this.panel1.Size = new System.Drawing.Size(628, 448);
             this.panel1.TabIndex = 4;
             // 
+            // ifError
+            // 
+            this.ifError.AutoSize = true;
+            this.ifError.ForeColor = System.Drawing.Color.Red;
+            this.ifError.Location = new System.Drawing.Point(251, 158);
+            this.ifError.Name = "ifError";
+            this.ifError.Size = new System.Drawing.Size(0, 17);
+            this.ifError.TabIndex = 3;
+            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.textBox2);
             this.panel2.Location = new System.Drawing.Point(8, 8);
             this.panel2.Name = "panel2";
@@ -99,14 +110,15 @@
             this.textBox2.Size = new System.Drawing.Size(405, 266);
             this.textBox2.TabIndex = 0;
             // 
-            // ifError
+            // button3
             // 
-            this.ifError.AutoSize = true;
-            this.ifError.ForeColor = System.Drawing.Color.Red;
-            this.ifError.Location = new System.Drawing.Point(251, 158);
-            this.ifError.Name = "ifError";
-            this.ifError.Size = new System.Drawing.Size(0, 17);
-            this.ifError.TabIndex = 3;
+            this.button3.Location = new System.Drawing.Point(461, 37);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(140, 43);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Browse Again";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
@@ -136,6 +148,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label ifError;
+        private System.Windows.Forms.Button button3;
     }
 }
 
