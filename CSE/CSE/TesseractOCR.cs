@@ -21,7 +21,7 @@ namespace CSE
             var img = new Bitmap(fileName);
             var ocr = new TesseractEngine("./tessdata", "eng", EngineMode.TesseractAndCube);
             var page = ocr.Process(img);
-            return page.GetText();
+            return page.GetText().Replace("\n","\r\n");
         }
     }
 }
