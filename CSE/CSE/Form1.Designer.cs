@@ -35,6 +35,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ifError = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +73,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ifError);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.button1);
@@ -97,13 +99,22 @@
             this.textBox2.Size = new System.Drawing.Size(405, 266);
             this.textBox2.TabIndex = 0;
             // 
+            // ifError
+            // 
+            this.ifError.AutoSize = true;
+            this.ifError.ForeColor = System.Drawing.Color.Red;
+            this.ifError.Location = new System.Drawing.Point(251, 158);
+            this.ifError.Name = "ifError";
+            this.ifError.Size = new System.Drawing.Size(0, 17);
+            this.ifError.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(644, 464);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -124,6 +135,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label ifError;
     }
 }
 

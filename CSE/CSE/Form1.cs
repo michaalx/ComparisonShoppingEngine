@@ -34,6 +34,7 @@ namespace CSE
                 {
                     string fullPath = Path.GetFullPath(file);
                     textBox1.Text = fullPath;
+                    ifError.Text = "";
                 }
                 catch (IOException)
                 {
@@ -42,7 +43,6 @@ namespace CSE
                 {
                 }
             }
-            Console.WriteLine(result); //<--- for debugging
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -58,6 +58,10 @@ namespace CSE
             }
             catch(ArgumentNullException)
             {
+            }
+            catch(ArgumentException)
+            {
+                ifError.Text = "Invalid file format";
             }
 
         }
