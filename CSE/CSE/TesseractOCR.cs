@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Emgu.CV;
+using Emgu.CV.Structure;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -18,6 +20,7 @@ namespace CSE
         /// <returns></returns>
         public static string ImageToText(string fileName)
         {
+            //Image<Bgr, Byte> image = emgu.ToImage<Bgr, Byte>();
             var img = new Bitmap(fileName);
             var ocr = new TesseractEngine("./tessdata", "eng", EngineMode.TesseractAndCube);
             var page = ocr.Process(img);
