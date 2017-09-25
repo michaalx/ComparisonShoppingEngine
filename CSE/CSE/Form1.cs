@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emgu.CV;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace CSE
 {
     public partial class Form1 : Form
     {
+
         public string file { get; set; }
         public Form1()
         {
@@ -23,6 +25,7 @@ namespace CSE
             
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             // Show the dialog and get result
@@ -33,7 +36,7 @@ namespace CSE
                 try
                 {
                     string fullPath = Path.GetFullPath(file);
-                    textBox1.Text = fullPath;
+                    pathBox.Text = fullPath;
                     ifError.Text = "";
                 }
                 catch (IOException)
@@ -42,6 +45,9 @@ namespace CSE
                 catch(ArgumentNullException)
                 {
                 }
+            } else if (openFileDialog1.FileName == "")
+            {
+                ifError.Text = "File not chosen";
             }
         }
 
@@ -49,6 +55,7 @@ namespace CSE
         {
             try
             {
+                cannyImage.Image = EmguOCR.ImageToCanny(file);
                 textBox2.Text = TesseractOCR.ImageToText(file);
                 panel2.Visible = true;
                 panel1.SendToBack();
@@ -63,6 +70,25 @@ namespace CSE
             {
                 ifError.Text = "Invalid file format";
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            panel2.Visible = false;
+            panel2.SendToBack();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Form_Resize(object sender, EventArgs e)
+        {
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
