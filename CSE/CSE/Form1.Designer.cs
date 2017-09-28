@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.brwsButton = new System.Windows.Forms.Button();
             this.pathBox = new System.Windows.Forms.TextBox();
             this.uplButton = new System.Windows.Forms.Button();
@@ -36,12 +35,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.ifError = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.cannyImage = new Emgu.CV.UI.ImageBox();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cannyImage)).BeginInit();
             this.SuspendLayout();
             // 
             // brwsButton
@@ -101,7 +98,6 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.cannyImage);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.textBox2);
             this.panel2.Location = new System.Drawing.Point(7, 4);
@@ -111,17 +107,9 @@
             this.panel2.Visible = false;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // cannyImage
-            // 
-            this.cannyImage.Location = new System.Drawing.Point(327, 106);
-            this.cannyImage.Name = "cannyImage";
-            this.cannyImage.Size = new System.Drawing.Size(279, 302);
-            this.cannyImage.TabIndex = 2;
-            this.cannyImage.TabStop = false;
-            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(346, 14);
+            this.button3.Location = new System.Drawing.Point(470, 14);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(140, 43);
             this.button3.TabIndex = 1;
@@ -134,7 +122,7 @@
             this.textBox2.Location = new System.Drawing.Point(5, 14);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(292, 431);
+            this.textBox2.Size = new System.Drawing.Size(444, 431);
             this.textBox2.TabIndex = 0;
             // 
             // Form1
@@ -142,8 +130,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(644, 464);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -152,7 +140,6 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cannyImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -168,7 +155,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label ifError;
         private System.Windows.Forms.Button button3;
-        private Emgu.CV.UI.ImageBox cannyImage;
     }
 }
 

@@ -13,7 +13,7 @@ namespace CSE
 {
     public partial class Form1 : Form
     {
-
+        List<Product> list = new List<Product>();
         public string file { get; set; }
         public Form1()
         {
@@ -53,9 +53,16 @@ namespace CSE
 
         private void button2_Click(object sender, EventArgs e)
         {
+            /* Reikia sukurti lista is nuskanuotu produktu
+             * 
+             * 
+            list.Add(new Product("Pienas", 0.76));
+            list.Add(new Product("Kiausiniai", 0.99));*/
+            var writer = new CSV();
+            writer.writeToFile(list);
             try
             {
-                cannyImage.Image = EmguOCR.ImageToCanny(file);
+                //cannyImage.Image = EmguOCR.ImageToCanny(file);
                 textBox2.Text = TesseractOCR.ImageToText(file);
                 panel2.Visible = true;
                 panel1.SendToBack();
