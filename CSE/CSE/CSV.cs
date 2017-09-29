@@ -50,7 +50,7 @@ namespace CSE
             if (File.Exists(pathRecord))
             {
                 StreamReader reader = File.OpenText(pathRegistration);
-                //var parser = new
+                
             }
         }
     }

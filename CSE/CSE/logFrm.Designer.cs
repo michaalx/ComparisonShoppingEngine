@@ -106,8 +106,9 @@
             this.SignIn.TabIndex = 19;
             this.SignIn.Text = "SignIn";
             this.SignIn.UseVisualStyleBackColor = true;
+            this.SignIn.Click += new System.EventHandler(this.SignIn_Click);
             // 
-            // Form3
+            // logFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -119,7 +120,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form3";
+            this.Name = "logFrm";
             this.Text = "Form3";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

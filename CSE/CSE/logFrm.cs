@@ -23,5 +23,12 @@ namespace CSE
             regFrm frm2 = new regFrm();
             frm2.Show();
         }
+
+        private void SignIn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 frm = new Form1();
+            frm.Show();
+        }
     }
 }
