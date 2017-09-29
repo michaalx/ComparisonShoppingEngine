@@ -9,11 +9,11 @@ namespace CSE
     class Product
     {
         public string Name { get; set; }
-        public double Price { get; set; }
-        public Product(string name, double price)
+        public decimal Price { get; set; }
+        public Product(string name, decimal price)
         {
-            this.Name = name;
-            this.Price = price;
+            Name = name;
+            Price = price;
         }
     }
 }
