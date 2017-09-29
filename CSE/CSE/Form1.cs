@@ -1,5 +1,4 @@
-﻿using Emgu.CV;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -53,16 +52,10 @@ namespace CSE
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /* Reikia sukurti lista is nuskanuotu produktu
-             * 
-             * 
-            list.Add(new Product("Pienas", 0.76));
-            list.Add(new Product("Kiausiniai", 0.99));*/
             var writer = new CSV();
-            writer.writeToFile(list);
+            //writer.writeToFile(list);
             try
             {
-                //cannyImage.Image = EmguOCR.ImageToCanny(file);
                 textBox2.Text = TesseractOCR.ImageToText(file);
                 panel2.Visible = true;
                 panel1.SendToBack();
