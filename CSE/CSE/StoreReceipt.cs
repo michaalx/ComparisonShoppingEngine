@@ -20,7 +20,7 @@ namespace CSE
         public List<Product> Products { get; }
         public DateTime Timestamp { get; }
         public Store StoreName { get; }
-        public StoreReceipt(List<Product> products, DateTime timestamp, int store )
+        public StoreReceipt(List<Product> products, DateTime timestamp, Store store )
         {
             Products = products;
             Timestamp = timestamp;
