@@ -13,17 +13,17 @@ namespace CSE
     public partial class Form1 : Form
     {
         List<Product> list = new List<Product>();
-        public string file { get; set; }
+		private ClosestMatch ClosestMatch { get; set; }
+		public string file { get; set; }
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
+		private void Form1_Closing(object sender, FormClosingEventArgs e)
+		{
+			System.Environment.Exit(1);
+		}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -53,10 +53,11 @@ namespace CSE
         private void button2_Click(object sender, EventArgs e)
         {
             var writer = new CSV();
-            //writer.writeToFile(list);
-            try
+			//writer.writeToFile(list);
+			try
             {
-                textBox2.Text = TesseractOCR.ImageToText(file);
+				ClosestMatch = new ClosestMatch();
+				textBox2.Text = ClosestMatch.FindMatch(TesseractOCR.ImageToText(file).Split('\n'), file);
                 panel2.Visible = true;
                 panel1.SendToBack();
             }
@@ -70,6 +71,7 @@ namespace CSE
             {
                 ifError.Text = "Invalid file format";
             }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -78,7 +80,12 @@ namespace CSE
             panel2.SendToBack();
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
+		private void Form1_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
@@ -91,5 +98,11 @@ namespace CSE
         {
 
         }
-    }
+
+		private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+		{
+
+		}
+
+	}
 }
