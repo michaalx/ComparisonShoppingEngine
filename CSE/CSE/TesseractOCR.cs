@@ -20,6 +20,7 @@ namespace CSE
         {
             var img = new Bitmap(fileName);
             var ocr = new TesseractEngine("./tessdata", "eng", EngineMode.TesseractAndCube);
+            ocr.SetVariable("tessedit_pageseg_mode", 6);
             var page = ocr.Process(img);
             return page.GetText().Replace("\n","\r\n");
         }
