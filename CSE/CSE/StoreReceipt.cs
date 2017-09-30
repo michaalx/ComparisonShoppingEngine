@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CSE
 {
 
-    public enum StoreList
+    public enum Store
     {
         Maxima = 1,
         IKI,
@@ -19,12 +19,12 @@ namespace CSE
     {
         public List<Product> Products { get; }
         public DateTime Timestamp { get; }
-        public int Store { get; }
-        public StoreReceipt(List<Product> products, DateTime timestamp, int store )
+        public Store StoreName { get; }
+        public StoreReceipt(List<Product> products, DateTime timestamp, Store store )
         {
             Products = products;
             Timestamp = timestamp;
-            Store = store;
+            StoreName = store;
         }
     }
 }
