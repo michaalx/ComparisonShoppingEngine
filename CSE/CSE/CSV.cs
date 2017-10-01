@@ -11,7 +11,7 @@ namespace CSE
     class CSV
     {    
        // string pathRecord = @"C:\Users\giedr\Desktop\cse\records.csv";
-        string pathRegistration = @"C:\Users\giedr\Desktop\cse\registration.csv";
+        string pathRegistration = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "registration.csv");
         public void WriteToFileProducts(List<Product> list, string filePath)
         {
             if (!(File.Exists(filePath)))
