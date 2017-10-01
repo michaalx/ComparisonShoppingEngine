@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ClosestMatch.cs" />
     <Compile Include="CSV.cs" />
+    <Compile Include="Email.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

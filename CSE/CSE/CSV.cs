@@ -45,13 +45,49 @@ namespace CSE
                 writer.Close();
             }
         }
-        public void parsingRegistration()
+        public bool ParsingRegistration(string email)
         {
             if (File.Exists(pathRecord))
             {
                 StreamReader reader = File.OpenText(pathRegistration);
-                
+                var parser = new CsvParser(reader);
+                while (true)
+                {
+                    var row = parser.Read();
+                    if( row == null )
+                    {
+                        reader.Close();
+                        break;
+                    }
+                    if (row[2] == email)
+                    {
+                        return true;
+                    }
+                }
             }
+            return false;
+        }
+        public bool ParsingRegistration(string email, string password)
+        {
+            if (File.Exists(pathRecord))
+            {
+                StreamReader reader = File.OpenText(pathRegistration);
+                var parser = new CsvParser(reader);
+                while (true)
+                {
+                    var row = parser.Read();
+                    if (row == null)
+                    {
+                        reader.Close();
+                        break;
+                    }
+                    if (row[2] == email && row[3] == password)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
