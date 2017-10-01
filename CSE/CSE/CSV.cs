@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace CSE
 {
     class CSV
-    {    
-        string pathRecord = @"C:\Users\giedr\Desktop\cse\records.csv";
-        string pathRegistration = @"C:\Users\giedr\Desktop\cse\registration.csv";
-        public void writeToFileProducts(List<Product> list)
+    {
+		string pathRecord = @"C:\Users\giedr\Desktop\cse\records.csv";//In order to successfully execute the software create files named records.csv & registration.csv and change paths accordingly
+		string pathRegistration = @"C:\Users\giedr\Desktop\cse\registration.csv";//^
+		public void writeToFileProducts(List<Product> list)
         {
             if (!(File.Exists(pathRecord)))
             {
