@@ -19,6 +19,10 @@ namespace CSE
             {
                 return false;
             }
+            catch(ArgumentException)
+            {
+                return false;
+            }
         }
     }
 }
