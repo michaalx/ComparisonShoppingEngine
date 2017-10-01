@@ -116,6 +116,7 @@
             // 
             this.regPwBox.Location = new System.Drawing.Point(241, 219);
             this.regPwBox.Name = "regPwBox";
+            this.regPwBox.PasswordChar = '*';
             this.regPwBox.Size = new System.Drawing.Size(180, 22);
             this.regPwBox.TabIndex = 16;
             // 
@@ -123,6 +124,7 @@
             // 
             this.regConfBox.Location = new System.Drawing.Point(241, 256);
             this.regConfBox.Name = "regConfBox";
+            this.regConfBox.PasswordChar = '*';
             this.regConfBox.Size = new System.Drawing.Size(180, 22);
             this.regConfBox.TabIndex = 17;
             // 
@@ -173,7 +175,7 @@
             this.ifError2.Size = new System.Drawing.Size(0, 17);
             this.ifError2.TabIndex = 20;
             // 
-            // Form2
+            // regFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -192,7 +194,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form2";
+            this.Name = "regFrm";
             this.Text = "Form2";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

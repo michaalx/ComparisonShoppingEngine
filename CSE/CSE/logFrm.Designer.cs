@@ -36,6 +36,7 @@
             this.logEmBox = new System.Windows.Forms.TextBox();
             this.logPwBox = new System.Windows.Forms.TextBox();
             this.SignIn = new System.Windows.Forms.Button();
+            this.ifError2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,6 +96,7 @@
             // 
             this.logPwBox.Location = new System.Drawing.Point(237, 193);
             this.logPwBox.Name = "logPwBox";
+            this.logPwBox.PasswordChar = '*';
             this.logPwBox.Size = new System.Drawing.Size(173, 22);
             this.logPwBox.TabIndex = 4;
             // 
@@ -108,11 +110,24 @@
             this.SignIn.UseVisualStyleBackColor = true;
             this.SignIn.Click += new System.EventHandler(this.SignIn_Click);
             // 
+            // ifError2
+            // 
+            this.ifError2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ifError2.AutoSize = true;
+            this.ifError2.ForeColor = System.Drawing.Color.Red;
+            this.ifError2.Location = new System.Drawing.Point(234, 123);
+            this.ifError2.Name = "ifError2";
+            this.ifError2.Size = new System.Drawing.Size(0, 17);
+            this.ifError2.TabIndex = 21;
+            // 
             // logFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(644, 464);
+            this.Controls.Add(this.ifError2);
             this.Controls.Add(this.SignIn);
             this.Controls.Add(this.logPwBox);
             this.Controls.Add(this.logEmBox);
@@ -139,5 +154,6 @@
         private System.Windows.Forms.TextBox logEmBox;
         private System.Windows.Forms.TextBox logPwBox;
         private System.Windows.Forms.Button SignIn;
+        private System.Windows.Forms.Label ifError2;
     }
 }
