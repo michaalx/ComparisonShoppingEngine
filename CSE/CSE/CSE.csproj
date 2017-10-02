@@ -52,6 +52,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrontEnd\GetDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\GetDataForm.Designer.cs">
+      <DependentUpon>GetDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrontEnd\StartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\StartForm.Designer.cs">
+      <DependentUpon>StartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrontEnd\UploadDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\UploadDataForm.Designer.cs">
+      <DependentUpon>UploadDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextProcessor.cs" />
     <Compile Include="CSV.cs" />
     <Compile Include="DataDistributionAmongFiles.cs" />
@@ -83,6 +101,15 @@
     <Compile Include="User.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\GetDataForm.resx">
+      <DependentUpon>GetDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\StartForm.resx">
+      <DependentUpon>StartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\UploadDataForm.resx">
+      <DependentUpon>UploadDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="regFrm.resx">
       <DependentUpon>regFrm.cs</DependentUpon>
