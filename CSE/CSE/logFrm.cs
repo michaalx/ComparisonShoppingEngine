@@ -26,20 +26,20 @@ namespace CSE
 
         private void SignIn_Click(object sender, EventArgs e)
         {//comment if you want fast testing without login
-            var email = logEmBox.Text;
+            /*var email = logEmBox.Text;
             var password = logPwBox.Text;
             var csv = new CSV();
             
             if (csv.ParsingRegistration(email,password))
-            {//This has to be uncommented (inside if)
+            {//This has to be uncommented (inside if)*/
                 this.Hide();
                 Form1 frm = new Form1();
                 frm.Show();
-            }//
+           /* }//
             else
             {
                 ifError2.Text = "Email or password is invalid";
-            }
+            }*/
         }
     }
 }

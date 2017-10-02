@@ -107,5 +107,20 @@ namespace CSE
 
 		}
 
-	}
+        private void insertReceiptToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = true;
+            panel3.Visible = false;
+            panel1.BringToFront();
+            panel3.SendToBack();
+        }
+
+        private void chooseItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = true;
+            panel1.Visible = false;
+            panel3.BringToFront();
+            panel1.SendToBack();
+        }
+    }
 }
