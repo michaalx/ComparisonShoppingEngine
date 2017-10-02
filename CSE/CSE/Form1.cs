@@ -13,7 +13,7 @@ namespace CSE
     public partial class Form1 : Form
     {
         List<Product> list = new List<Product>();
-		private ClosestMatch ClosestMatch { get; set; }
+		private TextProcessor ClosestMatch { get; set; }
 		public string file { get; set; }
         public Form1()
         {
@@ -56,9 +56,12 @@ namespace CSE
 			//writer.writeToFile(list);
 			try
             {
-				ClosestMatch = new ClosestMatch();
-				textBox2.Text = ClosestMatch.FindMatch(TesseractOCR.ImageToText(file).Split('\n'), file);
-                panel2.Visible = true;
+				var textProcessor = new TextProcessor(TesseractOCR.ImageToText(file).Split('\n'));
+				textProcessor.CleanEmptyLines();
+				textProcessor.SeparateNamePrice();
+				textProcessor.FindMatch();
+				textBox2.Text = string.Join("\r\n", textProcessor.GetPriceList().Select(x => x.ToString()).ToArray());//Change "GetProductList()" to "GetPriceList()" in order to preview price list and vice versa
+				panel2.Visible = true;
                 panel1.SendToBack();
             }
             catch (IOException)
