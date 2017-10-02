@@ -17,7 +17,7 @@ namespace CSE
             InitializeComponent();
         }
 
-        private void registerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RegisterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
             regFrm frm2 = new regFrm();

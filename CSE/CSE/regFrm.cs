@@ -18,7 +18,7 @@ namespace CSE
             InitializeComponent();
         }
 
-        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoginToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
             logFrm frm3 = new logFrm();
@@ -57,7 +57,7 @@ namespace CSE
                     user_information.Add(user);
                     //writing to csv file
 
-                    csv.writeToFileRegistration(user_information);
+                    csv.WriteToFileRegistration(user_information);
                     //showing loginform
                     this.Hide();
                     logFrm frm3 = new logFrm();

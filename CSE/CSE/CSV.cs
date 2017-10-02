@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 namespace CSE
 {
     class CSV
-    {
-		string pathRecord = @"C:\Users\giedr\Desktop\cse\records.csv";//In order to successfully execute the software create files named records.csv & registration.csv and change paths accordingly
-		string pathRegistration = @"C:\Users\giedr\Desktop\cse\registration.csv";//^
-		public void writeToFileProducts(List<Product> list)
+    {    
+       // string pathRecord = @"C:\Users\giedr\Desktop\cse\records.csv";
+        string pathRegistration = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "registration.csv");
+        public void WriteToFileProducts(List<Product> list, string filePath)
         {
-            if (!(File.Exists(pathRecord)))
+            if (!(File.Exists(filePath)))
             {
-                StreamWriter writer = File.CreateText(pathRecord);
+                StreamWriter writer = File.CreateText(filePath);
             } else
             {
-                StreamWriter writer = File.AppendText(pathRecord);
+                StreamWriter writer = File.AppendText(filePath);
                 var csv = new CsvWriter(writer);
                 foreach (var value in list)
                 {
@@ -29,7 +29,7 @@ namespace CSE
                 writer.Close();
             }
         }
-        public void writeToFileRegistration(List<User> list)
+        public void WriteToFileRegistration(List<User> list)
         {
             if (!(File.Exists(pathRegistration)))
             {
@@ -47,7 +47,10 @@ namespace CSE
         }
         public bool ParsingRegistration(string email)
         {
-            if (File.Exists(pathRecord))
+            //if (File.Exists(pathRecord))
+            //Maybe you have mentioned this?
+            if(File.Exists(pathRegistration)) 
+            //-----------------------------------
             {
                 StreamReader reader = File.OpenText(pathRegistration);
                 var parser = new CsvParser(reader);
@@ -69,7 +72,8 @@ namespace CSE
         }
         public bool ParsingRegistration(string email, string password)
         {
-            if (File.Exists(pathRecord))
+           // if (File.Exists(pathRecord))
+           if(File.Exists(pathRegistration))
             {
                 StreamReader reader = File.OpenText(pathRegistration);
                 var parser = new CsvParser(reader);
