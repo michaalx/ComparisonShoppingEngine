@@ -45,6 +45,25 @@ namespace CSE
 			}
 		}
 
+		public void CleanIrrelevantLines()
+		{
+			char[] temp = new char[6];
+			for (int i = 0; i < recognizedTextLines.Count; i++)
+			{	
+				recognizedTextLines[i].CopyTo(recognizedTextLines[i].Count()-7, temp, 0, 6);
+				if (!(Char.IsDigit(temp[0]) &&
+						(temp[1].Equals(',') || temp[1].Equals('.')) &&
+						Char.IsDigit(temp[2]) &&
+						Char.IsDigit(temp[3]) &&
+						temp[4].Equals(' ') &&
+						(temp[5].Equals('A') || temp[5].Equals('C'))))
+				{
+					recognizedTextLines.RemoveAt(i);
+					i--;
+				}
+			}
+		}
+
 		public void SeparateNamePrice()
 		{
 			int size;
@@ -98,8 +117,6 @@ namespace CSE
 				productList.Add(productDB[index]);
 				closestMatchIndex = -1;
 			}
-			for (int i = 0; i < productList.Count; i++)
-				Console.WriteLine(productList[i] + "\n");
 		}
 
 		public int LevenshteinDistance(string source, string target)

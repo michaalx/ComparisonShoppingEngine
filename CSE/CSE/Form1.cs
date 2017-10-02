@@ -58,9 +58,10 @@ namespace CSE
             {
 				var textProcessor = new TextProcessor(TesseractOCR.ImageToText(file).Split('\n'));
 				textProcessor.CleanEmptyLines();
+				textProcessor.CleanIrrelevantLines();
 				textProcessor.SeparateNamePrice();
 				textProcessor.FindMatch();
-				textBox2.Text = string.Join("\r\n", textProcessor.GetPriceList().Select(x => x.ToString()).ToArray());//Change "GetProductList()" to "GetPriceList()" in order to preview price list and vice versa
+				textBox2.Text = string.Join("\r\n", textProcessor.GetProductList().Select(x => x.ToString()).ToArray());//Change "GetProductList()" to "GetPriceList()" in order to preview price list and vice versa
 				panel2.Visible = true;
                 panel1.SendToBack();
             }
