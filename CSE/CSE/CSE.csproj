@@ -52,6 +52,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheapestStore.cs" />
+    <Compile Include="ListViewOperations.cs" />
     <Compile Include="TextProcessor.cs" />
     <Compile Include="CSV.cs" />
     <Compile Include="DataDistributionAmongFiles.cs" />

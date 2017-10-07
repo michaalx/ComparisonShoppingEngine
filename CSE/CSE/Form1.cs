@@ -12,8 +12,11 @@ namespace CSE
 {
     public partial class Form1 : Form
     {
-        List<Product> list = new List<Product>();
-		private TextProcessor ClosestMatch { get; set; }
+        List<Product> listOfItems = new List<Product>();
+        DataDistributionAmongFiles ddaf = new DataDistributionAmongFiles();
+        CheapestStore choose = new CheapestStore();
+        ListViewOperations lwo = new ListViewOperations();
+        private TextProcessor ClosestMatch { get; set; }
 		public string file { get; set; }
         public Form1()
         {
@@ -52,17 +55,21 @@ namespace CSE
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var writer = new CSV();
-			//writer.writeToFile(list);
 			try
             {
+                var shop = comboBox.Text;
 				var textProcessor = new TextProcessor(TesseractOCR.ImageToText(file).Split('\n'));
 				textProcessor.CleanEmptyLines();
 				textProcessor.CleanIrrelevantLines();
 				textProcessor.SeparateNamePrice();
 				textProcessor.FindMatch();
-				textBox2.Text = string.Join("\r\n", textProcessor.GetProductList().Select(x => x.ToString()).ToArray());//Change "GetProductList()" to "GetPriceList()" in order to preview price list and vice versa
-				panel2.Visible = true;
+                //This has to be in other class
+                var products = textProcessor.GetProductList().Select(x => x.ToString()).ToArray();
+                var prices = textProcessor.GetPriceList().Select(x => x.ToString()).ToArray();
+                //
+                ddaf.ToProductList(products,prices);
+                ddaf.WriteDataToFile(shop);
+                panel2.Visible = true;
                 panel1.SendToBack();
             }
             catch (IOException)
@@ -86,10 +93,28 @@ namespace CSE
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+            ListInit();
+            ListViewItems_Init();
+        }
+        //Adding items to listView
+        public void ListViewItems_Init()
+        {
+            foreach (var item in listOfItems)
+            {
+                listViewItems.Items.Add(item.Name);
+            }
+        }
 
-		}
+        //Parsing products from files
+        private void ListInit()
+        {
+            CSV csv = new CSV();
+            var paths = ddaf.GetFilesPaths();
+            listOfItems = csv.ParsingUniqueProducts(paths);
 
-		private void panel2_Paint(object sender, PaintEventArgs e)
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
@@ -122,6 +147,24 @@ namespace CSE
             panel1.Visible = false;
             panel3.BringToFront();
             panel1.SendToBack();
+        }
+
+        //adds selected products from one list to other(cart)
+        private void addButton_Click(object sender, EventArgs e)
+        {
+           lwo.CopySelectedItems(listViewItems,listViewCart);
+        }
+
+        private void CheapestStoreButton_Click(object sender, EventArgs e)
+        {
+            var result = choose.GetCheapestStore(listViewCart);
+            cheapestStore.Text = "You should go to " + result.ToUpper();
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            lwo.RemoveSelectedItems(listViewCart);
+            cheapestStore.Text = "";
         }
     }
 }

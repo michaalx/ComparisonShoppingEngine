@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSE
 {
-    class Product
+    struct Product
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
