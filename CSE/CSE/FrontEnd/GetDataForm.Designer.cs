@@ -52,6 +52,7 @@
             this.comparePricesButton.TabIndex = 1;
             this.comparePricesButton.Text = "Compare product prices";
             this.comparePricesButton.UseVisualStyleBackColor = true;
+            this.comparePricesButton.Click += new System.EventHandler(this.CompareProductPrices_Click);
             // 
             // goBackButton
             // 

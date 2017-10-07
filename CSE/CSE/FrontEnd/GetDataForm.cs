@@ -23,5 +23,12 @@ namespace CSE.FrontEnd
             StartForm startForm = new StartForm();
             startForm.Show();
         }
+
+        private void CompareProductPrices_Click(object sender, EventArgs e)
+        {
+            Hide();
+            CompareProductPricesForm compareProductPricesForm = new CompareProductPricesForm();
+            compareProductPricesForm.Show();
+        }
     }
 }

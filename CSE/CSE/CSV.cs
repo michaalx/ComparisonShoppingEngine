@@ -10,7 +10,6 @@ namespace CSE
 {
     class CSV
     {    
-       // string pathRecord = @"C:\Users\giedr\Desktop\cse\records.csv";
         string pathRegistration = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "registration.csv");
         public void WriteToFileProducts(List<Product> list, string filePath)
         {
@@ -29,7 +28,12 @@ namespace CSE
                 writer.Close();
             }
         }
-        public void WriteToFileRegistration(List<User> list)
+        /// <summary>
+        /// Modified method.
+        /// Only one user is able to sign up during session.
+        /// </summary>
+        /// <param name="user"></param>
+        public void WriteToFileRegistration(User user)
         {
             if (!(File.Exists(pathRegistration)))
             {
@@ -38,10 +42,10 @@ namespace CSE
             {
                 StreamWriter writer = File.AppendText(pathRegistration);
                 var csv = new CsvWriter(writer);
-                foreach (var value in list)
-                {
-                    csv.WriteRecord(value);
-                }
+               // foreach (var value in list)
+                //{
+                    csv.WriteRecord(user);
+                //}
                 writer.Close();
             }
         }

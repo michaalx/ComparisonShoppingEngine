@@ -20,14 +20,14 @@ namespace CSE.FrontEnd
         private void LogIn_Click(object sender, EventArgs e)
         {
             Hide();
-            logFrm loginForm = new logFrm();
+            LogInForm loginForm = new LogInForm();
             loginForm.Show();
         }
 
         private void SignUp_Click(object sender, EventArgs e)
         {
             Hide();
-            regFrm registrationForm = new regFrm();
+            SignUpForm registrationForm = new SignUpForm();
             registrationForm.Show();
         }
 
