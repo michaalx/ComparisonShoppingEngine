@@ -19,23 +19,23 @@ namespace CSE
         static string pathToLidl = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lidl.csv");
         string[] paths = { pathToIKI, pathToLidl, pathToMaxima, pathToNorfa, pathToRimi };
 
-        public void WriteDataToFile(string store)
+        public void WriteDataToFile(Store store)
         {
             switch (store)
             {
-                case "Maxima":
+                case Store.Maxima:
                     csvTool.WriteToFileProducts(products, pathToMaxima);
                     return;
-                case "IKI":
+                case Store.IKI:
                     csvTool.WriteToFileProducts(products, pathToIKI);
                     return;
-                case "Rimi":
+                case Store.Rimi:
                     csvTool.WriteToFileProducts(products, pathToRimi);
                     return;
-                case "Norfa":
+                case Store.Norfa:
                     csvTool.WriteToFileProducts(products, pathToNorfa);
                     return;
-                case "Lidl":
+                case Store.Lidl:
                     csvTool.WriteToFileProducts(products, pathToLidl);
                     return;
             }

@@ -135,7 +135,6 @@ namespace CSE
                     reader.Close();
                     break;
                 }
-                new Product(row[0], Decimal.Parse(row[1]));
                 originProducts.Add(new Product(row[0], Decimal.Parse(row[1])));
             }
             //querying for matching item
