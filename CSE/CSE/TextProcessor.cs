@@ -22,6 +22,9 @@ namespace CSE
 
 		public void DataBaseInit()
 		{
+            var fp = new DataDistributionAmongFiles();
+            
+            /*
 			productDB.Add("SEED BATCH");
 			productDB.Add("MILK");
 			productDB.Add("WHOLE MILK");
@@ -31,6 +34,7 @@ namespace CSE
 			productDB.Add("GREEK STYLE YOGURT");
 			productDB.Add("VIENNA TIGER ROLLS");
 			productDB.Add("GARLIC BAGUETTE");
+            */
 		}
 
 		public void CleanEmptyLines()

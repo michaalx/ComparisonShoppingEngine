@@ -4,18 +4,22 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CSE
 {
     class DataDistributionAmongFiles
     {
+        List<Product> products = new List<Product>();
         CSV csvTool = new CSV();
-        string pathToMaxima = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "maxima.csv");
-        string pathToIKI = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "iki.csv");
-        string pathToRimi = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rimi.csv");
-        string pathToNorfa = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "norfa.csv");
-        string pathToLidl = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lidl.csv");
-        public void WriteDataToFile(List<Product> products, Store store)
+        static string pathToMaxima = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "maxima.csv");
+        static string pathToIKI = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "iki.csv");
+        static string pathToRimi = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rimi.csv");
+        static string pathToNorfa = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "norfa.csv");
+        static string pathToLidl = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lidl.csv");
+        string[] paths = { pathToIKI, pathToLidl, pathToMaxima, pathToNorfa, pathToRimi };
+
+        public void WriteDataToFile(Store store)
         {
             switch (store)
             {
@@ -35,6 +39,21 @@ namespace CSE
                     csvTool.WriteToFileProducts(products, pathToLidl);
                     return;
             }
+        }
+
+        public void ToProductList(string[] products, string[] prices)
+        {
+            decimal[] price= Array.ConvertAll(prices, Decimal.Parse);
+            for (int i = 0; i < products.Length; i++)
+            {
+                var temp = new Product(products[i], price[i]);
+                this.products.Add(temp);
+            }
+        }
+
+        public string[] GetFilesPaths()
+        {
+            return paths;
         }
     }
 }
