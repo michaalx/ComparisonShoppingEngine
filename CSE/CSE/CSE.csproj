@@ -82,52 +82,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreReceipt.cs" />
     <Compile Include="TesseractOCR.cs" />
-    <Compile Include="User.cs" />
-    
-    
-    
-    
-     <Compile Include="FrontEnd\CompareProductPricesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrontEnd\CompareProductPricesForm.Designer.cs">
-      <DependentUpon>CompareProductPricesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrontEnd\FormsToolkit.cs" />
-    <Compile Include="FrontEnd\GetDataForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrontEnd\GetDataForm.Designer.cs">
-      <DependentUpon>GetDataForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrontEnd\LogInForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrontEnd\LogInForm.Designer.cs">
-      <DependentUpon>LogInForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrontEnd\SignUpForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrontEnd\SignUpForm.Designer.cs">
-      <DependentUpon>SignUpForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrontEnd\StartForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrontEnd\StartForm.Designer.cs">
-      <DependentUpon>StartForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrontEnd\UploadDataForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrontEnd\UploadDataForm.Designer.cs">
-      <DependentUpon>UploadDataForm.cs</DependentUpon>
-    </Compile>
-    
-    
-    
-    
+    <Compile Include="User.cs" /> 
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
