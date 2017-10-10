@@ -57,7 +57,7 @@ namespace CSE
                     user_information.Add(user);
                     //writing to csv file
 
-                    csv.WriteToFileRegistration(user_information);
+                    //csv.WriteToFileRegistration(user_information);
                     //showing loginform
                     this.Hide();
                     logFrm frm3 = new logFrm();

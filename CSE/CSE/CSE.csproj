@@ -86,6 +86,24 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\CompareProductPricesForm.resx">
+      <DependentUpon>CompareProductPricesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\GetDataForm.resx">
+      <DependentUpon>GetDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\LogInForm.resx">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\SignUpForm.resx">
+      <DependentUpon>SignUpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\StartForm.resx">
+      <DependentUpon>StartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\UploadDataForm.resx">
+      <DependentUpon>UploadDataForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="regFrm.resx">
       <DependentUpon>regFrm.cs</DependentUpon>
     </EmbeddedResource>
