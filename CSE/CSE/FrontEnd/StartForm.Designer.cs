@@ -75,6 +75,7 @@
             this.Controls.Add(this.label1);
             this.Name = "StartForm";
             this.Text = "Welcome";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartForm_Closing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

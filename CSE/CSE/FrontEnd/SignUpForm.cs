@@ -72,5 +72,10 @@ namespace CSE.FrontEnd
             UploadDataForm goBack = new UploadDataForm();
             goBack.Show();
         }
+
+        private void SignUpForm_Closing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(1);
+        }
     }
 }

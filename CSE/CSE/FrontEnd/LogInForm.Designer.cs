@@ -127,6 +127,7 @@
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.label1);
             this.Name = "LogInForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogInForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

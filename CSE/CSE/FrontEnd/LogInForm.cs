@@ -34,8 +34,8 @@ namespace CSE.FrontEnd
             }
             else
             {
-                errorLabel.Text = "Email or password is incorrect.";
-                //todo: hide after 5 sec .
+                var error = "Email or password is incorrect.";
+                FormsToolkit.DisplayInputError(error);
             }
         }
 
@@ -44,6 +44,11 @@ namespace CSE.FrontEnd
             Hide();
             UploadDataForm uploadDataForm = new UploadDataForm();
             uploadDataForm.Show();
+        }
+
+        private void LogInForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(1);
         }
     }
 }

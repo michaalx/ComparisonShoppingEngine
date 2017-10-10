@@ -88,6 +88,7 @@
             this.Controls.Add(this.label1);
             this.Name = "UploadDataForm";
             this.Text = " ";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UploadDataForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

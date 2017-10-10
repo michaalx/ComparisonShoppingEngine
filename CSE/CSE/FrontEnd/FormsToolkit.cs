@@ -25,14 +25,11 @@ namespace CSE.FrontEnd
              Later I will make a method that makes a list of products 
              from selected products that are available in at least two stores.
              */
-           /* TextProcessor tempClass = new TextProcessor(null);
-          / tempClass.DataBaseInit();
-            List<string> products = tempClass.GetProductList();
-            foreach(string value in products)
-            {
-                form.productListBox.Items.Add(value)
-            }
-            return;*/
+             
+        }
+        public static void InitializeProductDatabase()
+        {
+
         }
     }
 }
