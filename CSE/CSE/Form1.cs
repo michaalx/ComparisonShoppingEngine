@@ -57,8 +57,8 @@ namespace CSE
         {
 			try
             {
-                var shop = comboBox.Text;
-				var textProcessor = new TextProcessor(TesseractOCR.ImageToText(file).Split('\n'));
+                var shop = (Store)Enum.Parse(typeof(Store), comboBox.Text);
+                var textProcessor = new TextProcessor(TesseractOCR.ImageToText(file).Split('\n'));
 				textProcessor.CleanEmptyLines();
 				textProcessor.CleanIrrelevantLines();
 				textProcessor.SeparateNamePrice();
