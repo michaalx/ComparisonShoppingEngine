@@ -188,6 +188,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.confirmPasswordLabel);
             this.Name = "SignUpForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SignUpForm_Closing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

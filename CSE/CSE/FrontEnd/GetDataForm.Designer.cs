@@ -74,6 +74,7 @@
             this.Controls.Add(this.comparePricesButton);
             this.Controls.Add(this.label1);
             this.Name = "GetDataForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GetDataForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

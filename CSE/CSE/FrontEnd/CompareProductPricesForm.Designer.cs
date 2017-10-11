@@ -83,6 +83,7 @@
             this.Controls.Add(this.selectProductLabel);
             this.Controls.Add(this.greetingLabel);
             this.Name = "CompareProductPricesForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CompareProductPricesForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

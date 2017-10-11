@@ -30,5 +30,10 @@ namespace CSE.FrontEnd
             CompareProductPricesForm compareProductPricesForm = new CompareProductPricesForm();
             compareProductPricesForm.Show();
         }
+
+        private void GetDataForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(1);
+        }
     }
 }

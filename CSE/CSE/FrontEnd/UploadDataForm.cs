@@ -37,5 +37,10 @@ namespace CSE.FrontEnd
             StartForm startForm = new StartForm();
             startForm.Show();
         }
+
+        private void UploadDataForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(1);
+        }
     }
 }

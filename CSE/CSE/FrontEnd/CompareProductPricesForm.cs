@@ -15,7 +15,7 @@ namespace CSE.FrontEnd
         public CompareProductPricesForm()
         {
             InitializeComponent();
-          //  FormsToolkit.AddItemsToComparePricesList(this);
+            FormsToolkit.AddItemsToComparePricesList(this);
         }
 
         private void goBackButton_Click(object sender, EventArgs e)
@@ -23,6 +23,11 @@ namespace CSE.FrontEnd
             Hide();
             GetDataForm getDataForm = new GetDataForm();
             getDataForm.Show(); 
+        }
+
+        private void CompareProductPricesForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(1);
         }
     }
 }
