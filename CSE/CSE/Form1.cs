@@ -109,9 +109,8 @@ namespace CSE
         private void ListInit()
         {
             CSV csv = new CSV();
-            var paths = ddaf.GetFilesPaths();
-            listOfItems = csv.ParsingUniqueProducts(paths);
-
+            string[] paths = ddaf.paths;
+            listOfItems = csv.ParsingUniqueProducts(ddaf.paths);
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
