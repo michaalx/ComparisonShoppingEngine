@@ -111,7 +111,6 @@ namespace CSE
             CSV csv = new CSV();
             string[] paths = ddaf.paths;
             listOfItems = csv.ParsingUniqueProducts(ddaf.paths);
-
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

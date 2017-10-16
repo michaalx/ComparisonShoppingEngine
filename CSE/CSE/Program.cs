@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSE.FrontEnd;
 
 namespace CSE
 {
@@ -17,7 +18,8 @@ namespace CSE
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new regFrm());
+            // Application.Run(new regFrm());
+            Application.Run(new StartForm());
         }
     }
 }
