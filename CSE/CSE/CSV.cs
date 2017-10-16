@@ -122,6 +122,14 @@ namespace CSE
             return list;
         }
 
+        public void SaveUniqueProducts(Dictionary<string, int> products)
+        {
+            //nuskaityti visus produktus is failo i Dictionary nauja,
+            //papildyti ta dictionary 'products' elementais.
+            ///
+        //    ParsingUniqueProducts({"unique_products.csv"});
+        }
+
         public List<Product> ParsingForChosenItems(ListView cart, string file)
         {
             List<string> cartList = cart.Items.Cast<ListViewItem>()

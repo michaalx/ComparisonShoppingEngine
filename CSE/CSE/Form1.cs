@@ -22,7 +22,6 @@ namespace CSE
         {
             InitializeComponent();
         }
-
 		private void Form1_Closing(object sender, FormClosingEventArgs e)
 		{
 			System.Environment.Exit(1);

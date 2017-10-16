@@ -28,11 +28,18 @@ namespace CSE.FrontEnd
         private void uploadDataButton_Click(object sender, EventArgs e)
         {
             Hide();
-            UploadDataForm uploadDataForm = new UploadDataForm();
-            uploadDataForm.Show();
+            // UploadDataForm uploadDataForm = new UploadDataForm();
+            //uploadDataForm.Show();
+            InsertReceiptForm form = new InsertReceiptForm();
+            form.Show();
         }
 
         private void StartForm_Closing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(1);
+        }
+
+        private void ExitButton_OnClick(object sender, EventArgs e)
         {
             System.Environment.Exit(1);
         }

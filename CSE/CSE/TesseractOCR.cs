@@ -19,9 +19,9 @@ namespace CSE
         public static string ImageToText(string fileName)
         {
             var img = new Bitmap(fileName);
-            var ocr = new TesseractEngine("./tessdata", "eng", EngineMode.TesseractAndCube);
-            var page = ocr.Process(img);
-            ocr.SetVariable("tessedit_pageseg_mode", 6);
+            var ocr = new TesseractEngine("./tessdata", "eng");
+               var page = ocr.Process(img);
+             ocr.SetVariable("tessedit_pageseg_mode", 6);
             return page.GetText().Replace("\n","\r\n");
         }
     }

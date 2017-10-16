@@ -29,8 +29,10 @@ namespace CSE.FrontEnd
             if (csv.ParsingRegistration(email, password))
             {
                 this.Hide();
-                Form1 frm = new Form1();
-                frm.Show();
+                // Form1 frm = new Form1();
+                //frm.Show();
+                InsertReceiptForm insertReceiptForm = new InsertReceiptForm();
+                insertReceiptForm.Show();
             }
             else
             {

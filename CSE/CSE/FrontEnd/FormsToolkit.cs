@@ -6,8 +6,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace CSE.FrontEnd
 {
-    class FormsToolkit
+    public class FormsToolkit
     {
+        public List<Product> ListOfItems { get; set; }// = new List<Product>();
+
+        public DataDistributionAmongFiles Ddaf { get; set; }// = new DataDistributionAmongFiles();
+        public CheapestStore TheCheapestStore { get; set; }// = new CheapestStore();
+        public ListViewOperations TheListViewOperations { get; set; }// = new ListViewOperations();
+        public TextProcessor ClosestMatch { get; set; }
+        public string File { get; set; }
+        public FormsToolkit()
+        {
+            this.ListOfItems = new List<Product>();
+            this.Ddaf = new DataDistributionAmongFiles();
+            this.TheCheapestStore = new CheapestStore();
+            this.TheListViewOperations = new ListViewOperations();
+        }
         public static void DisplayInputError(string message)
         {
             var caption = "Error detected in input.";
@@ -15,18 +29,21 @@ namespace CSE.FrontEnd
             MessageBox.Show(message, caption, messageBox);
             return;
         }
+        public void DisplayCheapestStoreInfo(string storeName, decimal sum)
+        {
+            var message = "The cheapest store to do the shopping is " + storeName;
+            message +="\n The estimated sum is "+sum.ToString();
+            MessageBoxButtons messageBox = MessageBoxButtons.OK;
+            MessageBox.Show(message);
+        }
         /// <summary>
         ///Method that takes all products that are available in at least two stores. 
         /// </summary>
-        public static void AddItemsToComparePricesList(CompareProductPricesForm form)
+        public void AddItemsToComparePricesList()
         {
-            /*
-             For a while, I will use only array of products that is already made
-             Later I will make a method that makes a list of products 
-             from selected products that are available in at least two stores.
-             */
-             
+           
         }
+    
         public static void InitializeProductDatabase()
         {
 

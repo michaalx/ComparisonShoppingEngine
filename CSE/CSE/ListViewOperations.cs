@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CSE
 {
-    class ListViewOperations
+    public class ListViewOperations
     {
         public void CopySelectedItems(ListView source, ListView target)
         {
