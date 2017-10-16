@@ -33,6 +33,7 @@
             this.browseButton = new System.Windows.Forms.Button();
             this.pathBox = new System.Windows.Forms.TextBox();
             this.uploadImageButton = new System.Windows.Forms.Button();
+            this.goBackButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // greetingLabel
@@ -78,12 +79,24 @@
             this.uploadImageButton.UseVisualStyleBackColor = true;
             this.uploadImageButton.Click += new System.EventHandler(this.UploadImageButton_OnClick);
             // 
+            // goBackButton
+            // 
+            this.goBackButton.Font = new System.Drawing.Font("Modern No. 20", 20.25F);
+            this.goBackButton.Location = new System.Drawing.Point(12, 266);
+            this.goBackButton.Name = "goBackButton";
+            this.goBackButton.Size = new System.Drawing.Size(260, 72);
+            this.goBackButton.TabIndex = 2;
+            this.goBackButton.Text = "Go back";
+            this.goBackButton.UseVisualStyleBackColor = true;
+            this.goBackButton.Click += new System.EventHandler(this.GoBackButton_OnClick);
+            // 
             // InsertReceiptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 415);
             this.Controls.Add(this.pathBox);
+            this.Controls.Add(this.goBackButton);
             this.Controls.Add(this.uploadImageButton);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.greetingLabel);
@@ -102,5 +115,6 @@
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.TextBox pathBox;
         private System.Windows.Forms.Button uploadImageButton;
+        private System.Windows.Forms.Button goBackButton;
     }
 }

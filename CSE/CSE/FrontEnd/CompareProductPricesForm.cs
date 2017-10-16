@@ -57,8 +57,12 @@ namespace CSE.FrontEnd
         {
             foreach(var item in items)
             {
-                listViewOfAllProducts.Items.Add(item);
+                AddItemToListView(item);
             }
+        }
+        public void AddItemToListView(string item)
+        {
+            listViewOfAllProducts.Items.Add(item);
         }
         private void CompareProductPricesForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -78,7 +82,15 @@ namespace CSE.FrontEnd
                 listViewOfAllProducts.Items.Remove(item);
             }
         }
-
+        /// <summary>
+        /// Method needed in order to avoid products duplication
+        /// when removing from cart and opening cart again.
+        /// </summary>
+        /// <param name="item"></param>
+        public void UnselectItem(string item)
+        {
+            ListOfSelectedItems.Remove(item);
+        }
         private void ShowCartButton_OnClick(object sender, EventArgs e)
         {
             CartForm cartForm = new CartForm(ListOfSelectedItems,this);

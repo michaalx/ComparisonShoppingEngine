@@ -12,7 +12,7 @@ namespace CSE.FrontEnd
 
         public DataDistributionAmongFiles Ddaf { get; set; }// = new DataDistributionAmongFiles();
         public CheapestStore TheCheapestStore { get; set; }// = new CheapestStore();
-        public ListViewOperations TheListViewOperations { get; set; }// = new ListViewOperations();
+       // public ListViewOperations TheListViewOperations { get; set; }// = new ListViewOperations();
         public TextProcessor ClosestMatch { get; set; }
         public string File { get; set; }
         public FormsToolkit()
@@ -20,11 +20,10 @@ namespace CSE.FrontEnd
             this.ListOfItems = new List<Product>();
             this.Ddaf = new DataDistributionAmongFiles();
             this.TheCheapestStore = new CheapestStore();
-            this.TheListViewOperations = new ListViewOperations();
+        //    this.TheListViewOperations = new ListViewOperations();
         }
-        public static void DisplayInputError(string message)
+        public static void DisplayInputError(string message, string caption = "Errod detected in input.")
         {
-            var caption = "Error detected in input.";
             MessageBoxButtons messageBox = MessageBoxButtons.OK;
             MessageBox.Show(message, caption, messageBox);
             return;
@@ -33,20 +32,8 @@ namespace CSE.FrontEnd
         {
             var message = "The cheapest store to do the shopping is " + storeName;
             message +="\n The estimated sum is "+sum.ToString();
-            MessageBoxButtons messageBox = MessageBoxButtons.OK;
+          //  MessageBoxButtons messageBox = MessageBoxButtons.OK;
             MessageBox.Show(message);
-        }
-        /// <summary>
-        ///Method that takes all products that are available in at least two stores. 
-        /// </summary>
-        public void AddItemsToComparePricesList()
-        {
-           
-        }
-    
-        public static void InitializeProductDatabase()
-        {
-
         }
     }
 }

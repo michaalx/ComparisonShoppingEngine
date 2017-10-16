@@ -8,6 +8,6 @@ namespace CSE
 {
     interface IOCR
     {
-        //StoreReceipt Convert(string fileName);
+        string ImageToText(string fileName);
     }
 }

@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CSE.API;
 namespace CSE.FrontEnd
 {
     public partial class InsertReceiptForm : Form
@@ -53,12 +52,19 @@ namespace CSE.FrontEnd
         {
             try
             {
-               // string result = TesseractOCR.ImageToText(_file);
-              GoogleAPI.ImageToText(_file);
+              string result = TesseractOCR.ImageToText(_file);
+             // GoogleAPI.ImageToText(_file);
             }
             catch (IOException) { }
             catch (ArgumentException) { Debug.WriteLine("EMPTY ARGUMENT!"); }
             catch (Tesseract.TesseractException) { Debug.WriteLine("TESSERACT ERROR."); }
+        }
+
+        private void GoBackButton_OnClick(object sender, EventArgs e)
+        {
+            Hide();
+            StartForm startForm = new StartForm();
+            startForm.Show();
         }
     }
 }

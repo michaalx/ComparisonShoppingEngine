@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Tesseract;
 namespace CSE
 {
-    class TesseractOCR
+    class TesseractOCR 
     {
         /// <summary>
         /// The initial version of Tesseract-OCR image

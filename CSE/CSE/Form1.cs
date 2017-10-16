@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSE.BackEnd;
 namespace CSE
 {
     public partial class Form1 : Form
@@ -15,7 +16,7 @@ namespace CSE
         List<Product> listOfItems = new List<Product>();
         DataDistributionAmongFiles ddaf = new DataDistributionAmongFiles();
         CheapestStore choose = new CheapestStore();
-        ListViewOperations lwo = new ListViewOperations();
+        //ListViewOperations lwo = new ListViewOperations();
         private TextProcessor ClosestMatch { get; set; }
 		public string file { get; set; }
         public Form1()
@@ -151,7 +152,7 @@ namespace CSE
         //adds selected products from one list to other(cart)
         private void addButton_Click(object sender, EventArgs e)
         {
-           lwo.CopySelectedItems(listViewItems,listViewCart);
+           //lwo.CopySelectedItems(listViewItems,listViewCart);
         }
 
         private void CheapestStoreButton_Click(object sender, EventArgs e)
@@ -162,7 +163,7 @@ namespace CSE
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            lwo.RemoveSelectedItems(listViewCart);
+          //  lwo.RemoveSelectedItems(listViewCart);
             cheapestStore.Text = "";
         }
     }

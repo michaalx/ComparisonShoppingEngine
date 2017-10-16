@@ -28,6 +28,7 @@ namespace CSE.FrontEnd
         private void uploadDataButton_Click(object sender, EventArgs e)
         {
             Hide();
+            ///Ignore Loging in and Signing up (temporarily)
             // UploadDataForm uploadDataForm = new UploadDataForm();
             //uploadDataForm.Show();
             InsertReceiptForm form = new InsertReceiptForm();

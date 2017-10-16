@@ -33,6 +33,13 @@ namespace CSE.FrontEnd
 
         private void TheCheapestStoreButton_OnClick(object sender, EventArgs e)
         {
+            if (listViewOfChosenProducts.Items.Count == 0)
+            {
+                var emptyList = "You have not chosen any products to do shopping.";
+
+                FormsToolkit.DisplayInputError(emptyList, "Select items.");
+                return;
+            }  
             var result = compareProductPricesForm.formsToolKit.TheCheapestStore.GetCheapestStoreNameAndSum(listViewOfChosenProducts);
             compareProductPricesForm.formsToolKit.DisplayCheapestStoreInfo(result.Key.ToUpper(), result.Value);
         }
@@ -46,7 +53,6 @@ namespace CSE.FrontEnd
         private void CartForm_Load(object sender, EventArgs e)
         {
             AddItemsToListView();
-
         }
 
         private void GoBackButton_OnClick(object sender, EventArgs e)
@@ -59,8 +65,9 @@ namespace CSE.FrontEnd
         {
             foreach(ListViewItem item in listViewOfChosenProducts.CheckedItems)
             {
-                RemovedItems.Add(item.Text);
                 listViewOfChosenProducts.Items.Remove(item);
+                compareProductPricesForm.AddItemToListView(item.Text);
+                compareProductPricesForm.UnselectItem(item.Text);
             }
         }
     }
