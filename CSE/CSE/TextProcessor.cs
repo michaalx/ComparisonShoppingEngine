@@ -22,15 +22,11 @@ namespace CSE
 
 		public void DataBaseInit()
 		{
-			productDB.Add("SEED BATCH");
-			productDB.Add("MILK");
-			productDB.Add("WHOLE MILK");
-			productDB.Add("JS LIGHT SUGAR");
-			productDB.Add("MALTESERS");
-			productDB.Add("WENSLEY & CRAN");
-			productDB.Add("GREEK STYLE YOGURT");
-			productDB.Add("VIENNA TIGER ROLLS");
-			productDB.Add("GARLIC BAGUETTE");
+            var fp = new DataDistributionAmongFiles();
+			var csv = new CSV();
+			var list = csv.ParsingUniqueProducts(fp.paths);
+			foreach (Product product in list)
+				productDB.Add(product.Name);
 		}
 
 		public void CleanEmptyLines()
