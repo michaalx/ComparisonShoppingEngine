@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CSE
 {
-	class TextProcessor
+	public class TextProcessor
 	{
 		private List<string> productDB = new List<string>();
 		private List<string> recognizedTextLines = new List<string>();
 		private List<string> productList = new List<string>();
-		private List<double> priceList = new List<double>();
+		private List<decimal> priceList = new List<decimal>();
 
 
 		public TextProcessor(string[] recognizedTextLines)
@@ -81,7 +81,7 @@ namespace CSE
 						char[] temp2 = new char[size];
 						recognizedTextLines[i].CopyTo(k + 1, temp2, 0, temp.Count() - (k + 4));
 						temp2[temp2.Count() - 3] = '.';
-						priceList.Add(Convert.ToDouble(string.Join("", temp2)));
+						priceList.Add(Convert.ToDecimal(string.Join("", temp2)));
 						recognizedTextLines[i].Remove(k);
 						break;
 					}
@@ -156,7 +156,7 @@ namespace CSE
 			return distance[currentRow, m];
 		}
 
-		public List<double> GetPriceList()
+		public List<decimal> GetPriceList()
 		{
 			return priceList;
 		}

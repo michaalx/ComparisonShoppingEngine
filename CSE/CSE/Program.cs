@@ -20,6 +20,7 @@ namespace CSE
             Application.SetCompatibleTextRenderingDefault(false);
             // Application.Run(new regFrm());
             Application.Run(new StartForm());
+
         }
     }
 }

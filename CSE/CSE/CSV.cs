@@ -114,7 +114,7 @@ namespace CSE
                             break;
                         }
                         var prod = new Product(row[0], Decimal.Parse(row[1]));
-                        if(!list.Exists(x => x.Name == prod.Name ))
+                        if (!list.Exists(x => x.Name == prod.Name))
                             list.Add(prod);
                     }
                 }

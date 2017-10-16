@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSE.BackEnd;
 
 namespace CSE
 {
-    class DataDistributionAmongFiles
+    public class DataDistributionAmongFiles
     {
         List<Product> products = new List<Product>();
         CSV csvTool = new CSV();
@@ -21,23 +22,27 @@ namespace CSE
 
         public void WriteDataToFile(Store store)
         {
-            switch (store)
-            {
-                case Store.Maxima:
-                    csvTool.WriteToFileProducts(products, pathToMaxima);
-                    return;
-                case Store.IKI:
-                    csvTool.WriteToFileProducts(products, pathToIKI);
-                    return;
-                case Store.Rimi:
-                    csvTool.WriteToFileProducts(products, pathToRimi);
-                    return;
-                case Store.Norfa:
-                    csvTool.WriteToFileProducts(products, pathToNorfa);
-                    return;
-                case Store.Lidl:
-                    csvTool.WriteToFileProducts(products, pathToLidl);
-                    return;
+             switch (store)
+             {
+                 case Store.Maxima:
+                     csvTool.WriteToFileProducts(products, pathToMaxima);
+                     return;
+                 case Store.IKI:
+                     csvTool.WriteToFileProducts(products, pathToIKI);
+                     return;
+                 case Store.Rimi:
+                     csvTool.WriteToFileProducts(products, pathToRimi);
+                     return;
+                 case Store.Norfa:
+                     csvTool.WriteToFileProducts(products, pathToNorfa);
+                     return;
+                 case Store.Lidl:
+                     csvTool.WriteToFileProducts(products, pathToLidl);
+                     
+
+            
+             ///csvTool.WriteToFileProducts(products, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "" + store + ".csv"));
+             return;
             }
         }
 

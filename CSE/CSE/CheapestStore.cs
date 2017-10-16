@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace CSE
 {
-    class CheapestStore
+    public class CheapestStore
     {
         Dictionary<string, decimal> countDictionary = new Dictionary<string, decimal>();
         DataDistributionAmongFiles ddaf = new DataDistributionAmongFiles();
@@ -40,7 +41,17 @@ namespace CSE
             var result = GetCheapest();
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
+        public KeyValuePair<string, decimal> GetCheapestStoreNameAndSum(ListView cart)
+        {
+            string storeName = GetCheapestStore(cart);
+            decimal sum = countDictionary[storeName];
+            return new KeyValuePair<string,decimal>(storeName, sum);
+        }
         //Get store's price sum
         private void GetStorePriceSum(KeyValuePair<string, List<Product>> store)
         {

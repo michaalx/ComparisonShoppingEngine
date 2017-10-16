@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.getDataButton = new System.Windows.Forms.Button();
             this.uploadDataButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -65,11 +66,23 @@
             this.uploadDataButton.UseVisualStyleBackColor = true;
             this.uploadDataButton.Click += new System.EventHandler(this.uploadDataButton_Click);
             // 
+            // exitButton
+            // 
+            this.exitButton.Font = new System.Drawing.Font("Modern No. 20", 20.25F);
+            this.exitButton.Location = new System.Drawing.Point(22, 283);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(241, 102);
+            this.exitButton.TabIndex = 2;
+            this.exitButton.Text = "Exit";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.ExitButton_OnClick);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 450);
+            this.Controls.Add(this.exitButton);
             this.Controls.Add(this.uploadDataButton);
             this.Controls.Add(this.getDataButton);
             this.Controls.Add(this.label1);
@@ -86,5 +99,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button getDataButton;
         private System.Windows.Forms.Button uploadDataButton;
+        private System.Windows.Forms.Button exitButton;
     }
 }
