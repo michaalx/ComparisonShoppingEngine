@@ -22,18 +22,5 @@ namespace CSE.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Michal\\Downloads\\client_secret_307801214582-vb3bofi04u8ku27125ct3abetrj0" +
-            "cfos.apps.googleusercontent.com.json")]
-        public string GOOGLE_APPLICATION_CREDENTIALS {
-            get {
-                return ((string)(this["GOOGLE_APPLICATION_CREDENTIALS"]));
-            }
-            set {
-                this["GOOGLE_APPLICATION_CREDENTIALS"] = value;
-            }
-        }
     }
 }
