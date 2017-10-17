@@ -22,21 +22,21 @@ namespace CSE.FrontEnd
         }
         private void logInButton_Click(object sender, EventArgs e)
         {
-            var email = emailBox.Text;
+            /*var email = emailBox.Text;
             var password = passwordBox.Text;
             var csv = new CSV();
 
             if (csv.ParsingRegistration(email, password))
-            {
+            {*/
                 this.Hide();
                 Form1 frm = new Form1();
                 frm.Show();
-            }
+            /*}
             else
             {
                 errorLabel.Text = "Email or password is incorrect.";
                 //todo: hide after 5 sec .
-            }
+            }*/
         }
 
         private void goBackButton_Click(object sender, EventArgs e)

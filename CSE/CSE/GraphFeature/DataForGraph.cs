@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CSE
 {
-    interface IOCR
+    public class DataForGraph
     {
-        ProductDetails Convert(string fileName);
+        public Store store { get; set; }
+        public List<decimal> prices = new List<decimal>();
     }
 }

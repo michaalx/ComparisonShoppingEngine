@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +54,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheapestStore.cs" />
+    <Compile Include="GraphFeature\ChooseGraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphFeature\ChooseGraph.Designer.cs">
+      <DependentUpon>ChooseGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphFeature\ChooseGraph2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphFeature\ChooseGraph2.Designer.cs">
+      <DependentUpon>ChooseGraph2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphFeature\DataForGraph.cs" />
+    <Compile Include="GraphFeature\Graph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphFeature\Graph.Designer.cs">
+      <DependentUpon>Graph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphFeature\GraphOperations.cs" />
     <Compile Include="ListViewOperations.cs" />
     <Compile Include="TextProcessor.cs" />
     <Compile Include="CSV.cs" />
@@ -80,14 +101,10 @@
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StoreReceipt.cs" />
+    <Compile Include="ProductDetails.cs" />
     <Compile Include="TesseractOCR.cs" />
     <Compile Include="User.cs" />
-    
-    
-    
-    
-     <Compile Include="FrontEnd\CompareProductPricesForm.cs">
+    <Compile Include="FrontEnd\CompareProductPricesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrontEnd\CompareProductPricesForm.Designer.cs">
@@ -124,10 +141,6 @@
     <Compile Include="FrontEnd\UploadDataForm.Designer.cs">
       <DependentUpon>UploadDataForm.cs</DependentUpon>
     </Compile>
-    
-    
-    
-    
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,6 +149,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\GetDataForm.resx">
       <DependentUpon>GetDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphFeature\ChooseGraph.resx">
+      <DependentUpon>ChooseGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphFeature\ChooseGraph2.resx">
+      <DependentUpon>ChooseGraph2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphFeature\Graph.resx">
+      <DependentUpon>Graph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\LogInForm.resx">
       <DependentUpon>LogInForm.cs</DependentUpon>

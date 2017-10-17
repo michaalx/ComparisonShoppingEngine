@@ -15,16 +15,18 @@ namespace CSE
         Norfa,
         Lidl
     }
-    class StoreReceipt
+    struct ProductDetails
     {
-        public List<Product> Products { get; }
+        public string Name { get; }
+        public decimal Price { get; }
         public DateTime Timestamp { get; }
-        public Store StoreName { get; }
-        public StoreReceipt(List<Product> products, DateTime timestamp, Store store )
+        public int UserId { get; }
+        public ProductDetails(string name, decimal price, DateTime timestamp, int userId)
         {
-            Products = products;
+            Name = name;
+            Price = price;
             Timestamp = timestamp;
-            StoreName = store;
+            UserId = userId;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace CSE
             countDictionary.Clear();
             var allstores = new Dictionary<string, List<Product>>();
             List<Product> uniqueStoreList = new List<Product>();
-            string[] paths = ddaf.GetFilesPaths();
+            var paths = ddaf.GetPathsDetails();
             foreach(var file in paths)
             {
                 var filename = GetStoreName(file);
@@ -33,12 +33,14 @@ namespace CSE
                 if(uniqueStoreList.Count == cart.Items.Count)
                     allstores.Add(filename,uniqueStoreList);
             }
-            foreach(var store in allstores)
+            if (allstores.Count() == 0)
+                return "There are no stores to contain all items";
+            foreach (var store in allstores)
             {
                 GetStorePriceSum(store);
             }
             var result = GetCheapest();
-            return result;
+            return "You should go to " + result.ToUpper();
         }
 
         //Get store's price sum

@@ -17,8 +17,13 @@ namespace CSE
         static string pathToRimi = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rimi.csv");
         static string pathToNorfa = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "norfa.csv");
         static string pathToLidl = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lidl.csv");
-        string[] paths = { pathToIKI, pathToLidl, pathToMaxima, pathToNorfa, pathToRimi };
-
+        static string pathToMaximaDetails = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "maximaDetails.csv");
+        static string pathToIKIDetails = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ikiDetails.csv");
+        static string pathToRimiDetails = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rimiDetails.csv");
+        static string pathToNorfaDetails = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "norfaDetails.csv");
+        static string pathToLidlDetails = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lidlDetails.csv");
+        string[] paths = { pathToMaxima, pathToIKI, pathToRimi, pathToNorfa, pathToLidl };
+        string[] pathsDetails = { pathToMaximaDetails, pathToIKIDetails, pathToRimiDetails, pathToNorfaDetails, pathToLidlDetails };
         public void WriteDataToFile(Store store)
         {
             switch (store)
@@ -51,9 +56,14 @@ namespace CSE
             }
         }
 
-        public string[] GetFilesPaths()
+        public string[] GetPaths()
         {
             return paths;
+        }
+
+        public string[] GetPathsDetails()
+        {
+            return pathsDetails;
         }
     }
 }

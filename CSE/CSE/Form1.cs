@@ -109,9 +109,8 @@ namespace CSE
         private void ListInit()
         {
             CSV csv = new CSV();
-            var paths = ddaf.GetFilesPaths();
+            var paths = ddaf.GetPaths();
             listOfItems = csv.ParsingUniqueProducts(paths);
-
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -158,7 +157,7 @@ namespace CSE
         private void CheapestStoreButton_Click(object sender, EventArgs e)
         {
             var result = choose.GetCheapestStore(listViewCart);
-            cheapestStore.Text = "You should go to " + result.ToUpper();
+            cheapestStore.Text = result;
         }
 
         private void removeButton_Click(object sender, EventArgs e)

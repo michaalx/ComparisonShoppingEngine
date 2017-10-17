@@ -42,6 +42,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.removeButton = new System.Windows.Forms.Button();
             this.cheapestStore = new System.Windows.Forms.Label();
             this.CheapestStoreButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.insertReceiptToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.chooseItemsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -200,12 +200,23 @@
             this.panel3.Controls.Add(this.listViewCart);
             this.panel3.Controls.Add(this.listViewItems);
             this.panel3.Controls.Add(this.menuStrip2);
-            this.panel3.Location = new System.Drawing.Point(0, 6);
+            this.panel3.Location = new System.Drawing.Point(0, -2);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(637, 452);
+            this.panel3.Size = new System.Drawing.Size(637, 460);
             this.panel3.TabIndex = 6;
             this.panel3.Visible = false;
+            // 
+            // removeButton
+            // 
+            this.removeButton.Location = new System.Drawing.Point(238, 145);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.removeButton.Size = new System.Drawing.Size(142, 85);
+            this.removeButton.TabIndex = 6;
+            this.removeButton.Text = "Remove";
+            this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // cheapestStore
             // 
@@ -281,17 +292,6 @@
             this.chooseItemsToolStripMenuItem1.Name = "chooseItemsToolStripMenuItem1";
             this.chooseItemsToolStripMenuItem1.Size = new System.Drawing.Size(110, 24);
             this.chooseItemsToolStripMenuItem1.Text = "Choose Items";
-            // 
-            // removeButton
-            // 
-            this.removeButton.Location = new System.Drawing.Point(238, 145);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.removeButton.Size = new System.Drawing.Size(142, 85);
-            this.removeButton.TabIndex = 6;
-            this.removeButton.Text = "Remove";
-            this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // Form1
             // 

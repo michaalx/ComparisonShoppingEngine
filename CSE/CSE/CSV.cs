@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,8 @@ namespace CSE
         {
             if (!(File.Exists(filePath)))
             {
-                StreamWriter writer = File.CreateText(filePath);
-            } else
-            {
+                StreamWriter writerCreate = File.CreateText(filePath);
+            }
                 StreamWriter writer = File.AppendText(filePath);
                 var csv = new CsvWriter(writer);
                 foreach (var value in list)
@@ -27,7 +27,6 @@ namespace CSE
                     csv.NextRecord();
                 }
                 writer.Close();
-            }
         }
         /// <summary>
         /// Modified method.
@@ -154,6 +153,51 @@ namespace CSE
                 }
             }
             return matchingProducts;
+        }
+
+        //for graph
+        public List<string> ParsingOneFileNames(string path)
+        {
+            var list = new List<string>();
+
+            if (File.Exists(pathRegistration))
+            {
+                StreamReader reader = File.OpenText(path);
+                var parser = new CsvParser(reader);
+                while (true)
+                {
+                    var row = parser.Read();
+                    if (row == null)
+                    {
+                        reader.Close();
+                        break;
+                    }
+                    list.Add(row[0]);
+                }
+            }
+
+            return list;
+        }
+        
+        public List<ProductDetails> ParsingDetailsFile(string path, string name)
+        {
+            var list = new List<ProductDetails>();
+            if (File.Exists(path))
+            {
+                StreamReader reader = File.OpenText(path);
+                var parser = new CsvParser(reader);
+                while (true)
+                {
+                    var row = parser.Read();
+                    if (row == null)
+                    {
+                        reader.Close();
+                        break;
+                    }
+                    list.Add(new ProductDetails(row[0], Decimal.Parse(row[1]), DateTime.ParseExact(row[2], "yyyy-MM-dd", CultureInfo.InvariantCulture), Int32.Parse(row[3])));
+                }
+            }
+            return list;
         }
     }
 }
