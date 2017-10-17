@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSE.FrontEnd;
+using CSE.GraphFeature;
 
 namespace CSE
 {
@@ -20,7 +21,7 @@ namespace CSE
             Application.SetCompatibleTextRenderingDefault(false);
             // Application.Run(new regFrm());
             Application.Run(new StartForm());
-
+            //Application.Run(new ChooseGraph());
         }
     }
 }

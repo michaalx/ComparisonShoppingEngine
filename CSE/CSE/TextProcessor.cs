@@ -22,9 +22,9 @@ namespace CSE
 
 		public void DataBaseInit()
 		{
-      var fp = new DataDistributionAmongFiles();
+            var fp = new DataDistributionAmongFiles();
 			var csv = new CSV();
-			var list = csv.ParsingUniqueProducts(fp.paths);
+			var list = csv.ParsingUniqueProducts(fp.GetFilesPaths());
 			foreach (Product product in list)
 				productDB.Add(product.Name);
 		}
