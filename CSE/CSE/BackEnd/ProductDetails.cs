@@ -13,7 +13,6 @@ namespace CSE.BackEnd
     }
     public struct ProductDetails
     {
-       // public List<Product> Products { get; }
         public string Name { get; }
         public decimal Price { get; }
         public DateTime Timestamp { get; }
