@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Diagnostics;
 
 //Using Google Maps Geocoding API
 
@@ -18,6 +13,9 @@ namespace CSE.Map
         public double Lat { get; set; }
         public double Lon { get; set; }
         public static List<DeviceLocation> Locations { get; set; }
+        const string GGeoCodeJsonServiceUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}";
+        public string Key { get; set; }
+        public Result Stat { get; set; }
 
         public enum Result
         {
@@ -29,10 +27,7 @@ namespace CSE.Map
             UNKNOWN_ERROR
 
         }
-        const string GGeoCodeJsonServiceUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}";
-        public string Key { get; set; }
-        public Result Stat { get; set; }
-
+        
         public DeviceLocation(string address)
         {
             Key = "AIzaSyBGWA-e4F9FXwBrc1aCnq31m6LujasAchg";
@@ -60,6 +55,7 @@ namespace CSE.Map
                 return O.results[0].geometry.Location;
             }
         }
+
         private void SetGeoResultFlag(string status)
         {
             switch (status)

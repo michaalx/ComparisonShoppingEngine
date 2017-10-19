@@ -134,6 +134,7 @@
     <Compile Include="ListViewOperations.cs" />
     <Compile Include="Map\DeviceLocation.cs" />
     <Compile Include="Map\GeoJsonResult.cs" />
+    <Compile Include="Map\MapClass.cs" />
     <Compile Include="Map\StoreMap.cs">
       <SubType>Form</SubType>
     </Compile>
