@@ -1,6 +1,8 @@
-﻿using CsvHelper;
+﻿using CSE.FrontEnd;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,22 +14,56 @@ namespace CSE
     class CSV
     {    
         string pathRegistration = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "registration.csv");
+        private string _fileOfUniqueProducts = "unique_products.csv";
+
         public void WriteToFileProducts(List<Product> list, string filePath)
         {
-            if (!(File.Exists(filePath)))
+            StringBuilder sb = new StringBuilder();
+            foreach (var value in list)
             {
-                StreamWriter writer = File.CreateText(filePath);
-            } else
+                sb.Append(value.ToString());
+            }
+            File.WriteAllText(filePath, sb.ToString());
+        }
+        public void ResetUniqueProducts()
+        {
+            FormsToolkit formsToolKit = new FormsToolkit();
+            var paths = formsToolKit.Ddaf.GetFilesPaths();
+            var uniqueProducts = ParsingUniqueProducts(paths);
+            if (!(File.Exists(_fileOfUniqueProducts)))
             {
-                StreamWriter writer = File.AppendText(filePath);
+                StreamWriter writer = File.CreateText(_fileOfUniqueProducts);
+            }
+            else
+            {
+                StreamWriter writer = File.AppendText(_fileOfUniqueProducts);
                 var csv = new CsvWriter(writer);
-                foreach (var value in list)
+                 foreach (var item in uniqueProducts)
                 {
-                    csv.WriteRecord(value);
-                    csv.NextRecord();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(item.Name);
+                    sb.Append(",0");
+                    writer.WriteLine(sb);
                 }
                 writer.Close();
             }
+        }
+        public void UpdatePopularity(List<KeyValuePair<string, int>> products)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var item in products)
+                {
+                    sb.Append(item.Key);
+                    sb.Append(",");
+                    sb.Append(item.Value);
+                    sb.Append("\n");
+                }
+                File.WriteAllText(_fileOfUniqueProducts, sb.ToString());
+
+            }
+            catch (Exception) { }
         }
         /// <summary>
         /// Modified method.
@@ -121,7 +157,63 @@ namespace CSE
             }
             return list;
         }
-
+        public List<string> ParsingUniqueProducts()
+        {
+            List<string> result = new List<string>();
+            if(File.Exists(_fileOfUniqueProducts))
+            {
+                StreamReader reader = File.OpenText(_fileOfUniqueProducts);
+                var parser = new CsvParser(reader);
+                while (true)
+                {
+                    var row = parser.Read();
+                    if (row == null)
+                    {
+                        reader.Close();
+                        break;
+                    }
+                    if (!result.Exists(x => x == row[0]))
+                    {
+                        result.Add(row[0]);
+                    }
+                }
+            }
+            return result;
+        }
+        
+        public List<KeyValuePair<string,int>> GetAllProductsByPopularity()
+        {
+            var temporaryDictionary = new Dictionary<string, int>();
+            try
+            {
+                StreamReader reader = File.OpenText(_fileOfUniqueProducts);
+                var parser = new CsvParser(reader);
+                while (true)
+                {
+                    var row = parser.Read();
+                    if (row == null)
+                    {
+                        reader.Close();
+                        break;
+                    }
+                    if (!temporaryDictionary.ContainsKey(row[0]))
+                    {
+                        temporaryDictionary.Add(row[0], Int32.Parse(row[1]));
+                    }
+                }
+                var result = (
+                                   from entry in temporaryDictionary
+                                   orderby entry.Value
+                                   descending
+                                   select entry
+                               );
+                return result.ToList();
+            }
+            catch (FormatException) { return null; }
+            //catch (ArgumentNullException) { return null; }
+            catch (OverflowException) { return null; }
+        }
+        
         public List<Product> ParsingForChosenItems(ListView cart, string file)
         {
             List<string> cartList = cart.Items.Cast<ListViewItem>()
@@ -154,6 +246,23 @@ namespace CSE
                 }
             }
             return matchingProducts;
+        }
+        public List<Product> ParsingProductsOfStore(string file)
+        {
+            List<Product> result = new List<Product>();
+            StreamReader reader = File.OpenText(file);
+            var parser = new CsvParser(reader);
+            while (true)
+            {
+                var row = parser.Read();
+                if (row == null)
+                {
+                    reader.Close();
+                    break;
+                }
+                result.Add(new Product(row[0],Decimal.Parse(row[1])));
+            }
+            return result;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSE.BackEnd;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace CSE.FrontEnd
 {
     public partial class GetDataForm : Form
     {
+        private PopularProductsForm _popularProductsForm;
         public GetDataForm()
         {
             InitializeComponent();
@@ -34,6 +36,18 @@ namespace CSE.FrontEnd
         private void GetDataForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             System.Environment.Exit(1);
+        }
+
+        private void PopularButton_OnClick(object sender, EventArgs e)
+        {
+            DataToolkit dataToolkit = new DataToolkit();
+                _popularProductsForm = new PopularProductsForm(dataToolkit.PreparePopularProducts());
+                _popularProductsForm.Show();
+        }
+
+        private void StatisticsButton_OnClick(object sender, EventArgs e)
+        {
+            
         }
     }
 }

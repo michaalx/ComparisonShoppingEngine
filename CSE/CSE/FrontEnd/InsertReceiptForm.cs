@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSE.BackEnd;
+
 namespace CSE.FrontEnd
 {
     public partial class InsertReceiptForm : Form
@@ -44,7 +46,7 @@ namespace CSE.FrontEnd
                 catch (IOException) { }
             }   else if (openFileDialog.FileName == "")
             {
-                FormsToolkit.DisplayInputError("File is not chosen.");
+                FormsToolkit.DisplayMessageBox("File is not chosen.");
             }
         }
 
@@ -52,12 +54,13 @@ namespace CSE.FrontEnd
         {
             try
             {
-              string result = TesseractOCR.ImageToText(_file);
-             // GoogleAPI.ImageToText(_file);
+               ProcessReceipt processReceipt = new ProcessReceipt(_file);
+                //Uncomment as soon as method is implemented.
+                processReceipt.ManipulateData();
             }
             catch (IOException) { }
-            catch (ArgumentException) { Debug.WriteLine("EMPTY ARGUMENT!"); }
-            catch (Tesseract.TesseractException) { Debug.WriteLine("TESSERACT ERROR."); }
+            catch (ArgumentException) { }
+            catch (Tesseract.TesseractException) { }
         }
 
         private void GoBackButton_OnClick(object sender, EventArgs e)

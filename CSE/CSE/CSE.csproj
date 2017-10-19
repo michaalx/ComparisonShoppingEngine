@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackEnd\DataToolkit.cs" />
     <Compile Include="BackEnd\ProcessReceipt.cs" />
     <Compile Include="BackEnd\ProductDetails.cs" />
     <Compile Include="CheapestStore.cs" />
@@ -109,6 +110,12 @@
     </Compile>
     <Compile Include="FrontEnd\InsertReceiptForm.Designer.cs">
       <DependentUpon>InsertReceiptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrontEnd\PopularProductsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\PopularProductsForm.Designer.cs">
+      <DependentUpon>PopularProductsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ListViewOperations.cs" />
     <Compile Include="Settings.cs" />
@@ -195,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\LogInForm.resx">
       <DependentUpon>LogInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\PopularProductsForm.resx">
+      <DependentUpon>PopularProductsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\SignUpForm.resx">
       <DependentUpon>SignUpForm.cs</DependentUpon>

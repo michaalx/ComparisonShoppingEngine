@@ -118,7 +118,11 @@
             this.Controls.Add(this.listViewOfChosenProducts);
             this.Controls.Add(this.selectProductLabel);
             this.Controls.Add(this.greetingLabel);
+            this.Location = new System.Drawing.Point(550, 250);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CartForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Load += new System.EventHandler(this.CartForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

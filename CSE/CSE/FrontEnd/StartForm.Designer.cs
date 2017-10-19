@@ -86,9 +86,13 @@
             this.Controls.Add(this.uploadDataButton);
             this.Controls.Add(this.getDataButton);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "StartForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Welcome";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartForm_Closing);
+            this.Load += new System.EventHandler(this.StartForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

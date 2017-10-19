@@ -187,7 +187,10 @@
             this.Controls.Add(this.lastNameLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.confirmPasswordLabel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SignUpForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SignUpForm_Closing);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -13,6 +13,7 @@ namespace CSE.FrontEnd
 {
     public partial class CompareProductPricesForm : Form
     {
+        private CartForm _cartForm;
         public List<string> ListOfSelectedItems { get; set; }
         /// <summary>
         /// Additional form in order to seperate front-end
@@ -23,6 +24,7 @@ namespace CSE.FrontEnd
         {
             ListOfSelectedItems = new List<string>();   
             InitializeComponent();
+            _cartForm = null;
         }
         /// <summary>
         /// Method that returns union of products
@@ -74,27 +76,39 @@ namespace CSE.FrontEnd
             AddItemsToListView();
         }
 
-        private void AddToCartButton_OnClick(object sender, EventArgs e)
+        public void AddToCartButton_OnClick(object sender, EventArgs e)
         {
             foreach(ListViewItem item in listViewOfAllProducts.CheckedItems)
             {
                 ListOfSelectedItems.Add(item.Text);
-                listViewOfAllProducts.Items.Remove(item);
+             ///   listViewOfAllProducts.Items.Remove(item);
+            }
+            if (_cartForm != null)
+            {
+                _cartForm.Hide();
+                _cartForm = new CartForm(ListOfSelectedItems, this);
+                _cartForm.Show();
             }
         }
-        /// <summary>
         /// Method needed in order to avoid products duplication
         /// when removing from cart and opening cart again.
         /// </summary>
         /// <param name="item"></param>
-        public void UnselectItem(string item)
+        /*        public void UnselectItem(string item)
+                {
+                    ListOfSelectedItems.Remove(item);
+                }
+         */
+        public void ShowCartButton_OnClick(object sender, EventArgs e)
         {
-            ListOfSelectedItems.Remove(item);
-        }
-        private void ShowCartButton_OnClick(object sender, EventArgs e)
-        {
-            CartForm cartForm = new CartForm(ListOfSelectedItems,this);
-            cartForm.Show();
+            if (ListOfSelectedItems.Count == 0) { return; }
+            if(_cartForm!=null)
+            {
+                _cartForm.Hide();
+            }
+                _cartForm = new CartForm(ListOfSelectedItems, this);
+                _cartForm.Show();
+            
         }
 
         private void GoBackButton_Click(object sender, EventArgs e)
