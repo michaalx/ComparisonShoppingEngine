@@ -123,7 +123,6 @@
     <Compile Include="GraphFeature\ChooseGraph2.designer.cs">
       <DependentUpon>ChooseGraph2.cs</DependentUpon>
     </Compile>
-    <Compile Include="GraphFeature\DataForGraph.cs" />
     <Compile Include="GraphFeature\Graph.cs">
       <SubType>Form</SubType>
     </Compile>

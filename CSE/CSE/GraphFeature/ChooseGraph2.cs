@@ -45,7 +45,7 @@ namespace CSE.GraphFeature
             //{
                 string item = listViewGraph.SelectedItems[0].Text;
                 PathForStore = graph.GetPath(SavedStore, PathForStore);
-                var list = graph.GetList(PathForStore,item);
+                var list = graph.GetListDays(PathForStore,item);
                 var graphForm = new Graph(list,item);
                 graphForm.Show();
                 this.Hide();
