@@ -235,6 +235,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Map\StoreMap.resx">
       <DependentUpon>StoreMap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GraphFeature\ChooseGraph.resx">
       <DependentUpon>ChooseGraph.cs</DependentUpon>
     </EmbeddedResource>
