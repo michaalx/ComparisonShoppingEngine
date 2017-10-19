@@ -29,7 +29,7 @@ namespace CSE.GraphFeature
         {
             var chosen = (Store)Enum.Parse(typeof(Store), comboBoxStore.Text);
             var pathForStore = graph.GetPath(chosen);
-            var newGraph = new ChooseGraph2(pathForStore,chosen);
+            var newGraph = new ChooseGraph2(pathForStore,chosen );
             newGraph.Show();
             this.Hide();
         }

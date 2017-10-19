@@ -20,8 +20,8 @@ namespace CSE
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Application.Run(new regFrm());
-            Application.Run(new StartForm());
-            //Application.Run(new ChooseGraph());
+            //Application.Run(new StartForm());
+            Application.Run(new ChooseGraph());
         }
     }
 }
