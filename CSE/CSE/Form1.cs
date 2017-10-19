@@ -107,9 +107,9 @@ namespace CSE
         //Parsing products from files
         private void ListInit()
         {
-            //CSV csv = new CSV();
-            //string[] paths = ddaf.paths;
-           // listOfItems = csv.ParsingUniqueProducts(ddaf.paths);
+            CSV csv = new CSV();
+            string[] paths = ddaf.GetFilesPaths();
+            listOfItems = csv.ParsingUniqueProducts(paths);
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
