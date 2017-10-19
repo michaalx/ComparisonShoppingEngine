@@ -105,13 +105,11 @@ namespace CSE.BackEnd
                 {
                     foreach(var productInDatabase in productsInDatabase)
                     {
-                        Debug.WriteLine("COMPARE " + productInReceipt.Name + " WITH " + productInDatabase.Name);
                         if (productInReceipt.Name == productInDatabase.Name)
                         {
                             if (productInReceipt.Price < productInDatabase.Price)
                             {
                                 finalProductsList.Add(productInReceipt);
-                                Debug.WriteLine("SHOULD BE UPDATED: " + productInReceipt.Name);
                             }
                             else
                             {
