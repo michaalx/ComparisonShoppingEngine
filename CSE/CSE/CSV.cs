@@ -1,6 +1,8 @@
-﻿using CsvHelper;
+﻿using CSE.BackEnd;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -154,6 +156,50 @@ namespace CSE
                 }
             }
             return matchingProducts;
+        }
+
+        public List<string> ParsingOneFileNames(string path)
+        {
+            var list = new List<string>();
+
+            if (File.Exists(pathRegistration))
+            {
+                StreamReader reader = File.OpenText(path);
+                var parser = new CsvParser(reader);
+                while (true)
+                {
+                    var row = parser.Read();
+                    if (row == null)
+                    {
+                        reader.Close();
+                        break;
+                    }
+                    list.Add(row[0]);
+                }
+            }
+
+            return list;
+        }
+
+        public List<ProductDetails> ParsingDetailsFile(string path, string name)
+        {
+            var list = new List<ProductDetails>();
+            if (File.Exists(path))
+            {
+                StreamReader reader = File.OpenText(path);
+                var parser = new CsvParser(reader);
+                while (true)
+                {
+                    var row = parser.Read();
+                    if (row == null)
+                    {
+                        reader.Close();
+                        break;
+                    }
+                    list.Add(new ProductDetails(row[0], Decimal.Parse(row[1]), DateTime.ParseExact(row[2], "yyyy-MM-dd", CultureInfo.InvariantCulture), Int32.Parse(row[3])));
+                }
+            }
+            return list;
         }
     }
 }
