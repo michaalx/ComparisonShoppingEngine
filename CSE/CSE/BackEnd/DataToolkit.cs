@@ -19,14 +19,12 @@ namespace CSE.BackEnd
         }
         public List<Tuple<string, string, decimal>> PreparePopularProducts()
         {
-            Debug.WriteLine("CALLED");
             List<Tuple<string,string,decimal>> result = new List<Tuple<string, string, decimal>>();
             var popularProducts = GetPopularProducts(5);
             foreach(var item in popularProducts)
             {
                 KeyValuePair<string,decimal> partialResult = _cheapestStore.GetCheapestStoreForOneProduct(item.Key);
                 result.Add(new Tuple<string, string, decimal>(item.Key,partialResult.Key,partialResult.Value));
-                Debug.WriteLine(item.Key+"   "+partialResult.Key+"  "+partialResult.Value);
             }
             return result;
 
