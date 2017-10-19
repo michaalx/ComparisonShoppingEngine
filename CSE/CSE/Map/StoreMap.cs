@@ -28,7 +28,7 @@ namespace CSE.Map
             }
 
             MapClass storeMap = new MapClass();
-            storeMap.GetMap(i, zoom);
+            storeMap.GetMap(i, zoom, "Naugarduko g. 24", "IKI");
 
             if (i == 0)
             {

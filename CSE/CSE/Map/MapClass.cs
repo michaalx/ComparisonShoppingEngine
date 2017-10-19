@@ -30,7 +30,7 @@ namespace CSE.Map
             private set { key = value; }
         }
         public string StaticMapPath
-         {
+        {
             get { return staticMapPath; }
             private set { staticMapPath = value; }
         }
@@ -40,25 +40,32 @@ namespace CSE.Map
             private set { placesPath = value; }
         }
         
-        public void GetMap(int i, int zoom)
+        public void GetMap(int i, int zoom, string address, string storeName)
         {
-            Address = "Naugarduko g. 24";
+            
+            if (string.IsNullOrEmpty(address)|| string.IsNullOrEmpty(storeName))
+            {
+                throw new MissingFieldException("Wrong input;");
+            }
+            //Address = "Naugarduko g. 24";
+            Address = address;
+            StoreName = storeName;
             location = new DeviceLocation(Address);
             lat = location.Lat;
             lon = location.Lon;
-            StoreName = "IKI";
+            //StoreName = "IKI";
             latlng = lat.ToString().Replace(",", ".") + "," + lon.ToString().Replace(",", ".");
 
-            path =  PlacesPath + latlng + "&rankby=distance&keyword=" + StoreName + "_parduotuve&key=" + Key;
+            path = PlacesPath + latlng + "&rankby=distance&keyword=" + StoreName + "_parduotuve&key=" + Key;
+
             using (WebClient wc = new WebClient())
             {
-                wc.DownloadFile(path, "map.txt");
+                 wc.DownloadFile(path, "map.txt");
             }
             FindStores();
-          
-
+                
             path = StaticMapPath + latlng + "&zoom=" + zoom + "&size=500x500&markers=color:red%7Clabel:*%7C" + latlng;
-            
+
             foreach (StoreInfo store in stores)
             {
                 path += "&markers=color:blue%7Clabel:" + rank + "%7C" + store.Coordinates;

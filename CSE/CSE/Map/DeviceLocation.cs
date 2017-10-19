@@ -31,7 +31,15 @@ namespace CSE.Map
         public DeviceLocation(string address)
         {
             Key = "AIzaSyBGWA-e4F9FXwBrc1aCnq31m6LujasAchg";
-            GeoCodeInfo(address);
+            try
+            {
+                GeoCodeInfo(address);
+            }
+
+            catch (MissingFieldException e)
+            {
+                throw new MissingFieldException("Wrong Address.");
+            }
         }
 
         public Location GeoCodeInfo(string address)
@@ -42,11 +50,17 @@ namespace CSE.Map
                 throw new MissingFieldException("Your Google API Key is missing");
             }
 
+            if (string.IsNullOrEmpty(address))
+            {
+                throw new MissingFieldException("Wrong Address.");
+            }
+
             using (var client = new WebClient())
             {
                 string formatAddress = string.Format(GGeoCodeJsonServiceUrl, address, Key);
                 var result = client.DownloadString(formatAddress);
                 var O = JsonConvert.DeserializeObject<GeoJsonResult>(result);
+
                 if (Stat == Result.OK)
                 {
                     Lat = O.results[0].geometry.Location.lat;
