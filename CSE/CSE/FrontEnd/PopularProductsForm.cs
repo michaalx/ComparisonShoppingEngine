@@ -55,7 +55,6 @@ namespace CSE.FrontEnd
             for(int index=0;index<listOfSelectedItems.Count;index++)
             {
                 listOfSelectedItemsString.Add(listOfSelectedItems[index].Text);
-                Debug.WriteLine(listOfSelectedItems[index].Text);
             }
             CompareProductPricesForm compareProductPricesForm = new CompareProductPricesForm
             {
