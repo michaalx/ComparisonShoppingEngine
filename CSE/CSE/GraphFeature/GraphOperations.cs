@@ -33,20 +33,27 @@ namespace CSE.GraphFeature
 
         public Dictionary<DateTime,decimal> GetListDays(string path, string item)
         {
-            var dateAndPrice = new Dictionary<DateTime,decimal>();
-            var listFromFile = csvTool.ParsingDetailsFile(path,item);
-            var queryForMatchingItem = from record in listFromFile
-                                       where record.Name == item
-                                       select record;
-
-            foreach (var product in queryForMatchingItem)
+            try
             {
-                if(!dateAndPrice.Keys.Contains(product.Timestamp))
+                var dateAndPrice = new Dictionary<DateTime, decimal>();
+                var listFromFile = csvTool.ParsingDetailsFile(path, item);
+                var queryForMatchingItem = from record in listFromFile
+                                           where record.Name == item
+                                           select record;
+
+                foreach (var product in queryForMatchingItem)
                 {
-                    dateAndPrice.Add(product.Timestamp, product.Price);
+                    if (!dateAndPrice.Keys.Contains(product.Timestamp))
+                    {
+                        dateAndPrice.Add(product.Timestamp, product.Price);
+                    }
                 }
+                return dateAndPrice;
             }
-            return dateAndPrice;
+            catch (Exception)
+            {
+                return null;
+            }
         } 
 
         public Dictionary<DateTime,decimal> GetListYears(Dictionary<DateTime,decimal> listForDays)

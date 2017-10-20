@@ -15,7 +15,7 @@ namespace CSE
         private static string _pathToRimi = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rimi.csv");
         private static string _pathToNorfa = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "norfa.csv");
         private static string _pathToLidl = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lidl.csv");
-        private string[] _paths = { _pathToIKI, _pathToLidl, _pathToMaxima, _pathToNorfa, _pathToRimi };
+        private string[] _paths = { _pathToMaxima, _pathToIKI, _pathToRimi, _pathToNorfa, _pathToLidl  };
 
         private static string _pathToMaximaDetails = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "maximaDetails.csv");
         private static string _pathToIKIDetails = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ikiDetails.csv");
