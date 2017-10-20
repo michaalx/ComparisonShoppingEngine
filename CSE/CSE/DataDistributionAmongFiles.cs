@@ -57,14 +57,14 @@ namespace CSE
             }
         }
 
-        public string[] GetFilesPaths()
-        {
-            return _paths;
-        }
-
         public List<Product> GetProductsList()
         {
             return _products;
+        }
+
+        public string[] GetFilesPaths()
+        {
+            return _paths;
         }
 
         public string[] GetPathsDetails()

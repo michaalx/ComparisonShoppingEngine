@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace CSE
 {
-    class CSV
+    public class CSV
     {    
         private string _pathRegistration = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "registration.csv");
         private string _fileOfUniqueProducts = "unique_products.csv";

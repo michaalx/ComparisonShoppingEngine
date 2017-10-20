@@ -37,6 +37,11 @@ namespace CSE
             }
             return GetCheapest();
         }
+        /// <summary>
+        /// Method used in the process of displaying popular products data.
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         public KeyValuePair<string,decimal> GetCheapestStoreForOneProduct(string product)
         {
             Dictionary<string, decimal> allValues = new Dictionary<string, decimal>();
@@ -67,7 +72,7 @@ namespace CSE
             return new KeyValuePair<string, decimal>(store, minimum);
         }
         /// <summary>
-        /// 
+        /// Method used in displaying the cheapest store name.
         /// </summary>
         /// <param name="cart"></param>
         /// <returns></returns>

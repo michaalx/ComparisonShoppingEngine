@@ -3,7 +3,7 @@ using System.Net.Mail;
 
 namespace CSE
 {
-    class Email
+    public class Email
     {
         public bool IsValid(string email)
         {
