@@ -1,4 +1,4 @@
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -136,7 +136,6 @@
       <DependentUpon>Graph.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphFeature\GraphOperations.cs" />
-    <Compile Include="ListViewOperations.cs" />
     <Compile Include="Map\DeviceLocation.cs" />
     <Compile Include="Map\GeoJsonResult.cs" />
     <Compile Include="Map\MapClass.cs" />
@@ -151,25 +150,7 @@
     <Compile Include="CSV.cs" />
     <Compile Include="DataDistributionAmongFiles.cs" />
     <Compile Include="Email.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="IOCR.cs" />
-    <Compile Include="regFrm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="regFrm.Designer.cs">
-      <DependentUpon>regFrm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="logFrm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="logFrm.Designer.cs">
-      <DependentUpon>logFrm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,9 +193,6 @@
     <Compile Include="FrontEnd\UploadDataForm.Designer.cs">
       <DependentUpon>UploadDataForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\CartForm.resx">
       <DependentUpon>CartForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -253,12 +231,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GraphFeature\Graph.resx">
       <DependentUpon>Graph.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="regFrm.resx">
-      <DependentUpon>regFrm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="logFrm.resx">
-      <DependentUpon>logFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

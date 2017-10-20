@@ -27,11 +27,15 @@ namespace CSE.GraphFeature
 
         private void Show_Click(object sender, EventArgs e)
         {
-            var chosen = (Store)Enum.Parse(typeof(Store), comboBoxStore.Text);
-            var pathForStore = graph.GetPath(chosen);
-            var newGraph = new ChooseGraph2(pathForStore,chosen );
-            newGraph.Show();
-            this.Hide();
+            try
+            {
+                var chosen = (Store)Enum.Parse(typeof(Store), comboBoxStore.Text);
+                var pathForStore = graph.GetPath(chosen);
+                var newGraph = new ChooseGraph2(pathForStore, chosen);
+                newGraph.Show();
+                this.Hide();
+            }
+            catch (ArgumentException) { }
         }
     }
 }

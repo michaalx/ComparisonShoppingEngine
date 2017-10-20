@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CSE
+﻿namespace CSE
 {
-    class User
+    public class User
     {
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -20,11 +14,5 @@ namespace CSE
             Email = email;
             Password = password;
         }
-
-        /*public User(string email,string password)
-        {
-            Email = email;
-            Password = password;
-        }*/
     }
 }

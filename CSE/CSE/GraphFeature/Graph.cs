@@ -48,32 +48,36 @@ namespace CSE.GraphFeature
 
         private void ChartAreas()
         {
-            DateTime minDate = dateAndPrice.Keys.Min();
-            DateTime maxDate = dateAndPrice.Keys.Max();
-            var axisX = new System.Windows.Forms.DataVisualization.Charting.Axis
+            try
             {
-                IntervalType = DateTimeIntervalType.Days,
-                Interval = 1,
-                IntervalOffset = 1,
-                Minimum = minDate.ToOADate(),
-                Maximum = maxDate.ToOADate(),
-                Title = "Date"
-            };
+                DateTime minDate = dateAndPrice.Keys.Min();
+                DateTime maxDate = dateAndPrice.Keys.Max();
+                var axisX = new System.Windows.Forms.DataVisualization.Charting.Axis
+                {
+                    IntervalType = DateTimeIntervalType.Days,
+                    Interval = 1,
+                    IntervalOffset = 1,
+                    Minimum = minDate.ToOADate(),
+                    Maximum = maxDate.ToOADate(),
+                    Title = "Date"
+                };
 
-            var axisY = new System.Windows.Forms.DataVisualization.Charting.Axis
-            {
-                Minimum = (double)dateAndPrice.Values.Min(),
-                Maximum = (double)dateAndPrice.Values.Max(),
-                Title = "Price",
-            };
+                var axisY = new System.Windows.Forms.DataVisualization.Charting.Axis
+                {
+                    Minimum = (double)dateAndPrice.Values.Min(),
+                    Maximum = (double)dateAndPrice.Values.Max(),
+                    Title = "Price",
+                };
 
-            var chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea
-            {
-                AxisX = axisX,
-                AxisY = axisY,
-            };
+                var chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea
+                {
+                    AxisX = axisX,
+                    AxisY = axisY,
+                };
 
-            this.chart1.ChartAreas.Add(chartArea1);
+                this.chart1.ChartAreas.Add(chartArea1);
+            }
+            catch (InvalidOperationException) { Hide(); }
         }
 
         private void ChartSeries(string name)
@@ -234,40 +238,48 @@ namespace CSE.GraphFeature
 
         private void RunReport()
         {
-            //Clear Chart
-            this.chart1.Series.Clear();
-            this.chart1.Legends.Clear();
-            this.chart1.ChartAreas.Clear();
-            this.chart1.Titles.Clear();
+            try
+            {
+                //Clear Chart
+                this.chart1.Series.Clear();
+                this.chart1.Legends.Clear();
+                this.chart1.ChartAreas.Clear();
+                this.chart1.Titles.Clear();
 
-            //Build Chart
-            this.ChartSeries(productName);
-            this.ChartAreas();
-            this.ChartTitle(productName);
-            this.chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
-            this.chart1.Invalidate();
+                //Build Chart
+                this.ChartSeries(productName);
+                this.ChartAreas();
+                this.ChartTitle(productName);
+                this.chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+                this.chart1.Invalidate();
+            }
+            catch (ArgumentException) { return; }
         }
 
         private void graphComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (graphComboBox.Text)
+            try
             {
-                case "Years":
-                    this.chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Years;
-                    this.dateAndPriceYears = grapho.GetListYears(this.dateAndPrice);
-                    this.RunReportYears();
-                    break;
-                case "Months":
-                    this.chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Months;
-                    this.dateAndPriceMonths = grapho.GetListMonths(this.dateAndPrice);
-                    this.RunReportMonths();
-                    break;
-                case "Days":
-                default:
-                    this.chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
-                    this.RunReport();
-                    break;
+                switch (graphComboBox.Text)
+                {
+                    case "Years":
+                        this.chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Years;
+                        this.dateAndPriceYears = grapho.GetListYears(this.dateAndPrice);
+                        this.RunReportYears();
+                        break;
+                    case "Months":
+                        this.chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Months;
+                        this.dateAndPriceMonths = grapho.GetListMonths(this.dateAndPrice);
+                        this.RunReportMonths();
+                        break;
+                    case "Days":
+                    default:
+                        this.chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
+                        this.RunReport();
+                        break;
+                }
             }
+            catch (ArgumentException) { return; }
         }
 
     }

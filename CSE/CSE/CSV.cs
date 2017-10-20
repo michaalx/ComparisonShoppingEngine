@@ -7,14 +7,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSE
 {
-    class CSV
+    public class CSV
     {    
-        string pathRegistration = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "registration.csv");
+        private string _pathRegistration = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "registration.csv");
         private string _fileOfUniqueProducts = "unique_products.csv";
 
         public void WriteToFileProducts(List<Product> list, string filePath)
@@ -73,26 +72,23 @@ namespace CSE
         /// <param name="user"></param>
         public void WriteToFileRegistration(User user)
         {
-            if (!(File.Exists(pathRegistration)))
+            if (!(File.Exists(_pathRegistration)))
             {
-                StreamWriter writer = File.CreateText(pathRegistration);
+                StreamWriter writer = File.CreateText(_pathRegistration);
             }
             else
             {
-                StreamWriter writer = File.AppendText(pathRegistration);
+                StreamWriter writer = File.AppendText(_pathRegistration);
                 var csv = new CsvWriter(writer);
-               // foreach (var value in list)
-                //{
                     csv.WriteRecord(user);
-                //}
                 writer.Close();
             }
         }
         public bool ParsingRegistration(string email)
         {
-            if(File.Exists(pathRegistration)) 
+            if(File.Exists(_pathRegistration)) 
             {
-                StreamReader reader = File.OpenText(pathRegistration);
+                StreamReader reader = File.OpenText(_pathRegistration);
                 var parser = new CsvParser(reader);
                 while (true)
                 {
@@ -112,9 +108,9 @@ namespace CSE
         }
         public bool ParsingRegistration(string email, string password)
         {
-           if(File.Exists(pathRegistration))
+           if(File.Exists(_pathRegistration))
             {
-                StreamReader reader = File.OpenText(pathRegistration);
+                StreamReader reader = File.OpenText(_pathRegistration);
                 var parser = new CsvParser(reader);
                 while (true)
                 {
@@ -211,7 +207,7 @@ namespace CSE
                 return result.ToList();
             }
             catch (FormatException) { return null; }
-            //catch (ArgumentNullException) { return null; }
+            catch (ArgumentNullException) { return null; }
             catch (OverflowException) { return null; }
         }
         
@@ -270,7 +266,7 @@ namespace CSE
         {
             var list = new List<string>();
 
-            if (File.Exists(pathRegistration))
+            if (File.Exists(_pathRegistration))
             {
                 StreamReader reader = File.OpenText(path);
                 var parser = new CsvParser(reader);

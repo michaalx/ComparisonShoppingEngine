@@ -1,12 +1,6 @@
 ﻿using CSE.BackEnd;
+using CSE.GraphFeature;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSE.FrontEnd
@@ -47,7 +41,8 @@ namespace CSE.FrontEnd
 
         private void StatisticsButton_OnClick(object sender, EventArgs e)
         {
-            
+            ChooseGraph initialGraph = new ChooseGraph();
+            initialGraph.Show();
         }
     }
 }

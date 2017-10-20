@@ -1,12 +1,6 @@
-﻿using System;
+﻿using CSE.Map;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSE.FrontEnd
@@ -43,6 +37,8 @@ namespace CSE.FrontEnd
             if (result.Key!="NULL")
             {
                 compareProductPricesForm.formsToolKit.DisplayCheapestStoreInfo(result.Key.ToUpper(), result.Value);
+                StoreMap map = new StoreMap();
+                map.Show();
             }
             else
             {

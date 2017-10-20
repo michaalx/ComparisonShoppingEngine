@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSE
@@ -16,12 +13,12 @@ namespace CSE
         CSV csvtool = new CSV();
 
         //Extracting store name from filepath (there should be another way to do it, maybe with enum)
-        public string GetStoreName(string file)
+        private string GetStoreName(string file)
         {
             return Regex.Match(file, @".*\\([^\\]+(?=\.))").Groups[1].Value;
         }
 
-        public string GetCheapestStore(ListView cart)
+        private string GetCheapestStore(ListView cart)
         {
             countDictionary.Clear();
             var allstores = new Dictionary<string, List<Product>>();
@@ -40,6 +37,11 @@ namespace CSE
             }
             return GetCheapest();
         }
+        /// <summary>
+        /// Method used in the process of displaying popular products data.
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         public KeyValuePair<string,decimal> GetCheapestStoreForOneProduct(string product)
         {
             Dictionary<string, decimal> allValues = new Dictionary<string, decimal>();
@@ -70,7 +72,7 @@ namespace CSE
             return new KeyValuePair<string, decimal>(store, minimum);
         }
         /// <summary>
-        /// 
+        /// Method used in displaying the cheapest store name.
         /// </summary>
         /// <param name="cart"></param>
         /// <returns></returns>
@@ -102,7 +104,7 @@ namespace CSE
         }
         
         //Getting minimum count
-        public string GetCheapest()
+        private string GetCheapest()
         {
             try
             {

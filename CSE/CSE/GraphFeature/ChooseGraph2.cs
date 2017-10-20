@@ -41,19 +41,19 @@ namespace CSE.GraphFeature
 
         private void showButton_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 string item = listViewGraph.SelectedItems[0].Text;
                 PathForStore = graph.GetPath(SavedStore, PathForStore);
                 var list = graph.GetListDays(PathForStore,item);
                 var graphForm = new Graph(list,item);
                 graphForm.Show();
                 this.Hide();
-            //}
-            /*catch (Exception)
+            }
+            catch (Exception)
             {
                 notSelected.Text = "Select an item";
-            }*/
+            }
             
         }
     }

@@ -95,7 +95,7 @@
             this.Controls.Add(this.goBackButton);
             this.Controls.Add(this.addToCartButton);
             this.Controls.Add(this.listViewOfPopularProducts);
-            this.Location = new System.Drawing.Point(550, 250);
+            this.Location = new System.Drawing.Point(500, 265);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PopularProductsForm";

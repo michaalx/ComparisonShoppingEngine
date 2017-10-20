@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSE.FrontEnd;
-using CSE.GraphFeature;
 
 namespace CSE
 {
     static class Program
     {
-        //hello
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,9 +14,7 @@ namespace CSE
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new regFrm());
-            //Application.Run(new StartForm());
-            Application.Run(new ChooseGraph());
+            Application.Run(new StartForm());
         }
     }
 }

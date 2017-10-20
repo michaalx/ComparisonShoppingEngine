@@ -1,11 +1,7 @@
 ﻿using CSE.FrontEnd;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSE.BackEnd
 {
@@ -20,7 +16,8 @@ namespace CSE.BackEnd
             ListOfItems = new List<Product>();
             Ddaf = new DataDistributionAmongFiles();
             PopularProducts = new Dictionary<string, int>();
-            TextProcessorUsed = new TextProcessor(TesseractOCR.ImageToText(file).Split('\n'));
+            TesseractOCR tesseractOCR = new TesseractOCR();
+            TextProcessorUsed = new TextProcessor(tesseractOCR.ImageToText(file).Split('\n'));
         }
         /// <summary>
         /// Not sure about norfa, rimi.
