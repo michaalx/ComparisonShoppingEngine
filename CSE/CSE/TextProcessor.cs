@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace CSE
 {
-	public class TextProcessor
+    public class TextProcessor
 	{
 		private List<string> productDB = new List<string>();
 		private List<string> recognizedTextLines = new List<string>();

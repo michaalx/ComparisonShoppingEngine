@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CSE
+﻿namespace CSE
 {
     class User
     {
@@ -20,11 +14,5 @@ namespace CSE
             Email = email;
             Password = password;
         }
-
-        /*public User(string email,string password)
-        {
-            Email = email;
-            Password = password;
-        }*/
     }
 }
