@@ -8,15 +8,15 @@ namespace CSE
 {
     public class TextProcessor
 	{
-		private List<string> productDB = new List<string>();
-		private List<string> recognizedTextLines = new List<string>();
-		private List<string> productList = new List<string>();
-		private List<decimal> priceList = new List<decimal>();
+		private List<string> _productDB = new List<string>();
+		private List<string> _recognizedTextLines = new List<string>();
+		private List<string> _productList = new List<string>();
+		private List<decimal> _priceList = new List<decimal>();
 
 
 		public TextProcessor(string[] recognizedTextLines)
 		{
-			this.recognizedTextLines = recognizedTextLines.ToList();
+			this._recognizedTextLines = recognizedTextLines.ToList();
 			DataBaseInit();
 		}
 
@@ -27,17 +27,17 @@ namespace CSE
 			var list = csv.ParsingUniqueProducts(fp.GetFilesPaths());
 			foreach (Product product in list)
             {
-                productDB.Add(product.Name);
+                _productDB.Add(product.Name);
             }
 		}
 
 		public void CleanEmptyLines()
 		{
-			for (int i = 0; i < recognizedTextLines.Count; i++)
+			for (int i = 0; i < _recognizedTextLines.Count; i++)
 			{
-				if (recognizedTextLines[i] == "\r" || recognizedTextLines[i] == "")
+				if (_recognizedTextLines[i] == "\r" || _recognizedTextLines[i] == "")
 				{
-					recognizedTextLines.RemoveAt(i);
+					_recognizedTextLines.RemoveAt(i);
 					i--;
 				}
 			}
@@ -45,7 +45,7 @@ namespace CSE
 
         public int RecogniseStore()
         {
-            foreach(String line in recognizedTextLines)
+            foreach(String line in _recognizedTextLines)
             {
                 if(line.Contains("MAXIMA LT, UAB"))
                 {
@@ -75,7 +75,7 @@ namespace CSE
         {
             var regex = new Regex(@"\b\d{4}\-\d{2}.\d{2}\b");
             DateTime datetime;
-            foreach (String line in recognizedTextLines)
+            foreach (String line in _recognizedTextLines)
             {
                 foreach (Match match in regex.Matches(line))
                 {
@@ -89,11 +89,11 @@ namespace CSE
         public void CleanLines()
         {
             char[] temp = new char[6];
-            for (int i = 0; i < recognizedTextLines.Count; i++)
+            for (int i = 0; i < _recognizedTextLines.Count; i++)
             {
-                if (!Regex.Match((recognizedTextLines[i]), @"\d+[.,]\d{2}\s[A-Z]\b").Success)
+                if (!Regex.Match((_recognizedTextLines[i]), @"\d+[.,]\d{2}\s[A-Z]\b").Success)
                 {
-                    recognizedTextLines.RemoveAt(i);
+                    _recognizedTextLines.RemoveAt(i);
                     i--;
                 }
             }
@@ -103,13 +103,13 @@ namespace CSE
 		{
             string temp;
             double temp2;
-            foreach (String line in recognizedTextLines)
+            foreach (String line in _recognizedTextLines)
             {
                 var match = Regex.Match(line, @"\d+,\d{2}");
                 temp = match.Value;
                 temp = temp.Replace(',', '.');
                 Double.TryParse(temp, out temp2);
-                priceList.Add(Convert.ToDecimal(temp2));
+                _priceList.Add(Convert.ToDecimal(temp2));
             }
         }
 
@@ -119,11 +119,11 @@ namespace CSE
 			int index = 0;
 			int closestMatchIndex = -1;
          
-			for (int i = 0; i < recognizedTextLines.Count; i++)
+			for (int i = 0; i < _recognizedTextLines.Count; i++)
 			{
-				for (int j = 0; j < productDB.Count; j++)
+				for (int j = 0; j < _productDB.Count; j++)
 				{
-					temp = LevenshteinDistance(recognizedTextLines[i], productDB[j]);
+					temp = LevenshteinDistance(_recognizedTextLines[i], _productDB[j]);
 					if (closestMatchIndex > temp || closestMatchIndex == -1)
 					{
 						closestMatchIndex = temp;
@@ -131,7 +131,7 @@ namespace CSE
 					}
 				}
 
-				productList.Add(productDB[index]);
+				_productList.Add(_productDB[index]);
 				closestMatchIndex = -1;
 			}
 		}
@@ -178,27 +178,27 @@ namespace CSE
 		}
         public void SetProductDB(List<string> products)
         {
-            this.productDB = products;
+            this._productDB = products;
         }
         public List<string> GetListOfLines()
         {
-            return recognizedTextLines;
+            return _recognizedTextLines;
         }
 
 		public List<decimal> GetPriceList()
 		{
-			return priceList;
+			return _priceList;
 		}
 
 		public List<string> GetProductList()
 		{
-			return productList;
+			return _productList;
 		}
 
 		public int GetCount()
 		{
-			if (productList.Count == priceList.Count)
-				return productList.Count;
+			if (_productList.Count == _priceList.Count)
+				return _productList.Count;
 			else
 				throw new IndexOutOfRangeException();
 		}

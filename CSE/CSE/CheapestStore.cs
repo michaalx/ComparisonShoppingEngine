@@ -13,12 +13,12 @@ namespace CSE
         CSV csvtool = new CSV();
 
         //Extracting store name from filepath (there should be another way to do it, maybe with enum)
-        public string GetStoreName(string file)
+        private string GetStoreName(string file)
         {
             return Regex.Match(file, @".*\\([^\\]+(?=\.))").Groups[1].Value;
         }
 
-        public string GetCheapestStore(ListView cart)
+        private string GetCheapestStore(ListView cart)
         {
             countDictionary.Clear();
             var allstores = new Dictionary<string, List<Product>>();
@@ -99,7 +99,7 @@ namespace CSE
         }
         
         //Getting minimum count
-        public string GetCheapest()
+        private string GetCheapest()
         {
             try
             {

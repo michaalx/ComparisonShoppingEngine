@@ -6,7 +6,6 @@ namespace CSE
 {
     static class Program
     {
-        //hello
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

@@ -7,7 +7,6 @@ namespace CSE.FrontEnd
     public class FormsToolkit
     {
         public List<Product> ListOfItems { get; set; }
-
         public DataDistributionAmongFiles Ddaf { get; set; }
         public CheapestStore TheCheapestStore { get; set; }
         public TextProcessor ClosestMatch { get; set; }
