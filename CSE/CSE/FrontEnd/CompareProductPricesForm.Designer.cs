@@ -120,7 +120,9 @@
             this.Controls.Add(this.greetingLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "CompareProductPricesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CompareProductPricesForm_FormClosing);
             this.Load += new System.EventHandler(this.CompareProductPricesForm_Load);
             this.ResumeLayout(false);

@@ -38,8 +38,36 @@ namespace CSE
             {
                 GetStorePriceSum(store);
             }
-            var result = GetCheapest();
-            return result;
+            return GetCheapest();
+        }
+        public KeyValuePair<string,decimal> GetCheapestStoreForOneProduct(string product)
+        {
+            Dictionary<string, decimal> allValues = new Dictionary<string, decimal>();
+            string[] paths = ddaf.GetFilesPaths();
+            foreach(var file in paths)
+            {
+                var storeName = GetStoreName(file);
+
+                var productsInStore = csvtool.ParsingProductsOfStore(file);
+                foreach(var item in productsInStore)
+                {
+                    if (item.Name == product)
+                    {
+                        allValues.Add(storeName, item.Price);
+                    }
+                }
+            }
+            decimal minimum = Decimal.MaxValue;
+            string store = "NULL";
+            foreach(var item in allValues)
+            {
+                if (item.Value < minimum)
+                {
+                    minimum = item.Value;
+                    store = item.Key;
+                }
+            }
+            return new KeyValuePair<string, decimal>(store, minimum);
         }
         /// <summary>
         /// 
@@ -48,9 +76,16 @@ namespace CSE
         /// <returns></returns>
         public KeyValuePair<string, decimal> GetCheapestStoreNameAndSum(ListView cart)
         {
-            string storeName = GetCheapestStore(cart);
-            decimal sum = countDictionary[storeName];
-            return new KeyValuePair<string,decimal>(storeName, sum);
+            try
+            {
+                string storeName = GetCheapestStore(cart);
+                decimal sum = countDictionary[storeName];
+                return new KeyValuePair<string, decimal>(storeName, sum);
+            }
+            catch (ArgumentNullException)
+            {
+                return new KeyValuePair<string, decimal>("NULL", 0m);
+            }
         }
         //Get store's price sum
         private void GetStorePriceSum(KeyValuePair<string, List<Product>> store)
@@ -69,17 +104,24 @@ namespace CSE
         //Getting minimum count
         public string GetCheapest()
         {
-            decimal minNum = countDictionary.First().Value;
-            string minStore = countDictionary.First().Key;
-            foreach(var num in countDictionary)
+            try
             {
-                if(num.Value < minNum)
+                decimal minNum = countDictionary.First().Value;
+                string minStore = countDictionary.First().Key;
+                foreach (var num in countDictionary)
                 {
-                    minNum = num.Value;
-                    minStore = num.Key;
+                    if (num.Value < minNum)
+                    {
+                        minNum = num.Value;
+                        minStore = num.Key;
+                    }
                 }
+                return minStore;
             }
-            return minStore;
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
         }
     }
 }

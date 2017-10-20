@@ -100,7 +100,10 @@
             this.Controls.Add(this.uploadImageButton);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.greetingLabel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "InsertReceiptForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InsertReceiptForm_FormClosing);
             this.Load += new System.EventHandler(this.InsertReceiptForm_Load);
             this.ResumeLayout(false);

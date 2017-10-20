@@ -60,7 +60,7 @@ namespace CSE
                 var shop = (Store)Enum.Parse(typeof(Store), comboBox.Text);
                 var textProcessor = new TextProcessor(TesseractOCR.ImageToText(file).Split('\n'));
 				textProcessor.CleanEmptyLines();
-				textProcessor.CleanIrrelevantLines();
+			//	textProcessor.CleanIrrelevantLines();
 				textProcessor.SeparateNamePrice();
 				textProcessor.FindMatch();
                 //This has to be in other class
@@ -68,7 +68,7 @@ namespace CSE
                 var prices = textProcessor.GetPriceList().Select(x => x.ToString()).ToArray();
                 //
                 ddaf.ToProductList(products,prices);
-                ddaf.WriteDataToFile(shop);
+              //  ddaf.StoreDataToFile(shop);
                 panel2.Visible = true;
                 panel1.SendToBack();
             }
@@ -82,7 +82,6 @@ namespace CSE
             {
                 ifError.Text = "Invalid file format";
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)

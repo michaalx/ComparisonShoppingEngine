@@ -37,7 +37,7 @@ namespace CSE.FrontEnd
             else
             {
                 var error = "Email or password is incorrect.";
-                FormsToolkit.DisplayInputError(error);
+                FormsToolkit.DisplayMessageBox(error);
             }
         }
 

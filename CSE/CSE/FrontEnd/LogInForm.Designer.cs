@@ -126,7 +126,10 @@
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LogInForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogInForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

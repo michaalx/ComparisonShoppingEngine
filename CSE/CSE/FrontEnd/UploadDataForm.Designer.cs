@@ -86,7 +86,10 @@
             this.Controls.Add(this.signUpButton);
             this.Controls.Add(this.logInButton);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "UploadDataForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UploadDataForm_FormClosing);
             this.ResumeLayout(false);

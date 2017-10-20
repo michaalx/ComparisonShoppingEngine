@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,8 +11,16 @@ namespace CSE
 {
     public class DataDistributionAmongFiles
     {
-        List<Product> products = new List<Product>();
+        public List<Product> products;
         CSV csvTool = new CSV();
+      
+        private static string _pathToMaxima = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "maxima.csv");
+        private static string _pathToIKI = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "iki.csv");
+        private static string _pathToRimi = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rimi.csv");
+        private static string _pathToNorfa = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "norfa.csv");
+        private static string _pathToLidl = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lidl.csv");
+        private string[] _paths = { _pathToIKI, _pathToLidl, _pathToMaxima, _pathToNorfa, _pathToRimi };
+      
         static string pathToMaxima = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "maxima.csv");
         static string pathToIKI = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "iki.csv");
         static string pathToRimi = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rimi.csv");
@@ -26,34 +34,31 @@ namespace CSE
         string[] paths = { pathToMaxima, pathToIKI, pathToRimi, pathToNorfa, pathToLidl };
         string[] pathsDetails = { pathToMaximaDetails, pathToIKIDetails, pathToRimiDetails, pathToNorfaDetails, pathToLidlDetails };
 
-        public void WriteDataToFile(Store store)
+        public void StoreDataToFile(List<Product> products, Store? store)
         {
              switch (store)
              {
                  case Store.Maxima:
-                     csvTool.WriteToFileProducts(products, pathToMaxima);
+                     csvTool.WriteToFileProducts(products, _pathToMaxima);
                      return;
                  case Store.IKI:
-                     csvTool.WriteToFileProducts(products, pathToIKI);
+                     csvTool.WriteToFileProducts(products, _pathToIKI);
                      return;
                  case Store.Rimi:
-                     csvTool.WriteToFileProducts(products, pathToRimi);
+                     csvTool.WriteToFileProducts(products, _pathToRimi);
                      return;
                  case Store.Norfa:
-                     csvTool.WriteToFileProducts(products, pathToNorfa);
+                     csvTool.WriteToFileProducts(products, _pathToNorfa);
                      return;
                  case Store.Lidl:
-                     csvTool.WriteToFileProducts(products, pathToLidl);
-                     
-
-            
-             ///csvTool.WriteToFileProducts(products, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "" + store + ".csv"));
+                     csvTool.WriteToFileProducts(products, _pathToLidl);
              return;
             }
         }
 
         public void ToProductList(string[] products, string[] prices)
         {
+            this.products = new List<Product>();
             decimal[] price= Array.ConvertAll(prices, Decimal.Parse);
             for (int i = 0; i < products.Length; i++)
             {
@@ -64,7 +69,12 @@ namespace CSE
 
         public string[] GetFilesPaths()
         {
-            return paths;
+            return _paths;
+        }
+
+        public List<Product> GetProductsList()
+        {
+            return products;
         }
 
         public string[] GetPathsDetails()

@@ -10,8 +10,6 @@ namespace CSE
     class TesseractOCR 
     {
         /// <summary>
-        /// The initial version of Tesseract-OCR image
-        /// processing method.
         /// Standard English characters are recognised.
         /// </summary>
         /// <param name="fileName"></param>

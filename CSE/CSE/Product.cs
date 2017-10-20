@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSE
 {
-    public struct Product
+    public struct Product : IComparable<Product>
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
@@ -14,6 +14,14 @@ namespace CSE
         {
             Name = name;
             Price = price;
+        }
+       public int CompareTo(Product product)
+        {
+            return string.Compare(product.Name, Name);
+        }
+        public override string ToString()
+        {
+            return Name + "," + Price + "\n";
         }
     }
 }

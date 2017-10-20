@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CSE
@@ -26,7 +29,9 @@ namespace CSE
 			var csv = new CSV();
 			var list = csv.ParsingUniqueProducts(fp.GetFilesPaths());
 			foreach (Product product in list)
-				productDB.Add(product.Name);
+            {
+                productDB.Add(product.Name);
+            }
 		}
 
 		public void CleanEmptyLines()
@@ -41,63 +46,82 @@ namespace CSE
 			}
 		}
 
-		public void CleanIrrelevantLines()
-		{
-			char[] temp = new char[6];
-			for (int i = 0; i < recognizedTextLines.Count; i++)
-			{	
-				recognizedTextLines[i].CopyTo(recognizedTextLines[i].Count()-7, temp, 0, 6);
-				if (!(Char.IsDigit(temp[0]) &&
-						(temp[1].Equals(',') || temp[1].Equals('.')) &&
-						Char.IsDigit(temp[2]) &&
-						Char.IsDigit(temp[3]) &&
-						temp[4].Equals(' ') &&
-						(temp[5].Equals('A') || temp[5].Equals('C'))))
-				{
-					recognizedTextLines.RemoveAt(i);
-					i--;
-				}
-			}
-		}
+        public int RecogniseStore()
+        {
+            foreach(String line in recognizedTextLines)
+            {
+                if(line.Contains("MAXIMA LT, UAB"))
+                {
+                    return -1;
+                }
+                else if(line.Contains("UAB \"RIMI LIETUVA\""))
+                {
+                    return -2;
+                }
+                else if(line.Contains("UAB PALINK"))
+                {
+                    return -3;
+                }
+                else if(line.Contains("UAB NORFOS MAZMENA")||line.Contains("UAB \"NORFOS MAŽMENA\""))
+                {
+                    return -4;
+                }
+                else if(line.Contains("UAB \"Lidl Lietuva\""))
+                {
+                    return -5;
+                }
+            }
+            return 0;
+        }
+
+        public DateTime RecogniseDate()
+        {
+            var regex = new Regex(@"\b\d{4}\-\d{2}.\d{2}\b");
+            DateTime datetime;
+            foreach (String line in recognizedTextLines)
+            {
+                foreach (Match match in regex.Matches(line))
+                {
+                    if (DateTime.TryParseExact(match.Value, "yyyy-MM-dd", null, DateTimeStyles.None, out datetime))
+                        return datetime;
+                }
+            }
+            return datetime = new DateTime(0000, 00, 00);
+        }
+
+        public void CleanLines()
+        {
+            char[] temp = new char[6];
+            for (int i = 0; i < recognizedTextLines.Count; i++)
+            {
+                if (!Regex.Match((recognizedTextLines[i]), @"\d+[.,]\d{2}\s[A-Z]\b").Success)
+                {
+                    recognizedTextLines.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
 
 		public void SeparateNamePrice()
 		{
-			int size;
-			for (int i = 0; i < recognizedTextLines.Count; i++)
-			{
-				char[] temp = recognizedTextLines[i].ToCharArray();
-				for (int j = 0; j < temp.Count() - 5; j++)
-				{
-					if (Char.IsDigit(temp[j]) &&
-						(temp[j + 1].Equals(',') || temp[j + 1].Equals('.')) &&
-						Char.IsDigit(temp[j + 2]) &&
-						Char.IsDigit(temp[j + 3]) &&
-						temp[j + 4].Equals(' ') &&
-						(temp[j + 5].Equals('A') || temp[j + 5].Equals('C')))
-					{
-						int k = j - 1;
-						while (Char.IsDigit(temp[k])) k--;
-						size = temp.Count() - k - 4;
-						char[] temp2 = new char[size];
-						recognizedTextLines[i].CopyTo(k + 1, temp2, 0, temp.Count() - (k + 4));
-						temp2[temp2.Count() - 3] = '.';
-						priceList.Add(Convert.ToDecimal(string.Join("", temp2)));
-						recognizedTextLines[i].Remove(k);
-						break;
-					}
-				}
-
-			}
-
-
-		}
+            string temp;
+            double temp2;
+            foreach (String line in recognizedTextLines)
+            {
+                var match = Regex.Match(line, @"\d+,\d{2}");
+                temp = match.Value;
+                temp = temp.Replace(',', '.');
+                Double.TryParse(temp, out temp2);
+                priceList.Add(Convert.ToDecimal(temp2));
+            }
+        }
 
 		public void FindMatch()
 		{
 			int temp;
 			int index = 0;
 			int closestMatchIndex = -1;
-
+         
 			for (int i = 0; i < recognizedTextLines.Count; i++)
 			{
 				for (int j = 0; j < productDB.Count; j++)
@@ -155,6 +179,14 @@ namespace CSE
 			}
 			return distance[currentRow, m];
 		}
+        public void SetProductDB(List<string> products)
+        {
+            this.productDB = products;
+        }
+        public List<string> GetListOfLines()
+        {
+            return recognizedTextLines;
+        }
 
 		public List<decimal> GetPriceList()
 		{

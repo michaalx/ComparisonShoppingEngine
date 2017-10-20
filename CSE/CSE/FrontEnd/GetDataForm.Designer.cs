@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comparePricesButton = new System.Windows.Forms.Button();
             this.goBackButton = new System.Windows.Forms.Button();
+            this.popularProductsButton = new System.Windows.Forms.Button();
+            this.staticsticsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -57,7 +59,7 @@
             // goBackButton
             // 
             this.goBackButton.Font = new System.Drawing.Font("Modern No. 20", 20.25F);
-            this.goBackButton.Location = new System.Drawing.Point(33, 191);
+            this.goBackButton.Location = new System.Drawing.Point(33, 368);
             this.goBackButton.Name = "goBackButton";
             this.goBackButton.Size = new System.Drawing.Size(220, 91);
             this.goBackButton.TabIndex = 1;
@@ -65,15 +67,42 @@
             this.goBackButton.UseVisualStyleBackColor = true;
             this.goBackButton.Click += new System.EventHandler(this.GoBack_Click);
             // 
+            // popularProductsButton
+            // 
+            this.popularProductsButton.Font = new System.Drawing.Font("Modern No. 20", 20.25F);
+            this.popularProductsButton.Location = new System.Drawing.Point(33, 169);
+            this.popularProductsButton.Name = "popularProductsButton";
+            this.popularProductsButton.Size = new System.Drawing.Size(220, 91);
+            this.popularProductsButton.TabIndex = 1;
+            this.popularProductsButton.Text = "Popular products";
+            this.popularProductsButton.UseVisualStyleBackColor = true;
+            this.popularProductsButton.Click += new System.EventHandler(this.PopularButton_OnClick);
+            // 
+            // staticsticsButton
+            // 
+            this.staticsticsButton.Font = new System.Drawing.Font("Modern No. 20", 20.25F);
+            this.staticsticsButton.Location = new System.Drawing.Point(33, 266);
+            this.staticsticsButton.Name = "staticsticsButton";
+            this.staticsticsButton.Size = new System.Drawing.Size(220, 91);
+            this.staticsticsButton.TabIndex = 1;
+            this.staticsticsButton.Text = "Statistics";
+            this.staticsticsButton.UseVisualStyleBackColor = true;
+            this.staticsticsButton.Click += new System.EventHandler(this.StatisticsButton_OnClick);
+            // 
             // GetDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 401);
+            this.ClientSize = new System.Drawing.Size(284, 481);
             this.Controls.Add(this.goBackButton);
+            this.Controls.Add(this.staticsticsButton);
+            this.Controls.Add(this.popularProductsButton);
             this.Controls.Add(this.comparePricesButton);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GetDataForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GetDataForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -85,5 +114,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button comparePricesButton;
         private System.Windows.Forms.Button goBackButton;
+        private System.Windows.Forms.Button popularProductsButton;
+        private System.Windows.Forms.Button staticsticsButton;
     }
 }

@@ -36,12 +36,18 @@ namespace CSE.FrontEnd
             if (listViewOfChosenProducts.Items.Count == 0)
             {
                 var emptyList = "You have not chosen any products to do shopping.";
-
-                FormsToolkit.DisplayInputError(emptyList, "Select items.");
+                FormsToolkit.DisplayMessageBox(emptyList, "Select items.");
                 return;
             }  
             var result = compareProductPricesForm.formsToolKit.TheCheapestStore.GetCheapestStoreNameAndSum(listViewOfChosenProducts);
-            compareProductPricesForm.formsToolKit.DisplayCheapestStoreInfo(result.Key.ToUpper(), result.Value);
+            if (result.Key!="NULL")
+            {
+                compareProductPricesForm.formsToolKit.DisplayCheapestStoreInfo(result.Key.ToUpper(), result.Value);
+            }
+            else
+            {
+                FormsToolkit.DisplayMessageBox("There is no store where you can buy all products you have added to a cart. \n Remove some items and try again.", "We're sorry.");
+            }
         }
         private void AddItemsToListView()
         {
@@ -67,7 +73,6 @@ namespace CSE.FrontEnd
             {
                 listViewOfChosenProducts.Items.Remove(item);
                 compareProductPricesForm.AddItemToListView(item.Text);
-                compareProductPricesForm.UnselectItem(item.Text);
             }
         }
     }

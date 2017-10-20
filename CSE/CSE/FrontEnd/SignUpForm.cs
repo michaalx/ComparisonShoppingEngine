@@ -10,10 +10,6 @@ using System.Windows.Forms;
 
 namespace CSE.FrontEnd
 {
-    /*
-     TODO:
-     improve tab order (correct)
-         */
     public partial class SignUpForm : Form
     {
         public SignUpForm()
@@ -32,12 +28,12 @@ namespace CSE.FrontEnd
             if (password != confirmPassword)
             {
                 var error = "Passwords do not match.";
-                FormsToolkit.DisplayInputError(error);
+                FormsToolkit.DisplayMessageBox(error);
             }
             else if (!userEmail.IsValid(email))
             {
                 var error = "Email address is not valid.";
-                FormsToolkit.DisplayInputError(error);
+                FormsToolkit.DisplayMessageBox(error);
 
             }
             else
@@ -47,7 +43,7 @@ namespace CSE.FrontEnd
                 if (check)
                 {
                     var error = "User with this email already exists.";
-                    FormsToolkit.DisplayInputError(error);
+                    FormsToolkit.DisplayMessageBox(error);
                 }
                 else
                 {
