@@ -45,10 +45,21 @@ namespace CSE.GraphFeature
             {
                 string item = listViewGraph.SelectedItems[0].Text;
                 PathForStore = graph.GetPath(SavedStore, PathForStore);
-                var list = graph.GetListDays(PathForStore,item);
-                var graphForm = new Graph(list,item);
-                graphForm.Show();
-                this.Hide();
+                var list = graph.GetListDays(PathForStore, item);
+                if (list.Count == 0)
+                {
+                    MessageBox.Show("There's no data about this product");
+                }
+                else if (list.Count == 1)
+                {
+                    MessageBox.Show("There's not enough data about this product");
+                }
+                else
+                {
+                    var graphForm = new Graph(list, item);
+                    graphForm.Show();
+                    this.Hide();
+                }
             }
             catch (Exception)
             {

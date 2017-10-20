@@ -38,6 +38,7 @@ namespace CSE.FrontEnd
             {
                 compareProductPricesForm.formsToolKit.DisplayCheapestStoreInfo(result.Key.ToUpper(), result.Value);
                 StoreMap map = new StoreMap();
+                map.StoreName = result.Key.ToUpper();
                 map.Show();
             }
             else

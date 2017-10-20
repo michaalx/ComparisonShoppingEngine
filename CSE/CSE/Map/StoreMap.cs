@@ -10,6 +10,7 @@ namespace CSE.Map
     public partial class StoreMap : Form
     {
         public List<string> storeInfo { get; set; }
+        public string StoreName { get; set; }
         public int i = 0;
         public int zoom = 13;
 
@@ -28,7 +29,7 @@ namespace CSE.Map
             }
 
             MapClass storeMap = new MapClass();
-            storeMap.GetMap(i, zoom, "Naugarduko g. 24", "IKI");
+            storeMap.GetMap(i, zoom, "Didlaukio g. 47", StoreName);
 
             if (i == 0)
             {
