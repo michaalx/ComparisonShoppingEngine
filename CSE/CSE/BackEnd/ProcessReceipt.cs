@@ -49,7 +49,7 @@ namespace CSE.BackEnd
                 }
                 else if (textToCompare.Contains("UAB RIMI"))
                 {
-                    return Store.Lidl;
+                    return Store.Rimi;
                 }
             }
             return null;
