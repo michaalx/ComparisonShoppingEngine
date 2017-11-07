@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xamarin.CompareProductPricesPage"             
+             Padding="20">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Main" Clicked="Main_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="ListView">
+
+            </ListView>
+            <Button x:Name="addToCartButton" Text="Add to cart" Clicked="addToCartButton_Clicked"/>
+            <Button x:Name="showCartButton" Text="Show cart" Clicked="showCartButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

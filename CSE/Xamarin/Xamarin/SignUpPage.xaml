@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xamarin.SignUpPage"
+             Padding="20">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="loginToolbar" Text="Log in" Clicked="loginToolbar_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" >
+            <Entry x:Name="nameEntry" Placeholder="name"/>
+            <Entry x:Name="lastNameEntry" Placeholder="last name"/>
+            <Entry x:Name="emailEntry" Placeholder="email"/>
+            <Entry x:Name="ppasswordEntry" Placeholder="password"  IsPassword="True"/>
+            <Entry x:Name="confirmPasswordEntry" Placeholder="confirm password"  IsPassword="True" />
+            <Button x:Name="signUpButton" Text="Sign Up" Clicked="signUpButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
