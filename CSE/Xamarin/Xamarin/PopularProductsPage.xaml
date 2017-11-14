@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xamarin.PopularProductsPage"
+             Padding="20">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="mainToolbar" Text="Main" Clicked="mainToolbar_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="ListView">
+
+            </ListView>
+            <Button x:Name="addToCartButton" Text="Add to cart" Clicked="addToCartButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

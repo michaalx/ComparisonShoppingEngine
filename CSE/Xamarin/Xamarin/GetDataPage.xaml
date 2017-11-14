@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xamarin.GetDataPage"
+             Padding="20">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="mainToolbar" Text="Main" Clicked="mainToolbar_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Button x:Name="compareProductButton" Text="Compare product prices" Clicked="compareProductButton_Clicked"/>
+            <Button x:Name="popularProductsButton" Text="Popular products" Clicked="popularProductsButton_Clicked"/>
+            <Button x:Name="statisticsButton" Text="Statistics" Clicked="statisticsButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
