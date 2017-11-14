@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{2DC44D63-C606-4402-A82C-3A49766AF391}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{7BD299ED-A464-48F2-A19D-55B2220152BB}"
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd", "BackEnd\BackEnd.csproj", "{65E45C25-9E34-481F-AF42-1C8180184E19}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Android", "Xamarin\Xamarin.Android\Xamarin.Android.csproj", "{C123FCA1-4942-4F70-9454-6DDD33682581}"
@@ -112,6 +113,12 @@ Global
 		{2DC44D63-C606-4402-A82C-3A49766AF391}.Environment|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{2DC44D63-C606-4402-A82C-3A49766AF391}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DC44D63-C606-4402-A82C-3A49766AF391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BD299ED-A464-48F2-A19D-55B2220152BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BD299ED-A464-48F2-A19D-55B2220152BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BD299ED-A464-48F2-A19D-55B2220152BB}.Environment|Any CPU.ActiveCfg = Release|Any CPU
+		{7BD299ED-A464-48F2-A19D-55B2220152BB}.Environment|Any CPU.Build.0 = Release|Any CPU
+		{7BD299ED-A464-48F2-A19D-55B2220152BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BD299ED-A464-48F2-A19D-55B2220152BB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2DC44D63-C606-4402-A82C-3A49766AF391}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{2DC44D63-C606-4402-A82C-3A49766AF391}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{65E45C25-9E34-481F-AF42-1C8180184E19}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
