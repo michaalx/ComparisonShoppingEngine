@@ -1,8 +1,6 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
-using Tesseract;
 using Logic.ImageAnalysis.OCR;
-using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
