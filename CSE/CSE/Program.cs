@@ -24,7 +24,7 @@ namespace CSE
 			SqlDataReader reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
-				Console.WriteLine(reader.GetInt32(0).ToString() + " " + reader.GetString(1).ToString() + " " + reader.GetDecimal(2).ToString() + " " + reader.GetString(3).ToString() + " " + reader.GetDateTime(4).ToString() + "$");
+				//Console.WriteLine(reader.GetInt32(0).ToString() + " " + reader.GetString(1).ToString() + " " + reader.GetDecimal(2).ToString() + " " + reader.GetString(3).ToString() + " " + reader.GetDateTime(4).ToString() + "$");
 			}
 			reader.Close();
 			con.Close();
