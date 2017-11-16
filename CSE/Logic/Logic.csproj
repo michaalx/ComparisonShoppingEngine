@@ -46,7 +46,8 @@
   <ItemGroup>
     <Compile Include="DataManagement\Converter.cs" />
     <Compile Include="ImageAnalysis\ImageProcessing.cs" />
-    <Compile Include="ImageAnalysis\IOCR.cs" />
+    <Compile Include="ImageAnalysis\OCR\IOCR.cs" />
+    <Compile Include="ImageAnalysis\OCR\TesseractOCR.cs" />
     <Compile Include="ImageAnalysis\TextProcessing.cs" />
     <Compile Include="Metadata\Enums.cs" />
     <Compile Include="Models\Product.cs" />
