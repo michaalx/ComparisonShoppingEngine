@@ -49,7 +49,7 @@
     <Compile Include="ImageAnalysis\ImageProcessing.cs" />
     <Compile Include="ImageAnalysis\OCR\IOCR.cs" />
     <Compile Include="ImageAnalysis\OCR\TesseractOCR.cs" />
-    <Compile Include="ImageAnalysis\TextProcessing.cs" />
+    <Compile Include="DataManagement\TextProcessing.cs" />
     <Compile Include="Metadata\Enums.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Receipt.cs" />

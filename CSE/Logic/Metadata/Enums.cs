@@ -1,6 +1,6 @@
 ﻿namespace Logic.Metadata
 {
-    enum Store
+    public enum Store
     {
         Maxima = 1,
         IKI = 2,
