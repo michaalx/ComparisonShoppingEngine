@@ -5,6 +5,6 @@ namespace Logic.ImageAnalysis
 {
     interface IOCR
     {
-        Task<string> ImageToText(Bitmap image);
+        string ImageToText(Bitmap image);
     }
 }
