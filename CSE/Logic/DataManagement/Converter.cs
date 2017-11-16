@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Logic.ImageAnalysis;
 using Logic.Models;
 using Logic.ImageAnalysis;
 using System.Drawing;
@@ -41,7 +42,7 @@ namespace Logic.DataManagement
         public static Receipt ConvertImageToReceipt(this TextProcessing textProcessing, Bitmap image)
         {
             var imageProcessing = new ImageProcessing();
-            var textFromImage = imageProcessing.ImageToText(image);
+            var textFromImage =  imageProcessing.GetTextFromImage(image);
             var recognizedLines = textProcessing.SplitString(textFromImage.Result);
             var goodRecognizedLines = textProcessing.CleanIrrelevantLines(recognizedLines);
             var storeName = textProcessing.RecognizeStore(recognizedLines);
