@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Logic.Database;
 
 namespace CSE.FrontEnd
 {
@@ -16,6 +17,8 @@ namespace CSE.FrontEnd
         public StartForm()
         {
             InitializeComponent();
+			var reader = new Reader();
+			reader.Read();
         }
 
         private void getDataButton_Click(object sender, EventArgs e)
