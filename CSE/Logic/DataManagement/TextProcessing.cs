@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using Logic.Metadata;
+using Microsoft.Extensions.Configuration;
 
-namespace Logic.ImageAnalysis
+namespace Logic.DataManagement
 {
-    class TextProcessing
+    public class TextProcessing
     {
+        private readonly IConfiguration _configuration;
+        public TextProcessing() { }
+
+        public TextProcessing(IConfiguration configuration) => _configuration = configuration;
+
         public IEnumerable<string> SplitString(string text)
         {
             return text.Split('\n');
@@ -59,23 +65,23 @@ namespace Logic.ImageAnalysis
         {
             foreach (string line in lines)
             {
-                if (line.Contains("MAXIMA LT, UAB"))
+                if (line.Contains(_configuration["Maxima"]))
                 {
                     return Store.Maxima;
                 }
-                else if (line.Contains("UAB \"RIMI LIETUVA\""))
+                else if (line.Contains(_configuration["Rimi"]))
                 {
                     return Store.Rimi;
                 }
-                else if (line.Contains("UAB PALINK"))
+                else if (line.Contains(_configuration["Iki"]))
                 {
                     return Store.IKI;
                 }
-                else if (line.Contains("UAB NORFOS MAZMENA") || line.Contains("UAB \"NORFOS MAŽMENA\""))
+                else if (line.Contains(_configuration["Norfa"]))
                 {
                     return Store.Norfa;
                 }
-                else if (line.Contains("UAB \"Lidl Lietuva\""))
+                else if (line.Contains(_configuration["Lidl"]))
                 {
                     return Store.Lidl;
                 }
