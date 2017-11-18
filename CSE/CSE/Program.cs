@@ -13,8 +13,6 @@ namespace CSE
         [STAThread]
         static void Main()
         {
-			var dm = new DataModel();
-			var list = dm.ProductData;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartForm());
