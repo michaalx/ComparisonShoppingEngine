@@ -35,7 +35,7 @@ namespace Logic.Database
 			reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
-				list.Add(reader.GetString(0).ToString());
+				list.Add(reader.Get(0).ToString());
 			}
 			return list;
 		}

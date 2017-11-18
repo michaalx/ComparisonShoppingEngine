@@ -10,22 +10,6 @@ namespace Logic.ImageAnalysis
 {
     public class TextProcessing
     {
-		public IEnumerable<string> _productDB;
-
-		public IEnumerable<string> ProductDB //Lazy initialization
-		{
-			get
-			{
-				if (_productDB == null)
-				{
-					var reader = new Reader();
-					reader.OpenConnection();
-					_productDB = reader.ReadData("SELECT DISTINCT name FROM product");
-					reader.CloseConnection();
-				}
-				return _productDB;
-			}
-		}
         public IEnumerable<string> SplitString(string text)
         {
             return text.Split('\n');

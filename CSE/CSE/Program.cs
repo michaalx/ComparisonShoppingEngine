@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CSE.FrontEnd;
-using Logic.ImageAnalysis;
+using Logic.Database;
 
 namespace CSE
 {
@@ -13,8 +13,8 @@ namespace CSE
         [STAThread]
         static void Main()
         {
-			//var tp = new TextProcessing();
-			//var list = tp.ProductDB;
+			var dm = new DataModel();
+			var list = dm.ProductData;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartForm());
