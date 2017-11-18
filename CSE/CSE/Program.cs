@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CSE.FrontEnd;
+using Logic.Database;
 
 namespace CSE
 {

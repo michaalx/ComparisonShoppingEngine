@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using Logic.Metadata;
+using Logic.Database;
 
 namespace Logic.ImageAnalysis
 {
-    class TextProcessing
+    public class TextProcessing
     {
         public IEnumerable<string> SplitString(string text)
         {
@@ -59,23 +60,23 @@ namespace Logic.ImageAnalysis
         {
             foreach (string line in lines)
             {
-                if (line.Contains("MAXIMA LT, UAB"))
+                if (line.Contains("MAXIMA"))
                 {
                     return Store.Maxima;
                 }
-                else if (line.Contains("UAB \"RIMI LIETUVA\""))
+                else if (line.Contains("RIMI"))
                 {
                     return Store.Rimi;
                 }
-                else if (line.Contains("UAB PALINK"))
+                else if (line.Contains("IKI"))
                 {
                     return Store.IKI;
                 }
-                else if (line.Contains("UAB NORFOS MAZMENA") || line.Contains("UAB \"NORFOS MAŽMENA\""))
+                else if (line.Contains("NORFA"))
                 {
                     return Store.Norfa;
                 }
-                else if (line.Contains("UAB \"Lidl Lietuva\""))
+                else if (line.Contains("LIDL"))
                 {
                     return Store.Lidl;
                 }
