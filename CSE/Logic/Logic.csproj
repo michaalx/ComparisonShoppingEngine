@@ -31,6 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=6.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.6.0.0\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\10.0.1\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -45,13 +52,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheapestStore\CheapestStore.cs" />
+    <Compile Include="CSVFiles\CSV.cs" />
+    <Compile Include="CSVFiles\DataDistributionAmongFiles.cs" />
     <Compile Include="DataManagement\Converter.cs" />
+    <Compile Include="Graph\GraphOperations.cs" />
     <Compile Include="ImageAnalysis\ImageProcessing.cs" />
     <Compile Include="ImageAnalysis\OCR\IOCR.cs" />
     <Compile Include="ImageAnalysis\OCR\TesseractOCR.cs" />
     <Compile Include="ImageAnalysis\TextProcessing.cs" />
+    <Compile Include="Map\DeviceLocation.cs" />
+    <Compile Include="Map\GeoJsonResult.cs" />
+    <Compile Include="Map\MapClass.cs" />
     <Compile Include="Metadata\Enums.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\Receipt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
