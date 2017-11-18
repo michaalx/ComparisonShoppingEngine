@@ -4,14 +4,14 @@
              x:Class="Xamarin.CartPage"
              Padding="20">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="mainToolbar" Text="Main" Clicked="mainToolbar_Clicked"/>
+        <ToolbarItem x:Name="MainToolbar" Text="Main" Clicked="MainToolbar_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="ListView">
                 
             </ListView>
-            <Button x:Name="removeItemButton" Text="Remove Item" Clicked="removeItemButton_Clicked"/>
+            <Button x:Name="RemoveItemButton" Text="Remove Item" Clicked="RemoveItemButton_Clicked"/>
             <Button x:Name="CheapestStoreButton" Text="Find cheapest store" Clicked="CheapestStoreButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
