@@ -13,8 +13,8 @@ namespace CSE
         [STAThread]
         static void Main()
         {
-			var tp = new TextProcessing();
-			var list = tp.ProductDB;
+			//var tp = new TextProcessing();
+			//var list = tp.ProductDB;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartForm());
