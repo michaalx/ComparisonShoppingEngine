@@ -26,7 +26,6 @@ namespace Logic.ImageAnalysis
 				return _productDB;
 			}
 		}
-
         public IEnumerable<string> SplitString(string text)
         {
             return text.Split('\n');
