@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Logic</RootNamespace>
     <AssemblyName>Logic</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,8 +49,9 @@
     <Compile Include="Database\Reader.cs" />
     <Compile Include="DataManagement\Converter.cs" />
     <Compile Include="ImageAnalysis\ImageProcessing.cs" />
-    <Compile Include="ImageAnalysis\IOCR.cs" />
-    <Compile Include="ImageAnalysis\TextProcessing.cs" />
+    <Compile Include="ImageAnalysis\OCR\IOCR.cs" />
+    <Compile Include="ImageAnalysis\OCR\TesseractOCR.cs" />
+    <Compile Include="DataManagement\TextProcessing.cs" />
     <Compile Include="Metadata\Enums.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Receipt.cs" />

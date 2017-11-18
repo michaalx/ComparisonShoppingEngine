@@ -1,19 +1,12 @@
 ﻿using System.Collections.Generic;
-using Logic.Models;
 using Logic.ImageAnalysis;
+using Logic.Models;
 using System.Drawing;
 
 namespace Logic.DataManagement
 {
     static class Converter
     {
-        /// <summary>
-        /// I think this should be async.
-        /// Still not sure if this method is useful now.
-        /// (Where to use?)
-        /// </summary>
-        /// <param name="detailsOfProducts"></param>
-        /// <returns></returns>
         public static IEnumerable<Product> ConvertDataToListOfProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
         {
             var result = new List<Product>();
@@ -38,15 +31,17 @@ namespace Logic.DataManagement
         /// <param name="textProcessing"></param>
         /// <param name="image"></param>
         /// <returns>Receipt instance.</returns>
-        public static Receipt ConvertImageToReceipt(this TextProcessing textProcessing, Bitmap image)
+        public static Receipt ConvertImageToReceipt(Bitmap image)
         {
             var imageProcessing = new ImageProcessing();
-            var textFromImage = imageProcessing.ImageToText(image);
+            var textProcessing = new TextProcessing();
+
+            var textFromImage =  imageProcessing.GetTextFromImage(image);
             var recognizedLines = textProcessing.SplitString(textFromImage.Result);
-            var goodRecognizedLines = textProcessing.CleanIrrelevantLines(recognizedLines);
             var storeName = textProcessing.RecognizeStore(recognizedLines);
             var timestamp = textProcessing.RecognizeDate(recognizedLines);
-            var listOfProductDetails = textProcessing.GetListOfNamesAndPrices(goodRecognizedLines);
+			var goodRecognizedLines = textProcessing.CleanIrrelevantLines(recognizedLines);
+			var listOfProductDetails = textProcessing.GetListOfNamesAndPrices(goodRecognizedLines);
             var listOfProducts = ConvertDataToListOfProducts(listOfProductDetails);
             return new Receipt(listOfProducts, storeName, timestamp);
         }

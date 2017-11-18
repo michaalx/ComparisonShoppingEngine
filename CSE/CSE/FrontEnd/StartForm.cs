@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Logic.Database;
 
 namespace CSE.FrontEnd
 {
@@ -17,11 +16,9 @@ namespace CSE.FrontEnd
         public StartForm()
         {
             InitializeComponent();
-			var reader = new Reader();
-			reader.Read();
-        }
+		}
 
-        private void getDataButton_Click(object sender, EventArgs e)
+        private void GetDataButton_Click(object sender, EventArgs e)
         {
             Hide();
             GetDataForm getDataForm = new GetDataForm();
@@ -29,7 +26,7 @@ namespace CSE.FrontEnd
             
         }
 
-        private void uploadDataButton_Click(object sender, EventArgs e)
+        private void UploadDataButton_Click(object sender, EventArgs e)
         {
             Hide();
             /**

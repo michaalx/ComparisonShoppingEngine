@@ -10,28 +10,34 @@ namespace Logic.Database
 {
 	public class Reader
 	{
-		private List<string> _productDB = new List<string>();
-		int count = 0;
+		private System.Data.SqlClient.SqlConnection con;
+		private SqlDataReader reader;
 
-		public Reader() { }
-
-		public void Read()
+		public void OpenConnection()
 		{
-			System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection();
-			con.ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
-
-			con.Open();
-			SqlCommand cmd = new SqlCommand("SELECT DISTINCT name FROM product", con);
-			SqlDataReader reader = cmd.ExecuteReader();
-			while (reader.Read())
+			con = new System.Data.SqlClient.SqlConnection
 			{
-				_productDB.Add(reader.GetString(0));
-				Console.WriteLine(_productDB[count]);
-				count++;
-				//Console.WriteLine(reader.GetInt32(0).ToString() + " " + reader.GetString(1).ToString() + " " + reader.GetDecimal(2).ToString() + " " + reader.GetString(3).ToString() + " " + reader.GetDateTime(4).ToString() + "$");
-			}
+				ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString
+			};
+			con.Open();
+		}
+
+		public void CloseConnection()
+		{
 			reader.Close();
 			con.Close();
+		}
+
+		public IEnumerable<string> ReadData(string query)
+		{
+			List<string> list = new List<string>();
+			SqlCommand cmd = new SqlCommand(query, con);
+			reader = cmd.ExecuteReader();
+			while (reader.Read())
+			{
+				list.Add(reader.GetString(0).ToString());
+			}
+			return list;
 		}
 	}
 }

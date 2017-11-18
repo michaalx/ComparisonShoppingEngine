@@ -1,15 +1,14 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
-using Tesseract;
-using System.Diagnostics;
+using Logic.ImageAnalysis.OCR;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
 namespace Logic.ImageAnalysis
 {
-    public static class ImageProcessing 
+    public class ImageProcessing 
     {
-        public static Bitmap ResizeImage(this Image image, int width, int height)
+        public Bitmap ResizeImage(Image image, int width, int height)
         {
             var destRect = new Rectangle(0, 0, width, height);
             var destImage = new Bitmap(width, height);
@@ -35,12 +34,12 @@ namespace Logic.ImageAnalysis
             return destImage;
         }
 
-        public static bool SuitableSize(Image image)
+        public bool SuitableSize(Image image)
         {
             return (image.HorizontalResolution >= 300 && image.VerticalResolution >=300) ? true : false;
         }
 
-        public static Bitmap RescaleImage(Bitmap image)
+        public Bitmap RescaleImage(Bitmap image)
         {
             var verticalResolutionScale = 300 / image.VerticalResolution;
             var horizontalResolutionScale = 300 / image.HorizontalResolution;
@@ -52,11 +51,19 @@ namespace Logic.ImageAnalysis
             return newImage;
         }
 
-        public static Bitmap ImproveImageQuality(Bitmap image)
+        public Bitmap ImproveImageQuality(Bitmap image)
         {
             return SuitableSize(image) ? image : RescaleImage(image);
         }
         ///Improve the quality of the image.
         ///Process the image.
+        
+        public async Task<string> GetTextFromImage(Bitmap image)
+        {
+            var ocr = new TesseractOCR();
+            var improvedImage = ImproveImageQuality(image);
+            var result = await ocr.GetText(improvedImage);
+            return result;
+        }
     }
 }
