@@ -38,10 +38,10 @@ namespace Logic.DataManagement
 
             var textFromImage =  imageProcessing.GetTextFromImage(image);
             var recognizedLines = textProcessing.SplitString(textFromImage.Result);
-            var goodRecognizedLines = textProcessing.CleanIrrelevantLines(recognizedLines);
             var storeName = textProcessing.RecognizeStore(recognizedLines);
             var timestamp = textProcessing.RecognizeDate(recognizedLines);
-            var listOfProductDetails = textProcessing.GetListOfNamesAndPrices(goodRecognizedLines);
+			var goodRecognizedLines = textProcessing.CleanIrrelevantLines(recognizedLines);
+			var listOfProductDetails = textProcessing.GetListOfNamesAndPrices(goodRecognizedLines);
             var listOfProducts = ConvertDataToListOfProducts(listOfProductDetails);
             return new Receipt(listOfProducts, storeName, timestamp);
         }

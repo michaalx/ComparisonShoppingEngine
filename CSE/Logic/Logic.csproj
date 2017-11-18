@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Logic</RootNamespace>
     <AssemblyName>Logic</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -39,6 +39,7 @@
       <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\10.0.1\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +56,8 @@
     <Compile Include="CheapestStore\CheapestStore.cs" />
     <Compile Include="CSVFiles\CSV.cs" />
     <Compile Include="CSVFiles\DataDistributionAmongFiles.cs" />
+    <Compile Include="Database\DataModel.cs" />
+    <Compile Include="Database\Reader.cs" />
     <Compile Include="DataManagement\Converter.cs" />
     <Compile Include="Graph\GraphOperations.cs" />
     <Compile Include="ImageAnalysis\ImageProcessing.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="Map\DeviceLocation.cs" />
     <Compile Include="Map\GeoJsonResult.cs" />
     <Compile Include="Map\MapClass.cs" />
+    <Compile Include="DataManagement\TextProcessing.cs" />
     <Compile Include="Metadata\Enums.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductDetails.cs" />

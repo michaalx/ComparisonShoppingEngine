@@ -16,9 +16,9 @@ namespace CSE.FrontEnd
         public StartForm()
         {
             InitializeComponent();
-        }
+		}
 
-        private void getDataButton_Click(object sender, EventArgs e)
+        private void GetDataButton_Click(object sender, EventArgs e)
         {
             Hide();
             GetDataForm getDataForm = new GetDataForm();
@@ -26,7 +26,7 @@ namespace CSE.FrontEnd
             
         }
 
-        private void uploadDataButton_Click(object sender, EventArgs e)
+        private void UploadDataButton_Click(object sender, EventArgs e)
         {
             Hide();
             /**
