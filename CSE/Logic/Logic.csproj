@@ -72,7 +72,6 @@
     <Compile Include="ImageAnalysis\ImageProcessing.cs" />
     <Compile Include="ImageAnalysis\OCR\IOCR.cs" />
     <Compile Include="ImageAnalysis\OCR\TesseractOCR.cs" />
-    <Compile Include="ImageAnalysis\TextProcessing.cs" />
     <Compile Include="Map\DeviceLocation.cs" />
     <Compile Include="Map\GeoJsonResult.cs" />
     <Compile Include="Map\MapClass.cs" />
