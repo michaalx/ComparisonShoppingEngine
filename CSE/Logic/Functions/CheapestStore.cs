@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Logic.Metadata;
 using Logic.Models;
 
@@ -15,7 +13,7 @@ namespace Logic.Functions
         public Store GetCheapestStore(IEnumerable<string> products)
         {
             var lowestSumOfCart = decimal.MaxValue;
-            var cheapestStore = Store.Maxima;
+            var cheapestStore = (Store)(-1); //undefined store 
             var stores = GetStores();
             foreach (var store in stores)
             {
@@ -27,13 +25,16 @@ namespace Logic.Functions
                     ///
                     ///pseudocode of getting price from database 
                     ///(should be extracted to Reader.cs file or sth like that):
-                    ///SELECT price FROM ProductsTable 
+                    ///SELECT price FROM PRODUCTS 
                     ///WHERE product = productName AND store.ToString() = storeName
                     ///
                     ///sumOfCart+= price.Take(1).ToString();
                     sumOfCart += 0;
                 }
-                if (sumOfCart < lowestSumOfCart)
+                ///If none products of store are found in database .
+                ///Sum will be 0 but it is pointless to define this store 
+                ///as it doesn't contain given products.
+                if (sumOfCart < lowestSumOfCart && sumOfCart!=0)
                 {
                     cheapestStore = store;
                     lowestSumOfCart = sumOfCart;
