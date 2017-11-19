@@ -13,9 +13,9 @@ namespace CSE.FrontEnd
         public string File { get; set; }
         public FormsToolkit()
         {
-            this.ListOfItems = new List<Product>();
-            this.Ddaf = new DataDistributionAmongFiles();
-            this.TheCheapestStore = new CheapestStore();
+            ListOfItems = new List<Product>();
+            Ddaf = new DataDistributionAmongFiles();
+            TheCheapestStore = new CheapestStore();
         }
         public static void DisplayMessageBox(string message, string caption = "Errod detected in input.")
         {

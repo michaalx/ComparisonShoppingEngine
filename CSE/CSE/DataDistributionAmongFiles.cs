@@ -48,12 +48,12 @@ namespace CSE
 
         public void ToProductList(string[] products, string[] prices)
         {
-            this._products = new List<Product>();
+            _products = new List<Product>();
             decimal[] price= Array.ConvertAll(prices, Decimal.Parse);
             for (int i = 0; i < products.Length; i++)
             {
                 var temp = new Product(products[i], price[i]);
-                this._products.Add(temp);
+                _products.Add(temp);
             }
         }
 

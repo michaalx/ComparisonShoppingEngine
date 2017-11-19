@@ -16,7 +16,7 @@ namespace CSE
 
 		public TextProcessor(string[] recognizedTextLines)
 		{
-			this._recognizedTextLines = recognizedTextLines.ToList();
+			_recognizedTextLines = recognizedTextLines.ToList();
 			DataBaseInit();
 		}
 
@@ -29,6 +29,7 @@ namespace CSE
             {
                 _productDB.Add(product.Name);
             }
+          
 		}
 
 		public void CleanEmptyLines()
@@ -178,7 +179,7 @@ namespace CSE
 		}
         public void SetProductDB(List<string> products)
         {
-            this._productDB = products;
+            _productDB = products;
         }
         public List<string> GetListOfLines()
         {
