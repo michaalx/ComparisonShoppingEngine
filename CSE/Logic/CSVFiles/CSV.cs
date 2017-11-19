@@ -1,17 +1,14 @@
-using CSE.FrontEnd;
-using CSE.BackEnd;
-using CsvHelper;
+﻿using CsvHelper;
+using Logic.Models;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
-namespace CSE
+namespace Logic.CSVFiles
 {
-    public class CSV
+    class CSV
     {
         private string _pathRegistration = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "registration.csv");
         private string _fileOfUniqueProducts = "unique_products.csv";
@@ -70,7 +67,7 @@ namespace CSE
         /// Only one user is able to sign up during session.
         /// </summary>
         /// <param name="user"></param>
-        public void WriteToFileRegistration(User user)
+        /*public void WriteToFileRegistration(User user)
         {
             if (!(File.Exists(_pathRegistration)))
             {
@@ -127,7 +124,9 @@ namespace CSE
                 }
             }
             return false;
-        }
+        } */
+
+
         //parsing for listView
         public List<Product> ParsingUniqueProducts(string[] filePaths)
         {

@@ -17,17 +17,17 @@ namespace Xamarin
 			InitializeComponent ();
 		}
         
-        async void mainToolbar_Clicked(object sender, EventArgs e)
+        async void MainToolbar_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MainPage());
         }
 
-        private void CheapestStoreButton_Clicked(object sender, EventArgs e)
+        async void CheapestStoreButton_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new MapPage());
         }
 
-        private void removeItemButton_Clicked(object sender, EventArgs e)
+        private void RemoveItemButton_Clicked(object sender, EventArgs e)
         {
 
         }

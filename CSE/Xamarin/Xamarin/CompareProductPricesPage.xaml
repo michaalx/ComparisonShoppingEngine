@@ -11,8 +11,8 @@
             <ListView x:Name="ListView">
 
             </ListView>
-            <Button x:Name="addToCartButton" Text="Add to cart" Clicked="addToCartButton_Clicked"/>
-            <Button x:Name="showCartButton" Text="Show cart" Clicked="showCartButton_Clicked"/>
+            <Button x:Name="AddToCartButton" Text="Add to cart" Clicked="AddToCartButton_Clicked"/>
+            <Button x:Name="ShowCartButton" Text="Show cart" Clicked="ShowCartButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

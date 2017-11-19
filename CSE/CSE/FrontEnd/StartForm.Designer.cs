@@ -53,7 +53,7 @@
             this.getDataButton.TabIndex = 1;
             this.getDataButton.Text = "Get data";
             this.getDataButton.UseVisualStyleBackColor = true;
-            this.getDataButton.Click += new System.EventHandler(this.getDataButton_Click);
+            this.getDataButton.Click += new System.EventHandler(this.GetDataButton_Click);
             // 
             // uploadDataButton
             // 
@@ -64,7 +64,7 @@
             this.uploadDataButton.TabIndex = 1;
             this.uploadDataButton.Text = "Upload data";
             this.uploadDataButton.UseVisualStyleBackColor = true;
-            this.uploadDataButton.Click += new System.EventHandler(this.uploadDataButton_Click);
+            this.uploadDataButton.Click += new System.EventHandler(this.UploadDataButton_Click);
             // 
             // exitButton
             // 

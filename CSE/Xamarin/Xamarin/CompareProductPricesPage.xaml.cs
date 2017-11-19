@@ -22,12 +22,12 @@ namespace Xamarin
             await Navigation.PushAsync(new CartPage());
         }
 
-        private void addToCartButton_Clicked(object sender, EventArgs e)
+        private void AddToCartButton_Clicked(object sender, EventArgs e)
         {
 
         }
 
-        async void showCartButton_Clicked(object sender, EventArgs e)
+        async void ShowCartButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CartPage());
         }

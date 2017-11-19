@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using Logic.Metadata;
 using Microsoft.Extensions.Configuration;
+using Logic.Database;
 
 namespace Logic.DataManagement
 {
@@ -65,23 +66,23 @@ namespace Logic.DataManagement
         {
             foreach (string line in lines)
             {
-                if (line.Contains(_configuration["Maxima"]))
+                if (line.Contains("MAXIMA"))
                 {
                     return Store.Maxima;
                 }
-                else if (line.Contains(_configuration["Rimi"]))
+                else if (line.Contains("RIMI"))
                 {
                     return Store.Rimi;
                 }
-                else if (line.Contains(_configuration["Iki"]))
+                else if (line.Contains("IKI"))
                 {
                     return Store.IKI;
                 }
-                else if (line.Contains(_configuration["Norfa"]))
+                else if (line.Contains("NORFA"))
                 {
                     return Store.Norfa;
                 }
-                else if (line.Contains(_configuration["Lidl"]))
+                else if (line.Contains("LIDL"))
                 {
                     return Store.Lidl;
                 }
