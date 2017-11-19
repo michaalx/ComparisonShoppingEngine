@@ -17,7 +17,7 @@ namespace Logic.Models
         }
         public override string ToString()
         {
-            return Name + "," + Price + "\n";
+            return Name;
         }
     }
 }
