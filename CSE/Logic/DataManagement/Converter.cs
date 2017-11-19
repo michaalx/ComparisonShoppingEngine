@@ -5,9 +5,9 @@ using System.Drawing;
 
 namespace Logic.DataManagement
 {
-    static class Converter
+    public class Converter
     {
-        public static IEnumerable<Product> ConvertDataToListOfProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
+        public IEnumerable<Product> ConvertDataToListOfProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
         {
             var result = new List<Product>();
             foreach (var item in detailsOfProducts)
@@ -31,9 +31,11 @@ namespace Logic.DataManagement
         /// <param name="textProcessing"></param>
         /// <param name="image"></param>
         /// <returns>Receipt instance.</returns>
-        public static Receipt ConvertImageToReceipt(Bitmap image)
+        public Receipt ConvertImageToReceipt(Bitmap image)
         {
             var imageProcessing = new ImageProcessing();
+            ///TODO: textProcessing should be constructed
+            ///with configuration instance of application.
             var textProcessing = new TextProcessing();
 
             var textFromImage =  imageProcessing.GetTextFromImage(image);

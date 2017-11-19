@@ -4,12 +4,18 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using Logic.Metadata;
+using Microsoft.Extensions.Configuration;
 using Logic.Database;
 
-namespace Logic.ImageAnalysis
+namespace Logic.DataManagement
 {
     public class TextProcessing
     {
+        private readonly IConfiguration _configuration;
+        public TextProcessing() { }
+
+        public TextProcessing(IConfiguration configuration) => _configuration = configuration;
+
         public IEnumerable<string> SplitString(string text)
         {
             return text.Split('\n');
