@@ -2,6 +2,7 @@
 using Logic.ImageAnalysis;
 using Logic.Models;
 using System.Drawing;
+using System.Linq;
 
 namespace Logic.DataManagement
 {
@@ -9,12 +10,20 @@ namespace Logic.DataManagement
     {
         public IEnumerable<Product> ConvertDataToListOfProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
         {
-            var result = new List<Product>();
+            var dictionary = new Dictionary<string, Product>();
             foreach (var item in detailsOfProducts)
             {
-                result.Add(new Product(item.Key, item.Value));
+                if (dictionary.ContainsKey(item.Key))
+                {
+                    var hits = dictionary[item.Key].Quantity + 1;
+                    dictionary[item.Key] = new Product(item.Key, item.Value, hits);
+                }
+                else
+                {
+                    dictionary.Add(item.Key, new Product(item.Key, item.Value));
+                }
             }
-            return result;
+            return dictionary.Values.ToList();
         }
         /// <summary>
         /// Main method of converting image to 
