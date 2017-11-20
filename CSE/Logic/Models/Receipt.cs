@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Logic.Models
 {
-    public struct Receipt
+    public class Receipt
     {
         public IEnumerable<Product> Products { get; private set; }
         public Store StoreName { get; private set; }

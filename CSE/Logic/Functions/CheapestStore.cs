@@ -6,11 +6,11 @@ using Logic.Models;
 
 namespace Logic.Functions
 {
-    class CheapestStore : ICheapestStore<string>
+    class CheapestStore : ICheapestStore
     {
         public CheapestStore() { }
 
-        public Store GetCheapestStore(IEnumerable<string> products)
+        public Store GetCheapestStore<T>(IEnumerable<T> products)
         {
             var lowestSumOfCart = decimal.MaxValue;
             var cheapestStore = (Store)(-1); //undefined store 
@@ -26,7 +26,7 @@ namespace Logic.Functions
                     ///pseudocode of getting price from database 
                     ///(should be extracted to Reader.cs file or sth like that):
                     ///SELECT price FROM PRODUCTS 
-                    ///WHERE product = productName AND store.ToString() = storeName
+                    ///WHERE product.ToString() = productName AND store.ToString() = storeName
                     ///
                     ///sumOfCart+= price.Take(1).ToString();
                     sumOfCart += 0;

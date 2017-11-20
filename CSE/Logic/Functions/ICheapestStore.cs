@@ -4,8 +4,8 @@ using Logic.Models;
 
 namespace Logic.Functions
 {
-    interface ICheapestStore<T>
+    interface ICheapestStore
     {
-        Store GetCheapestStore(IEnumerable<T> products);
+        Store GetCheapestStore<T>(IEnumerable<T> products);
     }
 }

@@ -12,6 +12,7 @@ namespace Logic.DataManagement
     public class TextProcessing
     {
         private readonly IConfiguration _configuration;
+
         public TextProcessing() { }
 
         public TextProcessing(IConfiguration configuration) => _configuration = configuration;
@@ -20,6 +21,7 @@ namespace Logic.DataManagement
         {
             return text.Split('\n');
         }
+
         public IEnumerable<string> CleanIrrelevantLines(IEnumerable<string> lines)
         {
             var pattern = @"\d+[.,]\d{2}\s[A-Z]\b";
@@ -42,6 +44,7 @@ namespace Logic.DataManagement
                 decimalValue.Replace(',', '.');
                 if (!Decimal.TryParse(decimalValue, out decimal price)) continue;
                 var name = line.Substring(0, indexOfRegex + 1);
+                var matchedName = FindMatch(name);
                 result.Add(new KeyValuePair<string, decimal>(name, price));
             }
             return result;
@@ -51,7 +54,7 @@ namespace Logic.DataManagement
         {
             var regex = new Regex(@"\b\d{4}\-\d{2}.\d{2}\b");
             DateTime datetime;
-            foreach (String line in lines)
+            foreach (var line in lines)
             {
                 foreach (Match match in regex.Matches(line))
                 {
@@ -64,7 +67,7 @@ namespace Logic.DataManagement
 
         public Store RecognizeStore(IEnumerable<string> lines)
         {
-            foreach (string line in lines)
+            foreach (var line in lines)
             {
                 if (line.Contains("MAXIMA"))
                 {
@@ -89,16 +92,69 @@ namespace Logic.DataManagement
             }
             return 0;
         }
-        /// <summary>
-        /// Todo:
-        /// implement alternative method that we have used 
-        /// previously, this time involve database.
-        /// </summary>
-        public void FindMatch()
+    
+        public string FindMatch(string dataToCheck)
         {
+            ///TODO:
+            /// Get list of products names of store
+            ///from a database.
+            var productsInDatabase = new List<string>();
 
+            var distance = default(int);
+            var closestMatchIndex = -1;
+            var index = -1;
+            var counter = default(int);
+            foreach (var product in productsInDatabase)
+            {
+                distance = LevenshteinDistance(dataToCheck, product);
+                if (closestMatchIndex > distance || closestMatchIndex == -1)
+                {
+                    closestMatchIndex = distance;
+                    index = counter;
+                }
+                counter++;
+            }
+            return productsInDatabase[index];
         }
 
+        public int LevenshteinDistance(string source, string target)
+        {
+            if (string.IsNullOrEmpty(source))
+            {
+                if (string.IsNullOrEmpty(target)) return 0;
+                return target.Length;
+            }
+            if (string.IsNullOrEmpty(target)) return source.Length;
 
+            if (source.Length > target.Length)
+            {
+                var temp = target;
+                target = source;
+                source = temp;
+            }
+
+            var m = target.Length;
+            var n = source.Length;
+            var distance = new int[2, m + 1];
+
+            for (var j = 1; j <= m; j++) distance[0, j] = j;
+
+            var currentRow = 0;
+            for (var i = 1; i <= n; ++i)
+            {
+                currentRow = i & 1;
+                distance[currentRow, 0] = i;
+                var previousRow = currentRow ^ 1;
+                for (var j = 1; j <= m; j++)
+                {
+                    var cost = (target[j - 1] == source[i - 1] ? 0 : 1);
+                    distance[currentRow, j] = Math.Min(Math.Min(
+                                distance[previousRow, j] + 1,
+                                distance[currentRow, j - 1] + 1),
+                                distance[previousRow, j - 1] + cost);
+                }
+            }
+            return distance[currentRow, m];
+        }
     }
 }
