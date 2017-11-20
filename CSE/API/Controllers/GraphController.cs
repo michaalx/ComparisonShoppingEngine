@@ -12,9 +12,13 @@ namespace API.Controllers
     public class GraphController : Controller
     {
         [HttpGet]
-        public IEnumerable<string> GetProducts()
+        public JsonResult GetProducts()
         {
-            
+            return new JsonResult(new List<object>
+            {
+                new { id=1, Name="as"},
+                new { id=2, Name="tu"}
+            });
         }
     }
 }
