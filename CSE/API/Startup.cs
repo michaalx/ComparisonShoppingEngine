@@ -12,6 +12,7 @@ namespace API
 {
     public class Startup
     {
+        public static IConfigurationRoot Configuration;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -21,8 +22,6 @@ namespace API
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-
-        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)

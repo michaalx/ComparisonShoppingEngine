@@ -9,12 +9,28 @@ using System.Threading.Tasks;
 
 namespace Logic.Graph
 {
-    class GraphOperations
+    public class GraphOperations
     {
-        ProductDetails[] monthArray = new ProductDetails[12];
+        List<Dictionary<DateTime, decimal>> listOfLists = new List<Dictionary<DateTime, decimal>>();
+        Dictionary<DateTime,decimal> listForDays;
+        Dictionary<DateTime, decimal> listForMonths;
+        Dictionary<DateTime, decimal> listForYears;
         CSV csvTool = new CSV();
         DataDistributionAmongFiles ddaf = new DataDistributionAmongFiles();
-        List<ProductDetails> prod = new List<ProductDetails>();
+        public GraphOperations(string item)
+        {
+            listForDays = GetListDays(ddaf.GetMaxima(), item);
+            listForMonths = GetListMonths(listForDays);
+            listForYears = GetListYears(listForDays);
+            listOfLists.Add(listForDays);
+            listOfLists.Add(listForMonths);
+            listOfLists.Add(listForYears);
+        }
+
+        public List<Dictionary<DateTime,decimal>> GetList()
+        {
+            return listOfLists;
+        }
         public string GetPath(Store store, string path = "default")
         {
             //same order in enum and array

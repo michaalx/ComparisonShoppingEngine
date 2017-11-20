@@ -75,5 +75,11 @@ namespace Logic.CSVFiles
         {
             return _pathsDetails;
         }
+
+        //just for testing!!!!!!!!!!!!!!!!!!!
+        public string GetMaxima()
+        {
+            return _pathToMaximaDetails;
+        }
     }
 }
