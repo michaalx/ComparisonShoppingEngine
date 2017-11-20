@@ -14,11 +14,6 @@ namespace CSE
 		[STAThread]
 		static void Main()
 		{
-			var reader = new Reader();
-			Store store = Store.IKI;
-			//reader.OpenConnection();
-			//reader.CloseConnection();
-			//reader.ReadHistoryData(store, "Pienas");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new StartForm());

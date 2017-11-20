@@ -36,32 +36,34 @@ namespace Logic.Database
 			reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
-<<<<<<< HEAD
 				productList.Add(reader.GetString(0));
-=======
-				list.Add(reader.GetString(0).ToString());
->>>>>>> master
 			}
 			return productList;
 		}
 
-		public Dictionary<decimal, DateTime> ReadHistoryData(Store storeName, string productName)
+		public List<Tuple<decimal, DateTime>> ReadHistoryData(int storeName, string productName)
 		{
-			Dictionary<decimal, DateTime> history = new Dictionary<decimal, DateTime>();
+			var history = new List<Tuple<decimal, DateTime>>();
 
-			SqlCommand cmd = new SqlCommand("SELECT DISTINCT h.price, r.date" +
-													"FROM history AS h, receipt AS r" +
-													 "WHERE h.receiptid = r.id" +
-													 "AND h.product = " + productName +
-													 " AND r.shopid = " + storeName + ";", con);
+			SqlCommand cmd = new SqlCommand("SELECT DISTINCT h.price, r.date, h.product, r.shopid " +
+													"FROM history h, receipt r " +
+													 "WHERE h.receiptid = r.id " +
+													 "AND h.product = '" + productName +
+													 "' AND r.shopid = '" + storeName + "';", con);
 			reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
-				history.Add(reader.GetDecimal(0), reader.GetDateTime(1));
+				history.Add(Tuple.Create(reader.GetDecimal(0), reader.GetDateTime(1)));
 			}
-			foreach (KeyValuePair<decimal, DateTime> e in history)
-				Console.WriteLine(e.Key.ToString() + " " + e.Value.ToString());
 			return history;
+			//FOR TESTING
+			//var reader = new Reader();
+			//int store = (int)Store.IKI;
+			//reader.OpenConnection();
+			//var asd = reader.ReadHistoryData(store, "Pienas");
+			//reader.CloseConnection();
+			//foreach (Tuple<decimal, DateTime> e in asd)
+			//Console.WriteLine(e.Item1.ToString() + " " + e.Item2.ToString());
 		}
 	}
 }
