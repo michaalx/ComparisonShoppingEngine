@@ -19,7 +19,7 @@ namespace Xamarin.MapModel
 
         public PinInfo(double lat, double lon, string StoreName)
         {
-            latlon = lat.ToString() + "," + lon.ToString();
+            latlon = lat.ToString().Replace(",", ".") + "," + lon.ToString().Replace(",", ".");
             Debug.WriteLine(latlon);
             path = placesPath + latlon + "&rankby=distance&keyword=" + StoreName + "_parduotuve&key=" + key;
             Debug.WriteLine(path);
@@ -120,8 +120,8 @@ namespace Xamarin.MapModel
         public StoreInfo(string vicinity, string is_open, string lat, string lon, string name)
         {
             Vicinity = vicinity;
-            Lat = Convert.ToDouble(lat);
-            Lon = Convert.ToDouble(lon);
+            Lat = double.Parse(lat, System.Globalization.CultureInfo.InvariantCulture);
+            Lon = double.Parse(lon, System.Globalization.CultureInfo.InvariantCulture);
             Is_Open = is_open;
             Name = name;
         }

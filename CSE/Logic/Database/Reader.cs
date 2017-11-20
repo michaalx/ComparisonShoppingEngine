@@ -36,7 +36,11 @@ namespace Logic.Database
 			reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
+<<<<<<< HEAD
 				productList.Add(reader.GetString(0));
+=======
+				list.Add(reader.GetString(0).ToString());
+>>>>>>> master
 			}
 			return productList;
 		}
