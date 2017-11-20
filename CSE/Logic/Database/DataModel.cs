@@ -25,14 +25,29 @@ namespace Logic.Database
 				return productData;
 			}
 		}
+		//FOR TESTING
 
-		public List<Tuple<decimal, DateTime>> HistoryData(int storeName, string productName)
+		//var dm = new DataModel();
+		//var product = dm.ProductData;
+
+		//foreach (var e in product)
+		//	Console.WriteLine(e.ToString());
+
+		public List<Tuple<DateTime, decimal>> HistoryData(string productName, int storeName)
 		{
 			var reader = new Reader();
 			reader.OpenConnection();
-			var history = reader.ReadHistoryData(storeName, productName);
+			var history = reader.ReadHistoryData(productName, storeName);
 			reader.CloseConnection();
 			return history;
 		}
+		//FOR TESTING
+
+		//int store = (int)Store.IKI;
+		//var dm = new DataModel();
+		//var history = dm.HistoryData("Pienas", store);
+
+		//foreach (Tuple<DateTime, decimal> e in history)
+		//	Console.WriteLine(e.Item1.ToString() + " " + e.Item2.ToString());
 	}
 }

@@ -41,9 +41,9 @@ namespace Logic.Database
 			return productList;
 		}
 
-		public List<Tuple<decimal, DateTime>> ReadHistoryData(int storeName, string productName)
+		public List<Tuple<DateTime, decimal>> ReadHistoryData(string productName, int storeName)
 		{
-			var history = new List<Tuple<decimal, DateTime>>();
+			var history = new List<Tuple<DateTime, decimal>>();
 
 			SqlCommand cmd = new SqlCommand("SELECT DISTINCT h.price, r.date, h.product, r.shopid " +
 													"FROM history h, receipt r " +
@@ -53,17 +53,9 @@ namespace Logic.Database
 			reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
-				history.Add(Tuple.Create(reader.GetDecimal(0), reader.GetDateTime(1)));
+				history.Add(Tuple.Create(reader.GetDateTime(1), reader.GetDecimal(0)));
 			}
 			return history;
-			//FOR TESTING
-			//var reader = new Reader();
-			//int store = (int)Store.IKI;
-			//reader.OpenConnection();
-			//var asd = reader.ReadHistoryData(store, "Pienas");
-			//reader.CloseConnection();
-			//foreach (Tuple<decimal, DateTime> e in asd)
-			//Console.WriteLine(e.Item1.ToString() + " " + e.Item2.ToString());
 		}
 	}
 }
