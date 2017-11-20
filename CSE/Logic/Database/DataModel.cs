@@ -44,9 +44,9 @@ namespace Logic.Database
 			}
 		}*/
 
-		public void HistoryData
+		/*public void HistoryData
 		{
 
-		}
+		}*/
 	}
 }

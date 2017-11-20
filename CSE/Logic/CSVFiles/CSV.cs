@@ -1,10 +1,12 @@
-﻿using CsvHelper;
-using Logic.Models;
+﻿using Logic.Models;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Logic.CSVFiles
 {
@@ -24,8 +26,10 @@ namespace Logic.CSVFiles
         }
         public void ResetUniqueProducts()
         {
-            FormsToolkit formsToolKit = new FormsToolkit();
-            var paths = formsToolKit.Ddaf.GetFilesPaths();
+            //FormsToolkit formsToolKit = new FormsToolkit();
+            //var paths = formsToolKit.Ddaf.GetFilesPaths();
+            DataDistributionAmongFiles ddaf = new DataDistributionAmongFiles();
+            var paths = ddaf.GetFilesPaths();
             var uniqueProducts = ParsingUniqueProducts(paths);
             if (!(File.Exists(_fileOfUniqueProducts)))
             {
