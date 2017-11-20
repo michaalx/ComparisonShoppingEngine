@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Logic.Graph;
 
 namespace API.Controllers
 {
@@ -11,14 +12,12 @@ namespace API.Controllers
     [Route("api/Graph")]
     public class GraphController : Controller
     {
-        [HttpGet]
-        public JsonResult GetProducts()
+        [HttpGet()]
+        public IActionResult GetProducts(string item)
         {
-            return new JsonResult(new List<object>
-            {
-                new { id=1, Name="as"},
-                new { id=2, Name="tu"}
-            });
+            GraphOperations go = new GraphOperations(item);
+            var listToReturn = go.GetList();
+            return Ok(listToReturn);
         }
     }
 }
