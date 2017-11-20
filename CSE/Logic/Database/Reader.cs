@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Logic.Metadata;
 
 namespace Logic.Database
 {
@@ -28,16 +29,33 @@ namespace Logic.Database
 			con.Close();
 		}
 
-		public IEnumerable<string> ReadData(string query)
+		public IEnumerable<string> ReadProductData()
 		{
-			List<string> list = new List<string>();
-			SqlCommand cmd = new SqlCommand(query, con);
+			List<string> productList = new List<string>();
+			SqlCommand cmd = new SqlCommand("SELECT DISTINCT name FROM product", con);
 			reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
-				list.Add(reader.GetString(0).ToString());
+				productList.Add(reader.GetString(0));
 			}
-			return list;
+			return productList;
+		}
+
+		public List<Tuple<DateTime, decimal>> ReadHistoryData(string productName, int storeName)
+		{
+			var history = new List<Tuple<DateTime, decimal>>();
+
+			SqlCommand cmd = new SqlCommand("SELECT DISTINCT h.price, r.date, h.product, r.shopid " +
+													"FROM history h, receipt r " +
+													 "WHERE h.receiptid = r.id " +
+													 "AND h.product = '" + productName +
+													 "' AND r.shopid = '" + storeName + "';", con);
+			reader = cmd.ExecuteReader();
+			while (reader.Read())
+			{
+				history.Add(Tuple.Create(reader.GetDateTime(1), reader.GetDecimal(0)));
+			}
+			return history;
 		}
 	}
 }
