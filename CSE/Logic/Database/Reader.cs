@@ -53,19 +53,13 @@ namespace Logic.Database
 													 "WHERE h.receiptid = r.id " +
 													 "AND h.product = '" + productName +
 													 "' AND r.shopid = '" + storeName + "';", con);
-            try
+       
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    history.Add(Tuple.Create(reader.GetDateTime(1), reader.GetDecimal(0)));
-                }
-                return history;
+                history.Add(Tuple.Create(reader.GetDateTime(1), reader.GetDecimal(0)));
             }
-            catch (InvalidOperationException)
-            {
-                return new List<Tuple<DateTime, decimal>>() { new Tuple<DateTime, decimal>(new DateTime(2008, 5, 1, 8, 30, 52), 0) };
-            }
+            return history;
 			
 		}
 	}
