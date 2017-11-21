@@ -15,7 +15,8 @@ namespace API.Controllers
         [HttpGet()]
         public IActionResult GetProducts(string item, int storeName)
         {
-            GraphOperations go = new GraphOperations("pienas", 1);
+            //Item is product name, storeName is number of store in enum
+            GraphOperations go = new GraphOperations(item, storeName);
             var listToReturn = go.GetList();
             return Ok(listToReturn);
         }
