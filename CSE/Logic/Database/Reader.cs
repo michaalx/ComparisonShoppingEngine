@@ -14,12 +14,15 @@ namespace Logic.Database
 		private System.Data.SqlClient.SqlConnection con;
 		private SqlDataReader reader;
 
+
 		public void OpenConnection()
 		{
-			con = new System.Data.SqlClient.SqlConnection
-			{
-				ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString
-			};
+
+            con = new System.Data.SqlClient.SqlConnection
+            {
+                //ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString
+                ConnectionString = "Data Source=mssql6.gear.host;Initial Catalog=cse;User ID=cse;Password=Pr9O8fdOvG_!"
+            };
 			con.Open();
 		}
 
@@ -50,12 +53,20 @@ namespace Logic.Database
 													 "WHERE h.receiptid = r.id " +
 													 "AND h.product = '" + productName +
 													 "' AND r.shopid = '" + storeName + "';", con);
-			reader = cmd.ExecuteReader();
-			while (reader.Read())
-			{
-				history.Add(Tuple.Create(reader.GetDateTime(1), reader.GetDecimal(0)));
-			}
-			return history;
+            try
+            {
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    history.Add(Tuple.Create(reader.GetDateTime(1), reader.GetDecimal(0)));
+                }
+                return history;
+            }
+            catch (InvalidOperationException)
+            {
+                return new List<Tuple<DateTime, decimal>>() { new Tuple<DateTime, decimal>(new DateTime(2008, 5, 1, 8, 30, 52), 0) };
+            }
+			
 		}
 	}
 }

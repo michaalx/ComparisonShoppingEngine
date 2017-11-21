@@ -13,9 +13,9 @@ namespace API.Controllers
     public class GraphController : Controller
     {
         [HttpGet()]
-        public IActionResult GetProducts(string item)
+        public IActionResult GetProducts(string item, int storeName)
         {
-            GraphOperations go = new GraphOperations(item);
+            GraphOperations go = new GraphOperations("pienas", 1);
             var listToReturn = go.GetList();
             return Ok(listToReturn);
         }
