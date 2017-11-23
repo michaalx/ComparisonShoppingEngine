@@ -16,8 +16,6 @@ namespace Logic.Graph
         Dictionary<DateTime,decimal> listForDays;
         Dictionary<DateTime, decimal> listForMonths;
         Dictionary<DateTime, decimal> listForYears;
-        CSV csvTool = new CSV();
-        DataDistributionAmongFiles ddaf = new DataDistributionAmongFiles();
         DataModel dm = new DataModel();
         public GraphOperations(string item, int storeName)
         {
@@ -32,23 +30,6 @@ namespace Logic.Graph
         public List<Dictionary<DateTime,decimal>> GetList()
         {
             return listOfLists;
-        }
-        public string GetPath(Store store, string path = "default")
-        {
-            //same order in enum and array
-            if (path.Equals("default"))
-            {
-                var i = (int)store;
-                var paths = ddaf.GetFilesPaths();
-                return paths[i - 1];
-            }
-            else
-            {
-                var i = (int)store;
-                var paths = ddaf.GetPathsDetails();
-                return paths[i - 1];
-            }
-
         }
 
         public Dictionary<DateTime, decimal> GetListDays(string item, int storeName)

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Logic.Metadata;
+using System.Diagnostics;
 
 namespace Logic.Database
 {
@@ -39,10 +40,40 @@ namespace Logic.Database
 			reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
-				productList.Add(reader.GetString(0));
+				productList.Add(reader.GetString(0).Trim());
 			}
 			return productList;
 		}
+
+        public List<string> ReadOneStore(int storeId)
+        {
+            List<string> productList = new List<string>();
+            SqlCommand cmd = new SqlCommand("SELECT DISTINCT name, shopid FROM product "
+                                            + "WHERE shopid = '" + storeId + "';", con);
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                productList.Add(reader.GetString(0).Trim());
+            }
+            return productList;
+        }
+
+        public List<Tuple<string, decimal>> ReadForCheapest(Store store)
+        {
+            var products = new List<Tuple<string, decimal>>();
+            //List<string> productList = new List<string>();
+            SqlCommand cmd = new SqlCommand("SELECT DISTINCT p.name, p.price, p.shopid, s.name, s.id " +
+                                                    "FROM product p, shop s " +
+                                                    "WHERE s.name = '" + store.ToString() + 
+                                                    "' AND s.id = p.shopid;", con);
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                //Debug.WriteLine(reader.GetDecimal(1));
+                products.Add(Tuple.Create(reader.GetString(0), reader.GetDecimal(1)));
+            }
+            return products;
+        }
 
 		public List<Tuple<DateTime, decimal>> ReadHistoryData(string productName, int storeName)
 		{
@@ -53,7 +84,7 @@ namespace Logic.Database
 													 "WHERE h.receiptid = r.id " +
 													 "AND h.product = '" + productName +
 													 "' AND r.shopid = '" + storeName + "';", con);
-       
+            
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
