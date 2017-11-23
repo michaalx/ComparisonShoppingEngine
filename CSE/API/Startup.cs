@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Logic.DataManagement;
 using Logic.Database;
 using Logic.Functions;
+using Logic.Graph;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -38,6 +39,8 @@ namespace API
             services.AddTransient<IReader, Reader>();
             services.AddTransient<ITextProcessing, TextProcessing>();
             services.AddTransient<IConverter, Converter>();
+            services.AddTransient<ICheapestStore, CheapestStore>();
+            services.AddTransient<IGraphOperations, GraphOperations>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
