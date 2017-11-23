@@ -69,6 +69,7 @@
     <Compile Include="CheapestStore\CheapestStore.cs" />
     <Compile Include="CSVFiles\CSV.cs" />
     <Compile Include="CSVFiles\DataDistributionAmongFiles.cs" />
+    <Compile Include="Database\ConnectionFailedException.cs" />
     <Compile Include="Database\DataModel.cs" />
     <Compile Include="Database\Reader.cs" />
     <Compile Include="DataManagement\Converter.cs" />

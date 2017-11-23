@@ -14,6 +14,15 @@ namespace CSE
 		[STAThread]
 		static void Main()
 		{
+			//FOR TESTING
+
+			int store = (int)Store.IKI;
+			var dm = new DataModel();
+			var history = dm.HistoryData("Pienas", store);
+
+			foreach (Tuple<DateTime, decimal> e in history)
+				Console.WriteLine(e.Item1.ToString() + " " + e.Item2.ToString());
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new StartForm());

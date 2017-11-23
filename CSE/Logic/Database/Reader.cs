@@ -11,28 +11,32 @@ namespace Logic.Database
 {
 	public class Reader
 	{
-		private System.Data.SqlClient.SqlConnection con;
+		private System.Data.SqlClient.SqlConnection _con = new SqlConnection();
 		private SqlDataReader reader;
 
 		public void OpenConnection()
 		{
-			con = new System.Data.SqlClient.SqlConnection
+			try
 			{
-				ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString
-			};
-			con.Open();
+				_con.ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
+				_con.Open();
+			}
+			catch (Exception e)
+			{
+				throw new ConnectionFailedException(_con.ConnectionString);
+			}
 		}
 
 		public void CloseConnection()
 		{
 			reader.Close();
-			con.Close();
+			_con.Close();
 		}
 
 		public IEnumerable<string> ReadProductData()
 		{
 			List<string> productList = new List<string>();
-			SqlCommand cmd = new SqlCommand("SELECT DISTINCT name FROM product", con);
+			SqlCommand cmd = new SqlCommand("SELECT DISTINCT name FROM product", _con);
 			reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
@@ -47,9 +51,12 @@ namespace Logic.Database
 
 			SqlCommand cmd = new SqlCommand("SELECT DISTINCT h.price, r.date, h.product, r.shopid " +
 													"FROM history h, receipt r " +
-													 "WHERE h.receiptid = r.id " +
-													 "AND h.product = '" + productName +
-													 "' AND r.shopid = '" + storeName + "';", con);
+													"WHERE h.receiptid = r.id " +
+													"AND h.product = @PN AND r.shopid = @SN;", _con);
+
+			cmd.Parameters.AddWithValue("@PN", productName);
+			cmd.Parameters.AddWithValue("@SN", storeName);
+
 			reader = cmd.ExecuteReader();
 			while (reader.Read())
 			{
