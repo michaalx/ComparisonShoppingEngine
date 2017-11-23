@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Plugin.Media;
 
 namespace Xamarin.Droid
 {
@@ -20,6 +21,7 @@ namespace Xamarin.Droid
             base.OnCreate(bundle);
 
             Forms.Forms.Init(this, bundle);
+            OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
             LoadApplication(new App());
         }
     }
