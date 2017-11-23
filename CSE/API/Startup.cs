@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +7,6 @@ using Logic.DataManagement;
 using Logic.Database;
 using Logic.Functions;
 using Logic.Graph;
-using Microsoft.EntityFrameworkCore;
 
 namespace API
 {
@@ -33,7 +28,7 @@ namespace API
         {
             // Add framework services.
             services.AddMvc();
-            services.AddSingleton(Configuration);
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<IPopularProducts, PopularProducts>();
             services.AddTransient<IDataModel, DataModel>();
             services.AddTransient<IReader, Reader>();
