@@ -1,3 +1,4 @@
+using Logic.Metadata;
 using System;
 
 namespace Logic.Models
@@ -6,23 +7,35 @@ namespace Logic.Models
     {
         public string Name { get; private set; }
         public decimal Price { get; private set; }
-        public int Quantity { get; private set; }
+        public short Quantity { get; private set; }
+        public string Store { get; private set; }
         public Product(string name, decimal price)
         {
-            StoreName(name);
-            StorePrice(price);
+            SetName(name);
+            SetPrice(price);
         }
-        public Product(string name, decimal price, int quantity)
+        public Product(string name, decimal price, short quantity)
         {
-            StoreName(name);
-            StorePrice(price);
-            StoreQuantity(quantity);
+            SetName(name);
+            SetPrice(price);
+            SetQuantity(quantity);
         }
-        private void StoreName(string name) => Name = name; 
 
-        private void StorePrice(decimal price) => Price = price;
+        public Product(string name, decimal price, short quantity, string store)
+        {
+            SetName(name);
+            SetPrice(price);
+            SetQuantity(quantity);
+            SetStore(store);
+        }
+        private void SetName(string name) => Name = name; 
 
-        private void StoreQuantity(int quantity) => Quantity = quantity;
+        private void SetPrice(decimal price) => Price = price;
+
+        private void SetQuantity(short quantity) => Quantity = quantity;
+
+        private void SetStore(string store) => Store = store;
+
         public int CompareTo(Product product)
         {
             return string.Compare(product.Name, Name);

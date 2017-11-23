@@ -3,19 +3,26 @@ using Logic.ImageAnalysis;
 using Logic.Models;
 using System.Drawing;
 using System.Linq;
+using System.IO;
+using System;
 
 namespace Logic.DataManagement
 {
-    public class Converter
+    public class Converter : IConverter
     {
-        public IEnumerable<Product> ConvertDataToListOfProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
+        private readonly ITextProcessing _textProcessing;
+        public Converter(ITextProcessing textProcessing)
+        {
+            _textProcessing = textProcessing;
+        }
+        public IEnumerable<Product> GetProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
         {
             var dictionary = new Dictionary<string, Product>();
             foreach (var item in detailsOfProducts)
             {
                 if (dictionary.ContainsKey(item.Key))
                 {
-                    var hits = dictionary[item.Key].Quantity + 1;
+                    var hits = (short)(dictionary[item.Key].Quantity + 1);
                     dictionary[item.Key] = new Product(item.Key, item.Value, hits);
                 }
                 else
@@ -31,29 +38,22 @@ namespace Logic.DataManagement
         ///     list of products;
         ///     timestamp;
         ///     store name.
-        /// Reason to use:
-        ///     statistics. Receipt is stored in Database,
-        ///     and therefore we can gather information about 
-        ///     receipts and draw some conclusions.
-        ///     
         /// </summary>
         /// <param name="textProcessing"></param>
         /// <param name="image"></param>
         /// <returns>Receipt instance.</returns>
-        public Receipt ConvertImageToReceipt(Bitmap image)
+        public Receipt ConvertImageToReceipt(string imageArgs)
         {
             var imageProcessing = new ImageProcessing();
-            ///TODO: textProcessing should be constructed
-            ///with configuration instance of application.
-            var textProcessing = new TextProcessing();
-
+            // var image = (Bitmap)Image.FromStream(new MemoryStream(Convert.FromBase64String(imageArgs)));
+            var image = new Bitmap("filename"); //TBD; depends on deserialization.
             var textFromImage =  imageProcessing.GetTextFromImage(image);
-            var recognizedLines = textProcessing.SplitString(textFromImage.Result);
-            var storeName = textProcessing.RecognizeStore(recognizedLines);
-            var timestamp = textProcessing.RecognizeDate(recognizedLines);
-			var goodRecognizedLines = textProcessing.CleanIrrelevantLines(recognizedLines);
-			var listOfProductDetails = textProcessing.GetListOfNamesAndPrices(goodRecognizedLines);
-            var listOfProducts = ConvertDataToListOfProducts(listOfProductDetails);
+            var recognizedLines = _textProcessing.SplitString(textFromImage.Result);
+            var storeName = _textProcessing.RecognizeStore(recognizedLines);
+            var timestamp = _textProcessing.RecognizeDate(recognizedLines);
+			var goodRecognizedLines = _textProcessing.CleanIrrelevantLines(recognizedLines);
+			var listOfProductDetails = _textProcessing.GetListOfNamesAndPrices(goodRecognizedLines);
+            var listOfProducts = GetProducts(listOfProductDetails);
             return new Receipt(listOfProducts, storeName, timestamp);
         }
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Logic.Metadata;
@@ -27,6 +27,7 @@ namespace Logic.Functions
             foreach (var store in stores)
             {
                 var sumOfCart = 0m;
+                foreach (var product in products)
                 var storeProducts = dm.GetProducts(store);
                 foreach(var product in products)
                 {
@@ -41,7 +42,7 @@ namespace Logic.Functions
                 ///If none products of store are found in database .
                 ///Sum will be 0 but it is pointless to define this store 
                 ///as it doesn't contain given products.
-                if (sumOfCart < lowestSumOfCart && sumOfCart!=0)
+                if (sumOfCart < lowestSumOfCart && sumOfCart != 0)
                 {
                     cheapestStore = store;
                     lowestSumOfCart = sumOfCart;
@@ -49,9 +50,9 @@ namespace Logic.Functions
             }
             return Tuple.Create(cheapestStore, lowestSumOfCart);
         }
-        public IEnumerable<Store> GetStores()
+        public static IEnumerable<Store> GetStores()
         {
-            return Enum.GetValues(typeof(Store)).Cast<Store>().ToList();
+           return Enum.GetValues(typeof(Store)).Cast<Store>().ToList();
         }
     }
 }

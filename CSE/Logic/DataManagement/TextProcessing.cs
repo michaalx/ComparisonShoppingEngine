@@ -9,13 +9,16 @@ using Logic.Database;
 
 namespace Logic.DataManagement
 {
-    public class TextProcessing
+    public class TextProcessing : ITextProcessing
     {
         private readonly IConfiguration _configuration;
+        private readonly IReader _reader;
 
-        public TextProcessing() { }
-
-        public TextProcessing(IConfiguration configuration) => _configuration = configuration;
+        public TextProcessing(IConfiguration configuration, IReader reader)
+        {
+            _configuration = configuration;
+            _reader = reader;
+        }
 
         public IEnumerable<string> SplitString(string text)
         {
@@ -24,6 +27,7 @@ namespace Logic.DataManagement
 
         public IEnumerable<string> CleanIrrelevantLines(IEnumerable<string> lines)
         {
+
             var pattern = @"\d+[.,]\d{2}\s[A-Z]\b";
             var result = from relevantLines in lines
                          where Regex.Match(relevantLines, pattern).Success
@@ -69,23 +73,23 @@ namespace Logic.DataManagement
         {
             foreach (var line in lines)
             {
-                if (line.Contains("MAXIMA"))
+                if (line.Contains(_configuration["Maxima"]))
                 {
                     return Store.Maxima;
                 }
-                else if (line.Contains("RIMI"))
+                else if (line.Contains(_configuration["Rimi"]))
                 {
                     return Store.Rimi;
                 }
-                else if (line.Contains("IKI"))
+                else if (line.Contains(_configuration["Iki"]))
                 {
-                    return Store.IKI;
+                    return Store.Iki;
                 }
-                else if (line.Contains("NORFA"))
+                else if (line.Contains(_configuration["Norfa"]))
                 {
                     return Store.Norfa;
                 }
-                else if (line.Contains("LIDL"))
+                else if (line.Contains(_configuration["Lidl"]))
                 {
                     return Store.Lidl;
                 }
@@ -95,11 +99,7 @@ namespace Logic.DataManagement
     
         public string FindMatch(string dataToCheck)
         {
-            ///TODO:
-            /// Get list of products names of store
-            ///from a database.
-            var productsInDatabase = new List<string>();
-
+            var productsInDatabase = _reader.ReadProductData().ToList();
             var distance = default(int);
             var closestMatchIndex = -1;
             var index = -1;

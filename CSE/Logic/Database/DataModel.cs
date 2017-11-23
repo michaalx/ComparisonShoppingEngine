@@ -1,28 +1,32 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Logic.Metadata;
+using System.Diagnostics;
 
 namespace Logic.Database
 {
-	public class DataModel
-	{
-		public IEnumerable<string> productData;
+	public class DataModel : IDataModel
+    {
+		private IEnumerable<string> _productData;
+        private IReader _reader;
+
+        public DataModel(IReader reader) => _reader= reader;
 
 		public IEnumerable<string> ProductData
 		{
 			get
 			{
-				if (productData == null)
+                //Lazy
+				if (_productData == null)
 				{
-					var reader = new Reader();
-					reader.OpenConnection();
-					productData = reader.ReadProductData();
-					reader.CloseConnection();
+					_reader.OpenConnection();
+					_productData = _reader.ReadProductData();
+					_reader.CloseConnection();
 				}
-				return productData;
+				return _productData;
 			}
 		}
 		//FOR TESTING
@@ -35,12 +39,12 @@ namespace Logic.Database
 
 		public List<Tuple<DateTime, decimal>> HistoryData(string productName, int storeName)
 		{
-			var reader = new Reader();
-			reader.OpenConnection();
-			var history = reader.ReadHistoryData(productName, storeName);
-			reader.CloseConnection();
+			_reader.OpenConnection();
+			var history =_reader.ReadHistoryData(productName, storeName);
+			_reader.CloseConnection();
 			return history;
 		}
+        //FOR TESTING
         
         //To select from one store
         public List<string> OneStore(int shopId)
@@ -56,7 +60,7 @@ namespace Logic.Database
         public List<Tuple<string, decimal>> GetProducts(Store store)
         {
             var reader = new Reader();
-            reader.OpenConnection();
+          reader.OpenConnection();
             var products = reader.ReadForCheapest(store);
             reader.CloseConnection();
             return products;
@@ -72,11 +76,18 @@ namespace Logic.Database
         }
 		//FOR TESTING
 
-		//int store = (int)Store.IKI;
-		//var dm = new DataModel();
-		//var history = dm.HistoryData("Pienas", store);
+        //int store = (int)Store.IKI;
+        //var dm = new DataModel();
+        //var history = dm.HistoryData("Pienas", store);
 
-		//foreach (Tuple<DateTime, decimal> e in history)
-		//	Console.WriteLine(e.Item1.ToString() + " " + e.Item2.ToString());
-	}
+        //foreach (Tuple<DateTime, decimal> e in history)
+        //	Console.WriteLine(e.Item1.ToString() + " " + e.Item2.ToString());
+        public IEnumerable<Tuple<string, short, decimal, string>> PopularProducts()
+        {
+            _reader.OpenConnection();
+            var popularProducts = _reader.ReadPopularity();
+            _reader.CloseConnection();
+            return popularProducts;
+        }
+    }
 }

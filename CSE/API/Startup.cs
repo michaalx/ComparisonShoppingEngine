@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Logic.DataManagement;
+using Logic.Database;
+using Logic.Functions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -30,6 +33,11 @@ namespace API
             // Add framework services.
             services.AddMvc();
             services.AddSingleton(Configuration);
+            services.AddTransient<IPopularProducts, PopularProducts>();
+            services.AddTransient<IDataModel, DataModel>();
+            services.AddTransient<IReader, Reader>();
+            services.AddTransient<ITextProcessing, TextProcessing>();
+            services.AddTransient<IConverter, Converter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
