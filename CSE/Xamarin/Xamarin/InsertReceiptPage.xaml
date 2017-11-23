@@ -4,12 +4,12 @@
              x:Class="Xamarin.InsertReceiptPage"
              Padding="20">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="mainToolbar" Text="Main" Clicked="mainToolbar_Clicked"/>
+        <ToolbarItem x:Name="MainToolbar" Text="Main" Clicked="MainToolbar_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand">
-            <Button x:Name="browseFilesButton" Text="Browse files" Clicked="browseFilesButton_Clicked"/>
-            <Button x:Name="uploadImageButton" Text="Upload image" Clicked="uploadImageButton_Clicked"/>
+            <Button x:Name="takePhoto" Text="Take Photo"/>
+            <Button x:Name="pickPhoto" Text="Pick Photo"/>
         </StackLayout>
     </ContentPage.Content>
     </ContentPage>

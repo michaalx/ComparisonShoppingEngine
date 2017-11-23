@@ -32,9 +32,9 @@ namespace Xamarin
             await Navigation.PushAsync(new PopularProductsPage());
         }
 
-        private void statisticsButton_Clicked(object sender, EventArgs e)
+        async private void statisticsButton_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new GraphPage());
         }
     }
 }
