@@ -6,11 +6,14 @@ using Logic.Models;
 
 namespace Logic.Functions
 {
-    class CheapestStore : ICheapestStore
+    static class CheapestStore
     {
-        public CheapestStore() { }
-
-        public Store GetCheapestStore<T>(IEnumerable<T> products)
+        public static Tuple<Store,decimal> GetCheapestStore(IEnumerable<Product> products)
+        {
+            var listOfProducts = Enumerable.Empty<Product>();
+            return listOfProducts.GtCheapestStore();
+        }
+        public static Tuple<Store,decimal> GtCheapestStore(this IEnumerable<Product> products)
         {
             var lowestSumOfCart = decimal.MaxValue;
             var cheapestStore = (Store)(-1); //undefined store 
@@ -18,7 +21,7 @@ namespace Logic.Functions
             foreach (var store in stores)
             {
                 var sumOfCart = 0m;
-                foreach(var product in products)
+                foreach (var product in products)
                 {
                     ///Add price of product in this store to sum of cart.
                     ///We have to get list of products of store from database.
@@ -34,17 +37,17 @@ namespace Logic.Functions
                 ///If none products of store are found in database .
                 ///Sum will be 0 but it is pointless to define this store 
                 ///as it doesn't contain given products.
-                if (sumOfCart < lowestSumOfCart && sumOfCart!=0)
+                if (sumOfCart < lowestSumOfCart && sumOfCart != 0)
                 {
                     cheapestStore = store;
                     lowestSumOfCart = sumOfCart;
                 }
             }
-            return cheapestStore;
+            return new Tuple<Store,decimal>(cheapestStore, lowestSumOfCart);
         }
-        public IEnumerable<Store> GetStores()
+        public static IEnumerable<Store> GetStores()
         {
-            return Enum.GetValues(typeof(Store)).Cast<Store>().ToList();
+           return Enum.GetValues(typeof(Store)).Cast<Store>().ToList();
         }
     }
 }

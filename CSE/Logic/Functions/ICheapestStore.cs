@@ -6,6 +6,5 @@ namespace Logic.Functions
 {
     interface ICheapestStore
     {
-        Store GetCheapestStore<T>(IEnumerable<T> products);
     }
 }

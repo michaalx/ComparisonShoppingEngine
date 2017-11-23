@@ -1,42 +1,43 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Logic.Metadata;
 
 namespace Logic.Database
 {
-	public class Reader
-	{
-		private System.Data.SqlClient.SqlConnection con;
-		private SqlDataReader reader;
+	public class Reader : IReader
+    {
+		private SqlConnection _con;
+		private SqlDataReader _reader;
+        private readonly IConfiguration _configuration;
+
+        public Reader(IConfiguration configuration) => _configuration = configuration;
 
 		public void OpenConnection()
 		{
-			con = new System.Data.SqlClient.SqlConnection
-			{
-				ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString
+            _con = new SqlConnection
+            {
+                ConnectionString = "Data Source=mssql6.gear.host;Initial Catalog=cse;User ID=cse;Password=Pr9O8fdOvG_!" //ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString
 			};
-			con.Open();
+			_con.Open();
 		}
 
 		public void CloseConnection()
 		{
-			reader.Close();
-			con.Close();
+			_reader.Close();
+			_con.Close();
 		}
 
 		public IEnumerable<string> ReadProductData()
 		{
 			List<string> productList = new List<string>();
-			SqlCommand cmd = new SqlCommand("SELECT DISTINCT name FROM product", con);
-			reader = cmd.ExecuteReader();
-			while (reader.Read())
+			SqlCommand cmd = new SqlCommand("SELECT DISTINCT name FROM product", _con);
+			_reader = cmd.ExecuteReader();
+			while (_reader.Read())
 			{
-				productList.Add(reader.GetString(0));
+				productList.Add(_reader.GetString(0));
 			}
 			return productList;
 		}
@@ -49,13 +50,33 @@ namespace Logic.Database
 													"FROM history h, receipt r " +
 													 "WHERE h.receiptid = r.id " +
 													 "AND h.product = '" + productName +
-													 "' AND r.shopid = '" + storeName + "';", con);
-			reader = cmd.ExecuteReader();
-			while (reader.Read())
+													 "' AND r.shopid = '" + storeName + "';", _con);
+			_reader = cmd.ExecuteReader();
+			while (_reader.Read())
 			{
-				history.Add(Tuple.Create(reader.GetDateTime(1), reader.GetDecimal(0)));
+				history.Add(Tuple.Create(_reader.GetDateTime(1), _reader.GetDecimal(0)));
 			}
 			return history;
 		}
+
+        public List<Tuple<string, short, decimal, string>> ReadPopularity()
+        {
+            var query = 
+                "SELECT x.name, x.popularity, x.price, s.name " +
+                "FROM product x, shop s " +
+                "WHERE x.shopid = s.id " +
+                "ORDER BY x.popularity DESC;";
+            var listOfPopularProducts = new List<Tuple<string,short, decimal, string>>();
+            SqlCommand sqlCommand = new SqlCommand(query,_con);
+            _reader = sqlCommand.ExecuteReader();
+            while (_reader.Read())
+            {
+                if (listOfPopularProducts.Count < 5)
+                {
+                    listOfPopularProducts.Add(Tuple.Create(_reader.GetString(0), _reader.GetInt16(1), _reader.GetDecimal(2),_reader.GetString(3)));
+                }
+            }
+            return listOfPopularProducts;
+        }
 	}
 }

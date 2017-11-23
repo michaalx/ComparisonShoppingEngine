@@ -1,30 +1,27 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Logic.Models;
+using Logic.Database;
+using Logic.Metadata;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Logic.Functions
 {
-    class PopularProducts: IPopularProducts<Product>
+    public class PopularProducts : IPopularProducts
     {
-        /// <summary>
-        /// Sketch method of getting list of popular products.
-        /// Sketch, because we don't know so far, what type will 
-        /// request to SQL return.
-        /// </summary>
-        /// <returns></returns>
+        private readonly IDataModel _dataModel;
+
+        public PopularProducts(IDataModel dataModel) => _dataModel = dataModel;
+
         public IEnumerable<Product> GetPopularProducts()
         {
-            ///Get from database "list" of product names and rates.
-            ///pseudocode:
-            ///SELECT name, rate FROM PRODUCTS
-            ///ORDER BY rate DESCENDING
-            ///
-            var orderedList = new Dictionary<string, decimal>();
-            var sqlResult = orderedList.Take(5);
+            var sqlResult = _dataModel.PopularProducts();
             var productsList = new List<Product>();
             foreach(var query in sqlResult)
             {
-                productsList.Add(new Product(query.Key, query.Value));
+              //  var storeName = (Store)Enum.Parse(typeof(Store), query.Item4);
+                productsList.Add(new Product(query.Item1, query.Item3, query.Item2, query.Item4));
             }
             return productsList;
         }
