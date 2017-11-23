@@ -5,7 +5,7 @@ using System;
 
 namespace Logic.Functions
 {
-    interface ICheapestStore
+    public interface ICheapestStore
     {
         Tuple<Store,decimal> GetCheapestStore<T>(IEnumerable<T> products);
     }

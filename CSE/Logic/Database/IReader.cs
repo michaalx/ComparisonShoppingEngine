@@ -1,7 +1,6 @@
-﻿using Logic.Metadata;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Logic.Metadata;
 
 namespace Logic.Database
 {
@@ -9,10 +8,10 @@ namespace Logic.Database
     {
         void CloseConnection();
         void OpenConnection();
-        IEnumerable<string> ReadProductData();
-        List<Tuple<DateTime, decimal>> ReadHistoryData(string productName, int storeName);
-        List<Tuple<string, short, decimal, string>> ReadPopularity();
-        List<string> ReadOneStore(int storeId);
         List<Tuple<string, decimal>> ReadForCheapest(Store store);
+        List<Tuple<DateTime, decimal>> ReadHistoryData(string productName, int storeName);
+        List<string> ReadOneStore(int storeId);
+        List<Tuple<string, short, decimal, string>> ReadPopularity();
+        IEnumerable<string> ReadProductData();
     }
 }

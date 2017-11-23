@@ -14,24 +14,27 @@ namespace API.Controllers
     [Route("api/Store")]
     public class CheapestController : Controller
     {
+        private readonly ICheapestStore _cheapestStore;
+        private readonly IDataModel _dataModel;
+
+        public CheapestController(ICheapestStore cheapestStore, IDataModel dataModel)
+        {
+            _cheapestStore = cheapestStore;
+            _dataModel = dataModel;
+        }
+
         public IActionResult GetCheapest(IEnumerable<string> products)
         {
-           /* var products = new List<string>()
-            {
-                "Pienas",
-                "Duona"
-            };*/
+          
             Tuple<Store, decimal> cheapestStore;
-            CheapestStore cs = new CheapestStore();
-            cheapestStore = cs.GetCheapestStore(products);
+            cheapestStore = _cheapestStore.GetCheapestStore(products);
             return Ok(cheapestStore);
         }
 
         [HttpGet()]
         public IActionResult GetAllProducts()
         {
-            var dm = new DataModel();
-            var listToReturn = dm.GetAllStores();
+            var listToReturn = _dataModel.GetAllStores();
             return Ok(listToReturn);
         }
     }
