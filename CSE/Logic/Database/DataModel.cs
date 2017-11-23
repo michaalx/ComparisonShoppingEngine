@@ -41,6 +41,35 @@ namespace Logic.Database
 			reader.CloseConnection();
 			return history;
 		}
+        
+        //To select from one store
+        public List<string> OneStore(int shopId)
+        {
+            var reader = new Reader();
+            reader.OpenConnection();
+            var storeProducts = reader.ReadOneStore(shopId);
+            reader.CloseConnection();
+            return storeProducts;
+        }
+
+        //To find cheapest store
+        public List<Tuple<string, decimal>> GetProducts(Store store)
+        {
+            var reader = new Reader();
+            reader.OpenConnection();
+            var products = reader.ReadForCheapest(store);
+            reader.CloseConnection();
+            return products;
+        }
+
+        public IEnumerable<string> GetAllStores()
+        {
+            var reader = new Reader();
+            reader.OpenConnection();
+            var products = reader.ReadProductData().ToList();
+            reader.CloseConnection();
+            return products;
+        }
 		//FOR TESTING
 
 		//int store = (int)Store.IKI;

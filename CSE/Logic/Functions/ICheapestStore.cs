@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Logic.Metadata;
 using Logic.Models;
+using System;
 
 namespace Logic.Functions
 {
     interface ICheapestStore
     {
-        Store GetCheapestStore<T>(IEnumerable<T> products);
+        Tuple<Store,decimal> GetCheapestStore<T>(IEnumerable<T> products);
     }
 }
