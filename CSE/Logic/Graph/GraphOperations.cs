@@ -1,4 +1,5 @@
 ﻿using Logic.CSVFiles;
+using Logic.Database;
 using Logic.Metadata;
 using Logic.Models;
 using System;
@@ -15,11 +16,10 @@ namespace Logic.Graph
         Dictionary<DateTime,decimal> listForDays;
         Dictionary<DateTime, decimal> listForMonths;
         Dictionary<DateTime, decimal> listForYears;
-        CSV csvTool = new CSV();
-        DataDistributionAmongFiles ddaf = new DataDistributionAmongFiles();
-        public GraphOperations(string item)
+        DataModel dm = new DataModel();
+        public GraphOperations(string item, int storeName)
         {
-            listForDays = GetListDays(ddaf.GetMaxima(), item);
+            listForDays = GetListDays(item,storeName);
             listForMonths = GetListMonths(listForDays);
             listForYears = GetListYears(listForDays);
             listOfLists.Add(listForDays);
@@ -31,39 +31,18 @@ namespace Logic.Graph
         {
             return listOfLists;
         }
-        public string GetPath(Store store, string path = "default")
-        {
-            //same order in enum and array
-            if (path.Equals("default"))
-            {
-                var i = (int)store;
-                var paths = ddaf.GetFilesPaths();
-                return paths[i - 1];
-            }
-            else
-            {
-                var i = (int)store;
-                var paths = ddaf.GetPathsDetails();
-                return paths[i - 1];
-            }
 
-        }
-
-        public Dictionary<DateTime, decimal> GetListDays(string path, string item)
+        public Dictionary<DateTime, decimal> GetListDays(string item, int storeName)
         {
+            var list = dm.HistoryData(item, storeName);
             try
             {
                 var dateAndPrice = new Dictionary<DateTime, decimal>();
-                var listFromFile = csvTool.ParsingDetailsFile(path, item);
-                var queryForMatchingItem = from record in listFromFile
-                                           where record.Name == item
-                                           select record;
-
-                foreach (var product in queryForMatchingItem)
+                foreach (var product in list)
                 {
-                    if (!dateAndPrice.Keys.Contains(product.Timestamp))
+                    if (!dateAndPrice.Keys.Contains(product.Item1))
                     {
-                        dateAndPrice.Add(product.Timestamp, product.Price);
+                        dateAndPrice.Add(product.Item1, product.Item2);
                     }
                 }
                 return dateAndPrice;

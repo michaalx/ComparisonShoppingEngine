@@ -1,38 +1,43 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Logic.Metadata;
 using Logic.Models;
+using Logic.Database;
+using System.Diagnostics;
 
 namespace Logic.Functions
 {
-    static class CheapestStore
+    public class CheapestStore : ICheapestStore
     {
-        public static Tuple<Store,decimal> GetCheapestStore(IEnumerable<Product> products)
+       /* public static void HashSetasd()
         {
-            var listOfProducts = Enumerable.Empty<Product>();
-            return listOfProducts.GtCheapestStore();
-        }
-        public static Tuple<Store,decimal> GtCheapestStore(this IEnumerable<Product> products)
+            var x = Enumerable.Empty<Product>();
+            x.GetCheapestStore();
+        } */
+        DataModel dm = new DataModel();
+        public CheapestStore() { }
+
+        public Tuple<Store, decimal> GetCheapestStore<T>(IEnumerable<T> products)
         {
             var lowestSumOfCart = decimal.MaxValue;
             var cheapestStore = (Store)(-1); //undefined store 
             var stores = GetStores();
+            
             foreach (var store in stores)
             {
                 var sumOfCart = 0m;
                 foreach (var product in products)
+                var storeProducts = dm.GetProducts(store);
+                foreach(var product in products)
                 {
-                    ///Add price of product in this store to sum of cart.
-                    ///We have to get list of products of store from database.
-                    ///
-                    ///pseudocode of getting price from database 
-                    ///(should be extracted to Reader.cs file or sth like that):
-                    ///SELECT price FROM PRODUCTS 
-                    ///WHERE product.ToString() = productName AND store.ToString() = storeName
-                    ///
-                    ///sumOfCart+= price.Take(1).ToString();
-                    sumOfCart += 0;
+                    var query = from record in storeProducts
+                                where record.Item1.Trim() == product.ToString()
+                                select record;
+                    foreach (var matching in query)
+                    {
+                        sumOfCart += matching.Item2;
+                    }
                 }
                 ///If none products of store are found in database .
                 ///Sum will be 0 but it is pointless to define this store 
@@ -43,7 +48,7 @@ namespace Logic.Functions
                     lowestSumOfCart = sumOfCart;
                 }
             }
-            return new Tuple<Store,decimal>(cheapestStore, lowestSumOfCart);
+            return Tuple.Create(cheapestStore, lowestSumOfCart);
         }
         public static IEnumerable<Store> GetStores()
         {

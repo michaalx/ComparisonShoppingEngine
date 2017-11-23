@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Logic.DataManagement;
 using Logic.Database;
 using Logic.Functions;
+using Microsoft.EntityFrameworkCore;
 
 namespace API
 {
