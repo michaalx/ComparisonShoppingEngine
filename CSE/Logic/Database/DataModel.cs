@@ -49,29 +49,26 @@ namespace Logic.Database
         //To select from one store
         public List<string> OneStore(int shopId)
         {
-            var reader = new Reader();
-            reader.OpenConnection();
-            var storeProducts = reader.ReadOneStore(shopId);
-            reader.CloseConnection();
+            _reader.OpenConnection();
+            var storeProducts = _reader.ReadOneStore(shopId);
+            _reader.CloseConnection();
             return storeProducts;
         }
 
         //To find cheapest store
         public List<Tuple<string, decimal>> GetProducts(Store store)
         {
-            var reader = new Reader();
-          reader.OpenConnection();
-            var products = reader.ReadForCheapest(store);
-            reader.CloseConnection();
+            _reader.OpenConnection();
+            var products = _reader.ReadForCheapest(store);
+            _reader.CloseConnection();
             return products;
         }
 
         public IEnumerable<string> GetAllStores()
         {
-            var reader = new Reader();
-            reader.OpenConnection();
-            var products = reader.ReadProductData().ToList();
-            reader.CloseConnection();
+            _reader.OpenConnection();
+            var products = _reader.ReadProductData().ToList();
+            _reader.CloseConnection();
             return products;
         }
 		//FOR TESTING

@@ -13,12 +13,26 @@ namespace API.Controllers
     [Route("api/Graph")]
     public class GraphController : Controller
     {
+        private readonly IDataModel _dataModel;
+        private readonly IGraphOperations _graphOperations;
+
+        public GraphController(IGraphOperations graphOperations, IDataModel dataModel)
+        {
+            _dataModel = dataModel;
+            _graphOperations = graphOperations;
+        }
+
         [HttpGet()]
         public IActionResult GetProducts(string item, int storeName)
         {
+            //Dependency Injection (new approach).   
+            _graphOperations.SetItem(item);
+            _graphOperations.SetStoreName(storeName);
+            var listToReturn = _graphOperations.GetList();
+
             //Item is product name, storeName is number of store in enum
-            var go = new GraphOperations(item, storeName);
-            var listToReturn = go.GetList();
+            //var go = new GraphOperations(item, storeName);
+            // var listToReturn = go.GetList();
             return Ok(listToReturn);
             
         }
@@ -26,8 +40,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetOneStore(int id)
         {
-            var dm = new DataModel();
-            var listToReturn = dm.OneStore(id);
+            var listToReturn = _dataModel.OneStore(id);
             return Ok(listToReturn);
         }
     }

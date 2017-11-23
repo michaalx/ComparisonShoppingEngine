@@ -1,22 +1,23 @@
-﻿using Logic.CSVFiles;
-using Logic.Database;
-using Logic.Metadata;
-using Logic.Models;
+﻿using Logic.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic.Graph
 {
-    public class GraphOperations
+    public class GraphOperations : IGraphOperations
     {
+        private readonly IDataModel _dataModel;
+        private string _item;
+        private int _store;
+
+        public GraphOperations(IDataModel dataModel) => _dataModel = dataModel;
+
         List<Dictionary<DateTime, decimal>> listOfLists = new List<Dictionary<DateTime, decimal>>();
         Dictionary<DateTime,decimal> listForDays;
         Dictionary<DateTime, decimal> listForMonths;
         Dictionary<DateTime, decimal> listForYears;
-        DataModel dm = new DataModel();
+
         public GraphOperations(string item, int storeName)
         {
             listForDays = GetListDays(item,storeName);
@@ -27,6 +28,16 @@ namespace Logic.Graph
             listOfLists.Add(listForYears);
         }
 
+        public void SetItem(string item)
+        {
+            _item = item;
+        }
+
+        public void SetStoreName(int storeName)
+        {
+            _store = storeName;
+        }
+
         public List<Dictionary<DateTime,decimal>> GetList()
         {
             return listOfLists;
@@ -34,7 +45,7 @@ namespace Logic.Graph
 
         public Dictionary<DateTime, decimal> GetListDays(string item, int storeName)
         {
-            var list = dm.HistoryData(item, storeName);
+            var list = _dataModel.HistoryData(item, storeName);
             try
             {
                 var dateAndPrice = new Dictionary<DateTime, decimal>();

@@ -70,9 +70,14 @@
     <Compile Include="CSVFiles\CSV.cs" />
     <Compile Include="CSVFiles\DataDistributionAmongFiles.cs" />
     <Compile Include="Database\DataModel.cs" />
+    <Compile Include="Database\IDataModel.cs" />
+    <Compile Include="Database\IReader.cs" />
     <Compile Include="Database\Reader.cs" />
     <Compile Include="DataManagement\Converter.cs" />
+    <Compile Include="DataManagement\IConverter.cs" />
+    <Compile Include="DataManagement\ITextProcessing.cs" />
     <Compile Include="Graph\GraphOperations.cs" />
+    <Compile Include="Graph\IGraphOperations.cs" />
     <Compile Include="ImageAnalysis\ImageProcessing.cs" />
     <Compile Include="ImageAnalysis\OCR\IOCR.cs" />
     <Compile Include="ImageAnalysis\OCR\TesseractOCR.cs" />
