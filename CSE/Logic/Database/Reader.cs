@@ -17,10 +17,9 @@ namespace Logic.Database
 		public void OpenConnection()
 		{
 
-            _con = new System.Data.SqlClient.SqlConnection
+            _con = new SqlConnection
             {
-                //ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString
-                ConnectionString = "Data Source=mssql6.gear.host;Initial Catalog=cse;User ID=cse;Password=Pr9O8fdOvG_!"
+                ConnectionString = _configuration["DatabaseConnectionString"]
             };
 			      _con.Open();
 		}
