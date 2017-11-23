@@ -1,15 +1,12 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 using Logic.Metadata;
-using System.Diagnostics;
 
 namespace Logic.Database
 {
-	public class Reader : IReader
+    public class Reader : IReader
     {
 		private SqlConnection _con;
 		private SqlDataReader _reader;
@@ -41,7 +38,7 @@ namespace Logic.Database
 			_reader = cmd.ExecuteReader();
 			while (_reader.Read())
 			{
-				productList.Add(reader.GetString(0).Trim());
+				productList.Add(_reader.GetString(0).Trim());
 			}
 			return productList;
 		}
@@ -51,10 +48,10 @@ namespace Logic.Database
             List<string> productList = new List<string>();
             SqlCommand cmd = new SqlCommand("SELECT DISTINCT name, shopid FROM product "
                                             + "WHERE shopid = '" + storeId + "';", _con);
-            reader = cmd.ExecuteReader();
-            while (reader.Read())
+            _reader = cmd.ExecuteReader();
+            while (_reader.Read())
             {
-                productList.Add(reader.GetString(0).Trim());
+                productList.Add(_reader.GetString(0).Trim());
             }
             return productList;
         }
@@ -67,11 +64,11 @@ namespace Logic.Database
                                                     "FROM product p, shop s " +
                                                     "WHERE s.name = '" + store.ToString() + 
                                                     "' AND s.id = p.shopid;", _con);
-            reader = cmd.ExecuteReader();
-            while (reader.Read())
+            _reader = cmd.ExecuteReader();
+            while (_reader.Read())
             {
                 //Debug.WriteLine(reader.GetDecimal(1));
-                products.Add(Tuple.Create(reader.GetString(0), reader.GetDecimal(1)));
+                products.Add(Tuple.Create(_reader.GetString(0), _reader.GetDecimal(1)));
             }
             return products;
         }

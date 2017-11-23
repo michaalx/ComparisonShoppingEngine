@@ -13,6 +13,10 @@ namespace API.Controllers
     [Route("api/Graph")]
     public class GraphController : Controller
     {
+        private readonly IDataModel _dataModel;
+
+        public GraphController(IDataModel dataModel) => _dataModel = dataModel;
+
         [HttpGet()]
         public IActionResult GetProducts(string item, int storeName)
         {
@@ -26,8 +30,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetOneStore(int id)
         {
-            var dm = new DataModel();
-            var listToReturn = dm.OneStore(id);
+            var listToReturn = _dataModel.OneStore(id);
             return Ok(listToReturn);
         }
     }

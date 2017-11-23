@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logic.Metadata;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,5 +12,7 @@ namespace Logic.Database
         IEnumerable<string> ReadProductData();
         List<Tuple<DateTime, decimal>> ReadHistoryData(string productName, int storeName);
         List<Tuple<string, short, decimal, string>> ReadPopularity();
+        List<string> ReadOneStore(int storeId);
+        List<Tuple<string, decimal>> ReadForCheapest(Store store);
     }
 }

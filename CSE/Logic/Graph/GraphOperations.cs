@@ -12,11 +12,15 @@ namespace Logic.Graph
 {
     public class GraphOperations
     {
+        private readonly IDataModel _dataModel;
+
+        public GraphOperations(IDataModel dataModel) => _dataModel = dataModel;
+
         List<Dictionary<DateTime, decimal>> listOfLists = new List<Dictionary<DateTime, decimal>>();
         Dictionary<DateTime,decimal> listForDays;
         Dictionary<DateTime, decimal> listForMonths;
         Dictionary<DateTime, decimal> listForYears;
-        DataModel dm = new DataModel();
+
         public GraphOperations(string item, int storeName)
         {
             listForDays = GetListDays(item,storeName);
@@ -34,7 +38,7 @@ namespace Logic.Graph
 
         public Dictionary<DateTime, decimal> GetListDays(string item, int storeName)
         {
-            var list = dm.HistoryData(item, storeName);
+            var list = _dataModel.HistoryData(item, storeName);
             try
             {
                 var dateAndPrice = new Dictionary<DateTime, decimal>();

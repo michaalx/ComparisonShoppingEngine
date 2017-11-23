@@ -10,13 +10,9 @@ namespace Logic.Functions
 {
     public class CheapestStore : ICheapestStore
     {
-       /* public static void HashSetasd()
-        {
-            var x = Enumerable.Empty<Product>();
-            x.GetCheapestStore();
-        } */
-        DataModel dm = new DataModel();
-        public CheapestStore() { }
+        private readonly IDataModel _dataModel;
+
+        public CheapestStore(IDataModel dataModel) => _dataModel = dataModel;
 
         public Tuple<Store, decimal> GetCheapestStore<T>(IEnumerable<T> products)
         {
@@ -27,8 +23,7 @@ namespace Logic.Functions
             foreach (var store in stores)
             {
                 var sumOfCart = 0m;
-                foreach (var product in products)
-                var storeProducts = dm.GetProducts(store);
+                var storeProducts = _dataModel.GetProducts(store);
                 foreach(var product in products)
                 {
                     var query = from record in storeProducts
