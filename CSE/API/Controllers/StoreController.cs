@@ -26,10 +26,10 @@ namespace API.Controllers
         [Route("api/Store/GetCheapest")]
         public IActionResult GetCheapest([FromBody]List<string> products)
         {
-          
             Tuple<Store, decimal> cheapestStore;
             cheapestStore = _cheapestStore.GetCheapestStore(products);
-            return Ok(cheapestStore);
+            Store cheapest = cheapestStore.Item1;
+            return Ok(cheapest);
         }
 
         [HttpGet()]
