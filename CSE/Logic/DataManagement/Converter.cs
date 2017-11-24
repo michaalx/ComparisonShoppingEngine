@@ -13,6 +13,9 @@ namespace Logic.DataManagement
 {
 	public class Converter : IConverter
     {
+    		private readonly ITextProcessing _textProcessing;
+ -        	private readonly IUpdater _updater;
+ 		public Converter(ITextProcessing textProcessing, IUpdater updater)
 		public delegate void ListInitializedEventHandler(object source, EventArgs args);
 		public event ListInitializedEventHandler ListInitialized;
 		private readonly ITextProcessing _textProcessing;
