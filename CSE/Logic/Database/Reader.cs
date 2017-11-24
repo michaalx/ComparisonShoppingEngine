@@ -43,7 +43,6 @@ namespace Logic.Database
 			{
 				productList.Add(_reader.GetString(0).Trim());
 			}
-			Console.WriteLine("ReadProductData");
 			return productList;
 		}
 
