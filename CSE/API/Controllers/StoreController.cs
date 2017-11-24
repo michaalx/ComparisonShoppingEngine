@@ -28,7 +28,7 @@ namespace API.Controllers
         {
             Tuple<Store, decimal> cheapestStore;
             cheapestStore = _cheapestStore.GetCheapestStore(products);
-            Store cheapest = cheapestStore.Item1;
+            string cheapest = cheapestStore.Item1.ToString();
             return Ok(cheapest);
         }
 
