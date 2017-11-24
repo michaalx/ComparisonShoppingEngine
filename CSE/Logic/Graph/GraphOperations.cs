@@ -3,30 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+delegate Dictionary<DateTime, decimal> AvgCounter(Dictionary<DateTime, decimal> days);
+
 namespace Logic.Graph
 {
     public class GraphOperations : IGraphOperations
     {
+
         private readonly IDataModel _dataModel;
         private string _item;
         private int _store;
 
+        
         public GraphOperations(IDataModel dataModel) => _dataModel = dataModel;
 
         List<Dictionary<DateTime, decimal>> listOfLists = new List<Dictionary<DateTime, decimal>>();
         Dictionary<DateTime,decimal> listForDays;
         Dictionary<DateTime, decimal> listForMonths;
         Dictionary<DateTime, decimal> listForYears;
-
-        public GraphOperations(string item, int storeName)
-        {
-            listForDays = GetListDays(item,storeName);
-            listForMonths = GetListMonths(listForDays);
-            listForYears = GetListYears(listForDays);
-            listOfLists.Add(listForDays);
-            listOfLists.Add(listForMonths);
-            listOfLists.Add(listForYears);
-        }
 
         public void SetItem(string item)
         {
@@ -40,6 +34,14 @@ namespace Logic.Graph
 
         public List<Dictionary<DateTime,decimal>> GetList()
         {
+            var months = new AvgCounter(GetListMonths); 
+            var years = new AvgCounter(GetListYears);
+            listForDays = GetListDays(_item, _store);
+            listForMonths = months(listForDays);
+            listForYears = years(listForDays);
+            listOfLists.Add(listForDays);
+            listOfLists.Add(listForMonths);
+            listOfLists.Add(listForYears);
             return listOfLists;
         }
 

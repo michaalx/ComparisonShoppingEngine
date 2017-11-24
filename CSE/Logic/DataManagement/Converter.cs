@@ -6,6 +6,8 @@ using System.Linq;
 using System.IO;
 using System;
 using System.Threading;
+using Logic.Database;
+using System.Diagnostics;
 
 namespace Logic.DataManagement
 {
@@ -19,6 +21,7 @@ namespace Logic.DataManagement
         public Converter(ITextProcessing textProcessing)
         {
             _textProcessing = textProcessing;
+            _updater = updater;
         }
 
 
@@ -50,11 +53,10 @@ namespace Logic.DataManagement
         /// <param name="textProcessing"></param>
         /// <param name="image"></param>
         /// <returns>Receipt instance.</returns>
-		/// 
 
 
         public Receipt ConvertImageToReceipt(string imageArgs)
-        {
+      {
 			var imageProcessing = new ImageProcessing();
 			// var image = (Bitmap)Image.FromStream(new MemoryStream(Convert.FromBase64String(imageArgs)));
 			var image = new Bitmap("filename"); //TBD; depends on deserialization.
@@ -81,5 +83,13 @@ namespace Logic.DataManagement
 		{
 			ListInitialized?.Invoke(this, EventArgs.Empty);
 		}
+
+        public int SaveReceipt(byte[] image)
+        {
+            var receipt = ConvertImageToReceipt(image);
+            var response = _updater.UpdatePopularityRates(receipt);
+            _updater.UpdatePrices(receipt);
+            return response;
+        }
     }
 }
