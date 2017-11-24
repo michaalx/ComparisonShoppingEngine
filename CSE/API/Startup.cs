@@ -32,6 +32,7 @@ namespace API
             services.AddTransient<IPopularProducts, PopularProducts>();
             services.AddTransient<IDataModel, DataModel>();
             services.AddTransient<IReader, Reader>();
+            services.AddTransient<IUpdater, Updater>();
             services.AddTransient<ITextProcessing, TextProcessing>();
             services.AddTransient<IConverter, Converter>();
             services.AddTransient<ICheapestStore, CheapestStore>();

@@ -5,15 +5,19 @@ using System.Drawing;
 using System.Linq;
 using System.IO;
 using System;
+using Logic.Database;
+using System.Diagnostics;
 
 namespace Logic.DataManagement
 {
     public class Converter : IConverter
     {
         private readonly ITextProcessing _textProcessing;
-        public Converter(ITextProcessing textProcessing)
+        private readonly IUpdater _updater;
+        public Converter(ITextProcessing textProcessing, IUpdater updater)
         {
             _textProcessing = textProcessing;
+            _updater = updater;
         }
         public IEnumerable<Product> GetProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
         {
@@ -42,7 +46,7 @@ namespace Logic.DataManagement
         /// <param name="textProcessing"></param>
         /// <param name="image"></param>
         /// <returns>Receipt instance.</returns>
-        public Receipt ConvertImageToReceipt(string imageArgs)
+        public Receipt ConvertImageToReceipt(byte[] imageArgs)
         {
             var imageProcessing = new ImageProcessing();
             // var image = (Bitmap)Image.FromStream(new MemoryStream(Convert.FromBase64String(imageArgs)));
@@ -55,6 +59,14 @@ namespace Logic.DataManagement
 			var listOfProductDetails = _textProcessing.GetListOfNamesAndPrices(goodRecognizedLines);
             var listOfProducts = GetProducts(listOfProductDetails);
             return new Receipt(listOfProducts, storeName, timestamp);
+        }
+
+        public int SaveReceipt(byte[] image)
+        {
+            var receipt = ConvertImageToReceipt(image);
+            var response = _updater.UpdatePopularityRates(receipt);
+            _updater.UpdatePrices(receipt);
+            return response;
         }
     }
 }

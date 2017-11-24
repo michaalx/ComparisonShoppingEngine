@@ -72,7 +72,9 @@
     <Compile Include="Database\DataModel.cs" />
     <Compile Include="Database\IDataModel.cs" />
     <Compile Include="Database\IReader.cs" />
+    <Compile Include="Database\IUpdater.cs" />
     <Compile Include="Database\Reader.cs" />
+    <Compile Include="Database\Updater.cs" />
     <Compile Include="DataManagement\Converter.cs" />
     <Compile Include="DataManagement\IConverter.cs" />
     <Compile Include="DataManagement\ITextProcessing.cs" />
