@@ -65,6 +65,7 @@ namespace Logic.DataManagement
         {
             var receipt = ConvertImageToReceipt(image);
             var response = _updater.UpdatePopularityRates(receipt);
+            _updater.UpdatePrices(receipt);
             return response;
         }
     }
