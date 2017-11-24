@@ -33,7 +33,7 @@ namespace Logic.Map
                 GeoCodeInfo(address);
             }
 
-            catch (MissingFieldException e)
+            catch (MissingFieldException)
             {
                 throw new MissingFieldException("Wrong Address.");
             }

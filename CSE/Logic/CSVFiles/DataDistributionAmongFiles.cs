@@ -35,7 +35,7 @@ namespace Logic.CSVFiles
                 case Store.Maxima:
                     _csvTool.WriteToFileProducts(products, _pathToMaxima);
                     return;
-                case Store.IKI:
+                case Store.Iki:
                     _csvTool.WriteToFileProducts(products, _pathToIKI);
                     return;
                 case Store.Rimi:

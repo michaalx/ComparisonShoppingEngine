@@ -5,16 +5,24 @@ using System.Drawing;
 using System.Linq;
 using System.IO;
 using System;
+using System.Threading;
 
 namespace Logic.DataManagement
 {
-    public class Converter : IConverter
+	public class Converter : IConverter
     {
-        private readonly ITextProcessing _textProcessing;
+		public delegate void ListInitializedEventHandler(object source, EventArgs args);
+		public event ListInitializedEventHandler ListInitialized;
+		private readonly ITextProcessing _textProcessing;
+
+
         public Converter(ITextProcessing textProcessing)
         {
             _textProcessing = textProcessing;
         }
+
+
+
         public IEnumerable<Product> GetProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
         {
             var dictionary = new Dictionary<string, Product>();
@@ -42,19 +50,36 @@ namespace Logic.DataManagement
         /// <param name="textProcessing"></param>
         /// <param name="image"></param>
         /// <returns>Receipt instance.</returns>
+		/// 
+
+
         public Receipt ConvertImageToReceipt(string imageArgs)
         {
-            var imageProcessing = new ImageProcessing();
-            // var image = (Bitmap)Image.FromStream(new MemoryStream(Convert.FromBase64String(imageArgs)));
-            var image = new Bitmap("filename"); //TBD; depends on deserialization.
-            var textFromImage =  imageProcessing.GetTextFromImage(image);
-            var recognizedLines = _textProcessing.SplitString(textFromImage.Result);
-            var storeName = _textProcessing.RecognizeStore(recognizedLines);
-            var timestamp = _textProcessing.RecognizeDate(recognizedLines);
+			var imageProcessing = new ImageProcessing();
+			// var image = (Bitmap)Image.FromStream(new MemoryStream(Convert.FromBase64String(imageArgs)));
+			var image = new Bitmap("filename"); //TBD; depends on deserialization.
+			var textFromImage = imageProcessing.GetTextFromImage(image);
+			var recognizedLines = _textProcessing.SplitString(textFromImage.Result);
+			var storeName = _textProcessing.RecognizeStore(recognizedLines);
+			var timestamp = _textProcessing.RecognizeDate(recognizedLines);
 			var goodRecognizedLines = _textProcessing.CleanIrrelevantLines(recognizedLines);
 			var listOfProductDetails = _textProcessing.GetListOfNamesAndPrices(goodRecognizedLines);
-            var listOfProducts = GetProducts(listOfProductDetails);
-            return new Receipt(listOfProducts, storeName, timestamp);
+			var listOfProducts = GetProducts(listOfProductDetails);
+
+			TaskInit ti = new TaskInit();
+			ListInitialized += ti.OnListInitialized;
+
+			var r = new Receipt(listOfProducts, storeName, timestamp);
+			ti.Receipt = r;
+
+			OnListInitialized();
+
+			return r;
         }
+
+		protected virtual void OnListInitialized( )
+		{
+			ListInitialized?.Invoke(this, EventArgs.Empty);
+		}
     }
 }

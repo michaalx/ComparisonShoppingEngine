@@ -19,7 +19,6 @@ namespace Logic.Database
 		{
 			get
 			{
-                //Lazy
 				if (_productData == null)
 				{
 					_reader.OpenConnection();
@@ -29,13 +28,6 @@ namespace Logic.Database
 				return _productData;
 			}
 		}
-		//FOR TESTING
-
-		//var dm = new DataModel();
-		//var product = dm.ProductData;
-
-		//foreach (var e in product)
-		//	Console.WriteLine(e.ToString());
 
 		public List<Tuple<DateTime, decimal>> HistoryData(string productName, int storeName)
 		{
@@ -71,14 +63,7 @@ namespace Logic.Database
             _reader.CloseConnection();
             return products;
         }
-		//FOR TESTING
 
-        //int store = (int)Store.IKI;
-        //var dm = new DataModel();
-        //var history = dm.HistoryData("Pienas", store);
-
-        //foreach (Tuple<DateTime, decimal> e in history)
-        //	Console.WriteLine(e.Item1.ToString() + " " + e.Item2.ToString());
         public IEnumerable<Tuple<string, short, decimal, string>> PopularProducts()
         {
             _reader.OpenConnection();
