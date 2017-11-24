@@ -23,7 +23,8 @@ namespace API.Controllers
             _dataModel = dataModel;
         }
 
-        public IActionResult GetCheapest(IEnumerable<string> products)
+        [Route("api/Store/GetCheapest")]
+        public IActionResult GetCheapest([FromBody]List<string> products)
         {
           
             Tuple<Store, decimal> cheapestStore;
