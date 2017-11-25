@@ -1,17 +1,24 @@
 ﻿using Plugin.Media;
+using RestSharp.Portable;
+using RestSharp.Portable.HttpClient;
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Xamarin
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class InsertReceiptPage : ContentPage
-	{
-		public InsertReceiptPage ()
-		{
-			InitializeComponent ();
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class InsertReceiptPage : ContentPage
+    {
+        string strFile;
+        const string path = "http://172.26.193.238:5000/api/"; //use your IP - command, ipconfig
+
+        public InsertReceiptPage()
+        {
+            InitializeComponent();
             takePhoto.Clicked += async (sender, args) =>
             {
                 try
@@ -41,18 +48,48 @@ namespace Xamarin
 
                     await DisplayAlert("File Location", file.Path, "OK");
 
+                    await PreparePhoto(file);
+                    //file.Dispose();
+
                     //image.Source = ImageSource.FromStream(() =>
                     //{
                     //    var stream = file.GetStream();
                     //    file.Dispose();
                     //    return stream;
                     //});
+                    //using (var image.Source = ImageSource.FromFile(file.Path))
+                    //{
+                    //    using (MemoryStream m = new MemoryStream())
+                    //    {
+                    //        image.Save(m, image.RawFormat);
+                    //        byte[] imageBytes = m.ToArray();
+                    //        // Convert byte[] to Base64 String
+                    //        string base64String = Convert.ToBase64String(imageBytes);
+                    //        return base64String;
+                    //    }
+                    //}
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("Error  == "+ e.Message);
+                    Debug.WriteLine("Error  == " + e.Message);
                 }
             };
+
+            async Task PreparePhoto(Plugin.Media.Abstractions.MediaFile file)
+            {
+                try
+                {
+                    var stream = file.GetStream();
+                    var bytes = new byte[stream.Length];
+                    await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                    strFile = Convert.ToBase64String(bytes);
+                    await PutPhoto();
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Error  == " + e.Message);
+                }
+            }
 
             pickPhoto.Clicked += async (sender, args) =>
             {
@@ -70,6 +107,8 @@ namespace Xamarin
                 if (file == null)
                     return;
 
+                await PreparePhoto(file);
+
                 //image.Source = ImageSource.FromStream(() =>
                 //{
                 //    var stream = file.GetStream();
@@ -78,7 +117,29 @@ namespace Xamarin
                 //});
             };
         }
-        
+
+        public async Task PutPhoto()
+        {
+            using (var client = new RestClient(new Uri(path)))
+            {
+                var request = new RestRequest("Receipt/" + strFile, Method.PUT);
+                await client.Execute<string>(request);
+            }
+        }
+        //public string ImageToString(string path)
+
+        //{
+
+        //    if (path == null)
+        //        throw new ArgumentNullException("path");
+
+        //    //Image im = Image.FromFile(path);
+        //    //MemoryStream ms = new MemoryStream();
+        //    //im.Save(ms, im.RawFormat);
+        //    //byte[] array = ms.ToArray();
+        //    //return Convert.ToBase64String(array);
+        //}
+
         async void MainToolbar_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MainPage());

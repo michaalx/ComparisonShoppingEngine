@@ -27,30 +27,53 @@ namespace Xamarin
             Norfa = 4
         }
 
-        string path = "http://192.168.1.55:5000/api/graph/?"; //use your IP - command, ipconfig
-        string item = "Pienas";
-        Store storeName = Store.IKI;
+        const string path = "http://192.168.0.106:5000/api/"; //use your IP - command, ipconfig
+        string item;
+        string storeName;
         LineSeries line;
+        List<String> productList;
         Dictionary<DateTime, decimal> listForDays;
         List<Dictionary<DateTime, decimal>> listOfLists = new List<Dictionary<DateTime, decimal>>();
 
         public GraphPage()
         {
             InitializeComponent();
-            AddLine();
+            button.IsVisible = false;
+            button.IsEnabled = false;
+            List<Store> stores = Enum.GetValues(typeof(Store)).Cast<Store>().ToList();
+            foreach(var store in stores)
+            {
+                picker.Items.Add(store.ToString());
+            }
+
+            picker.SelectedIndexChanged += async (sender, args) =>
+            {
+                storeName = picker.SelectedItem.ToString();
+                //storeName = (Store)Enum.Parse(typeof(Store), selected);
+                await GetProductsData();
+                list.ItemsSource = productList;
+                list.ItemSelected += async (sender2, args2) =>
+                {
+                    item = list.SelectedItem.ToString();
+                    //picker.IsVisible = false;
+                    //list.IsVisible = false;
+                    button.IsVisible = true;
+                    button.IsEnabled = true;
+                };
+            };
         }
         
-        public async Task GetAPIData()
+        public async Task GetProductsData()
         {
             try
             {
-                path += "item=" + item + "&storeName=" + ((int)storeName).ToString();
-                var pathh = path;
-                using (var client = new RestClient(new Uri(path)))
+                string path1 = path + $"graph/{storeName.ToString()}";
+                
+                using (var client = new RestClient(new Uri(path1)))
                 {
                     var request = new RestRequest(Method.GET);
-                    var result = await client.Execute<List<Dictionary<DateTime, decimal>>>(request);
-                    listOfLists = result.Data;
+                    var result = await client.Execute<IEnumerable<String>>(request);
+                    productList = result.Data.ToList();
                 }
             }
             catch (Exception e)
@@ -59,51 +82,14 @@ namespace Xamarin
             }
         }
 
-        public async Task GetList()
+        async void mainToolbar_Clicked(object sender, EventArgs e)
         {
-            await GetAPIData();
-            listForDays = listOfLists[0];
-            var ordered = from pair in listForDays
-                          orderby pair.Key ascending
-                          select pair;
-            listForDays = ordered.ToDictionary(pair => pair.Key, pair => pair.Value); ;
+            await Navigation.PushAsync(new MainPage());
         }
 
-        public async void AddLine()
+        async void button_Clicked(object sender, EventArgs e)
         {
-            await GetList();
-            var model = new PlotModel { Title = $"Product price change in {storeName}" };
-            Content = new PlotView
-            {
-                Model = model,
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-            };
-            line = new LineSeries();
-
-            DateTimeAxis xAxis = new DateTimeAxis
-            {
-                Position = AxisPosition.Bottom,
-                StringFormat = "yyyy/MM/dd",
-
-                Title = "Date",
-                MinorIntervalType = DateTimeIntervalType.Days,
-                IntervalType = DateTimeIntervalType.Days,
-                MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.None,
-            };
-            model.Axes.Add(xAxis);
-            model.Axes.Add(new LinearAxis { Title = "Price" });
-            foreach (var days in listForDays)
-            {
-                line.Points.Add(new DataPoint(DateTimeAxis.ToDouble(days.Key), Convert.ToDouble(days.Value)));
-            }
-            model.Series.Add(line);
-        }
-
-        async void SignUpToolbar_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SignUpPage());
+            await Navigation.PushAsync(new StatisticsPage(item, storeName));
         }
     }
 }

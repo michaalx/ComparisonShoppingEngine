@@ -9,7 +9,11 @@
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="ListView">
-
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
             <Button x:Name="addToCartButton" Text="Add to cart" Clicked="addToCartButton_Clicked"/>
         </StackLayout>
