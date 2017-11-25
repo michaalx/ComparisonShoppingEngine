@@ -8,9 +8,8 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="ListView">
-                
-            </ListView>
+            <ListView x:Name="ListView"  ItemSelected="ListViewSelected" />
+            <Button x:Name="AddItemButton" Text="Add Item" Clicked="AddItemButton_Clicked"/>
             <Button x:Name="RemoveItemButton" Text="Remove Item" Clicked="RemoveItemButton_Clicked"/>
             <Button x:Name="CheapestStoreButton" Text="Find cheapest store" Clicked="CheapestStoreButton_Clicked"/>
         </StackLayout>

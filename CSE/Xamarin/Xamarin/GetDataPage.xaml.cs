@@ -19,12 +19,12 @@ namespace Xamarin
 
         async void mainToolbar_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CartPage());
+            await Navigation.PushAsync(new MainPage());
         }
 
         async private void compareProductButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CompareProductPricesPage());
+            await Navigation.PushAsync(new CartPage());
         }
 
         async private void popularProductsButton_Clicked(object sender, EventArgs e)
