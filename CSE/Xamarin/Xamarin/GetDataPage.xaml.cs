@@ -34,7 +34,7 @@ namespace Xamarin
 
         async private void statisticsButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new GraphPage());
+            await Navigation.PushAsync(new StatisticsPage());
         }
     }
 }

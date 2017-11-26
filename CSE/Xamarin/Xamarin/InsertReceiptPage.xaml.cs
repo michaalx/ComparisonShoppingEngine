@@ -13,7 +13,8 @@ namespace Xamarin
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class InsertReceiptPage : ContentPage
     {
-        string strFile;
+        string strFile = "";
+        
         const string path = "http://172.26.193.238:5000/api/"; //use your IP - command, ipconfig
 
         public InsertReceiptPage()
@@ -48,26 +49,8 @@ namespace Xamarin
 
                     await DisplayAlert("File Location", file.Path, "OK");
 
-                    await PreparePhoto(file);
-                    //file.Dispose();
-
-                    //image.Source = ImageSource.FromStream(() =>
-                    //{
-                    //    var stream = file.GetStream();
-                    //    file.Dispose();
-                    //    return stream;
-                    //});
-                    //using (var image.Source = ImageSource.FromFile(file.Path))
-                    //{
-                    //    using (MemoryStream m = new MemoryStream())
-                    //    {
-                    //        image.Save(m, image.RawFormat);
-                    //        byte[] imageBytes = m.ToArray();
-                    //        // Convert byte[] to Base64 String
-                    //        string base64String = Convert.ToBase64String(imageBytes);
-                    //        return base64String;
-                    //    }
-                    //}
+                    //await PreparePhoto(file);
+                    //await PutPhoto();
                 }
                 catch (Exception e)
                 {
@@ -102,19 +85,11 @@ namespace Xamarin
                 {
                     PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
                 });
-
-
+                
                 if (file == null)
                     return;
 
                 await PreparePhoto(file);
-
-                //image.Source = ImageSource.FromStream(() =>
-                //{
-                //    var stream = file.GetStream();
-                //    file.Dispose();
-                //    return stream;
-                //});
             };
         }
 
@@ -122,27 +97,54 @@ namespace Xamarin
         {
             using (var client = new RestClient(new Uri(path)))
             {
-                var request = new RestRequest("Receipt/" + strFile, Method.PUT);
+                var request = new RestRequest("Receipt/" + strFile, Method.GET);
                 await client.Execute<string>(request);
             }
         }
-        //public string ImageToString(string path)
-
-        //{
-
-        //    if (path == null)
-        //        throw new ArgumentNullException("path");
-
-        //    //Image im = Image.FromFile(path);
-        //    //MemoryStream ms = new MemoryStream();
-        //    //im.Save(ms, im.RawFormat);
-        //    //byte[] array = ms.ToArray();
-        //    //return Convert.ToBase64String(array);
-        //}
-
+        
         async void MainToolbar_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MainPage());
         }
     }
 }
+//file.Dispose();
+
+//image.Source = ImageSource.FromStream(() =>
+//{
+//    var stream = file.GetStream();
+//    file.Dispose();
+//    return stream;
+//});
+//using (var image.Source = ImageSource.FromFile(file.Path))
+//{
+//    using (MemoryStream m = new MemoryStream())
+//    {
+//        image.Save(m, image.RawFormat);
+//        byte[] imageBytes = m.ToArray();
+//        // Convert byte[] to Base64 String
+//        string base64String = Convert.ToBase64String(imageBytes);
+//        return base64String;
+//    }
+//}
+
+//image.Source = ImageSource.FromStream(() =>
+//{
+//    var stream = file.GetStream();
+//    file.Dispose();
+//    return stream;
+//});
+
+//public string ImageToString(string path)
+
+//{
+
+//    if (path == null)
+//        throw new ArgumentNullException("path");
+
+//    //Image im = Image.FromFile(path);
+//    //MemoryStream ms = new MemoryStream();
+//    //im.Save(ms, im.RawFormat);
+//    //byte[] array = ms.ToArray();
+//    //return Convert.ToBase64String(array);
+//}
