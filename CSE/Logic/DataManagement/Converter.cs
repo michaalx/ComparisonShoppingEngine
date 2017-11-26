@@ -60,7 +60,9 @@ namespace Logic.DataManagement
 
         public Receipt ConvertImageToReceipt(string imageArgs)
       {
+      			var ti = new TaskInit();
 			var imageProcessing = new ImageProcessing();
+			
 			// var image = (Bitmap)Image.FromStream(new MemoryStream(Convert.FromBase64String(imageArgs)));
 			var image = new Bitmap("filename"); //TBD; depends on deserialization.
 			var textFromImage = imageProcessing.GetTextFromImage(image);
@@ -71,12 +73,9 @@ namespace Logic.DataManagement
 			var listOfProductDetails = _textProcessing.GetListOfNamesAndPrices(goodRecognizedLines);
 			var listOfProducts = GetProducts(listOfProductDetails);
 
-			TaskInit ti = new TaskInit();
 			ListInitialized += ti.OnListInitialized;
-
 			var r = new Receipt(listOfProducts, storeName, timestamp);
 			ti.Receipt = r;
-
 			OnListInitialized();
 
 			return r;
