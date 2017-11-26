@@ -44,8 +44,8 @@
     <Compile Include="GetDataPage.xaml.cs">
       <DependentUpon>GetDataPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GraphPage.xaml.cs">
-      <DependentUpon>GraphPage.xaml</DependentUpon>
+    <Compile Include="StatisticsPage.xaml.cs">
+      <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="InsertReceiptPage.xaml.cs">
       <DependentUpon>InsertReceiptPage.xaml</DependentUpon>
@@ -68,8 +68,11 @@
     <Compile Include="SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatisticsPage.xaml.cs">
-      <DependentUpon>StatisticsPage.xaml</DependentUpon>
+    <Compile Include="GraphPage.xaml.cs">
+      <DependentUpon>GraphPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCartPage.xaml.cs">
+      <DependentUpon>ViewCartPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -185,13 +188,19 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="StatisticsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="GraphPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="StatisticsPage.xaml">
+    <EmbeddedResource Include="ViewCartPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

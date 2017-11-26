@@ -19,13 +19,18 @@ namespace Xamarin
         List<string> list;
         List<string> selected = new List<string>();
         string item;
-        //IEnumerable<string> selectedEn;
 
         public CartPage()
         {
             InitializeComponent();
             GetData();
+        }
 
+        public CartPage(List<string> _selected)
+        {
+            InitializeComponent();
+            selected = _selected;
+            GetData();
         }
 
         public async Task GetAPIData()
@@ -45,41 +50,16 @@ namespace Xamarin
                 Debug.WriteLine("Error  == " + e.Message);
             }
         }
-
-        async Task GetCheapest()
-        {
-            string path2 = path;
-            using (var client = new RestClient(new Uri(path2)))
-            {
-                var request = new RestRequest("CheapestStore", Method.GET);
-                request.AddParameter("products", selected);
-                //request.Parameters.Add("products", selected);
-                var result = await client.Execute<IEnumerable<String>>(request);
-                list = result.Data.ToList();
-            }
-        }
-
+           
         public async void GetData()
         {
             await GetAPIData();
             ListView.ItemsSource = list;
         }
-
-        //public IEnumerable<string> GetEn()
-        //{
-        //    return selected;
-        //}
-
+                
         async void MainToolbar_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MainPage());
-        }
-
-        async void CheapestStoreButton_Clicked(object sender, EventArgs e)
-        {
-            //selectedEn = GetEn();
-            await GetCheapest();
-            //await Navigation.PushAsync(new MapPage());
         }
 
         private void RemoveItemButton_Clicked(object sender, EventArgs e)
@@ -96,5 +76,14 @@ namespace Xamarin
         {
             item = ListView.SelectedItem.ToString();
         }
+
+        async void ViewCartButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ViewCartPage(selected));
+        }
     }
 }
+//public IEnumerable<string> GetEn()
+//{
+//    return selected;
+//}
