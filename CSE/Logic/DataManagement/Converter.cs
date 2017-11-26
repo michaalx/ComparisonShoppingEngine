@@ -74,11 +74,10 @@ namespace Logic.DataManagement
 			var listOfProducts = GetProducts(listOfProductDetails);
 
 			ListInitialized += ti.OnListInitialized;
-			var r = new Receipt(listOfProducts, storeName, timestamp);
-			ti.Receipt = r;
+			ti.Receipt = new Receipt(listOfProducts, storeName, timestamp);
 			OnListInitialized();
 
-			return r;
+			return ti.Receipt;
         }
 
 		protected virtual void OnListInitialized( )
