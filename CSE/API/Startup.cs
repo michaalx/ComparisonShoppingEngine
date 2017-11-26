@@ -7,6 +7,7 @@ using Logic.DataManagement;
 using Logic.Database;
 using Logic.Functions;
 using Logic.Graph;
+using DataAccess.Repositories;
 
 namespace API
 {
@@ -29,6 +30,7 @@ namespace API
             // Add framework services.
             services.AddMvc();
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddTransient<IProductRepository,ProductRepository>();
             services.AddTransient<IPopularProducts, PopularProducts>();
             services.AddTransient<IDataModel, DataModel>();
             services.AddTransient<IReader, Reader>();
