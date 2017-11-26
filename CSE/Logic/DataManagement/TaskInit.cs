@@ -12,22 +12,23 @@ namespace Logic.DataManagement
 {
 	public class TaskInit
 	{
+		private readonly IReader _reader;
+		private readonly IConfiguration _configuration;
 		public Receipt receipt { get; set; }
 
+		
 		public void OnListInitialized(object source, EventArgs e)
 		{
 			ThreadStart update = new ThreadStart(UpdateThread);
 			Thread thread = new Thread(update);
 		}
 
+		
 		public void UpdateThread()
 		{
-
-			Store store = Store.Iki;
-			DataModel dm = new DataModel();
-			dm.GetProducts(store);
-			var updater = new Updater();
-			updater.UpdatePopularityRates(receipt);
+			DataModel dm = new DataModel(_reader);
+			var updater = new Updater(_configuration);
+			updater.UpdatePopularityRates(Receipt);	
 		}
 	}
 }
