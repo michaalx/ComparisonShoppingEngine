@@ -12,8 +12,7 @@ namespace Logic.DataManagement
 {
 	public class TaskInit
 	{
-		public Receipt receipt;
-		public Receipt Receipt { get; set; }
+		public Receipt receipt { get; set; }
 
 		public void OnListInitialized(object source, EventArgs e)
 		{
