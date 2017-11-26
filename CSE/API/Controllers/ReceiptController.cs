@@ -17,10 +17,10 @@ namespace API.Controllers
         /// Should be changed to HttpPost.
         /// </summary>
         /// <param name="image"></param>
-        [HttpGet]
+        [HttpPost]
         public void Post(byte[] image)
         {
-            _converter.SaveReceipt(image);
+            _converter.ConvertImageToReceipt(image);
             return;
         }
     }

@@ -40,18 +40,23 @@ namespace Logic.DataManagement
         /// Main method of converting image to 
         /// Receipt instance that holds:
         ///     list of products;
-        ///     timestamp;
+        ///     timestamp;  
         ///     store name.
         /// </summary>
         /// <param name="textProcessing"></param>
         /// <param name="image"></param>
         /// <returns>Receipt instance.</returns>
-        public Receipt ConvertImageToReceipt(byte[] imageArgs)
+        public Receipt ConvertImageToReceipt(byte[] image)
         {
             var imageProcessing = new ImageProcessing();
             // var image = (Bitmap)Image.FromStream(new MemoryStream(Convert.FromBase64String(imageArgs)));
-            var image = new Bitmap("filename"); //TBD; depends on deserialization.
-            var textFromImage =  imageProcessing.GetTextFromImage(image);
+            //var image = new Bitmap("filename"); //TBD; depends on deserialization.
+            Bitmap x;
+            using(var ms = new MemoryStream(image))
+            {
+                x = new Bitmap(ms);
+            }
+            var textFromImage =  imageProcessing.GetTextFromImage(x);
             var recognizedLines = _textProcessing.SplitString(textFromImage.Result);
             var storeName = _textProcessing.RecognizeStore(recognizedLines);
             var timestamp = _textProcessing.RecognizeDate(recognizedLines);
