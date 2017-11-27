@@ -1,12 +1,7 @@
-﻿using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
-using OxyPlot.Xamarin.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using RestSharp.Portable;
@@ -32,6 +27,7 @@ namespace Xamarin
         Store storeName = Store.IKI;
         LineSeries line;
         Dictionary<DateTime, decimal> listForDays;
+
         List<Dictionary<DateTime, decimal>> listOfLists = new List<Dictionary<DateTime, decimal>>();
 
         public GraphPage(string it, string store)

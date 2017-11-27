@@ -13,8 +13,8 @@ namespace Xamarin
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class InsertReceiptPage : ContentPage
     {
-        string strFile = "";
-        
+
+        string strFile = ""; 
         const string path = "http://172.26.193.238:5000/api/"; //use your IP - command, ipconfig
 
         public InsertReceiptPage()

@@ -14,7 +14,7 @@ namespace Xamarin
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PopularProductsPage : ContentPage
 	{
-        const string path = "http://192.168.0.106:5000/api/"; //use your IP - command, ipconfig
+        const string path = "http://192.168.0.104:5000/api/"; //use your IP - command, ipconfig
         List<Tuple<string, string, decimal>> productList;
 
         public PopularProductsPage ()

@@ -27,6 +27,7 @@ namespace Xamarin
             Norfa = 4
         }
 
+
         const string path = "http://192.168.0.106:5000/api/"; //use your IP - command, ipconfig
         string item;
         string storeName;
