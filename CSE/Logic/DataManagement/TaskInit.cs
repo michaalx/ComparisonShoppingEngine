@@ -19,8 +19,9 @@ namespace Logic.DataManagement
 		
 		public void OnListInitialized(object source, EventArgs e)
 		{
-			ThreadStart update = new ThreadStart(UpdateThread);
-			Thread thread = new Thread(update);
+			Thread thread = new Thread(new ThreadStart(UpdateThread));
+			thread.IsBackground = true;
+			thread.Start();
 		}
 
 		
