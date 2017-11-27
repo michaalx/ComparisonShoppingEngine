@@ -7,25 +7,29 @@ using Logic.Database;
 using Logic.Metadata;
 using System.Threading;
 using Logic.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace Logic.DataManagement
 {
 	public class TaskInit
 	{
-        private readonly IReader _reader;
-        //private readonly IConfiguration _configuration;
-        public Receipt Receipt { get; set; }
+		private readonly IUpdater _updater;
+		public Receipt Receipt { get; set; }
 
-        public void OnListInitialized(object source, EventArgs e)
-        {
-            Thread thread = new Thread(new ThreadStart(() =>
-               {
-                   DataModel dm = new DataModel(_reader);
-                   //var updater = new Updater(_configuration);
-                   //updater.UpdatePopularityRates(Receipt);
-               }));
-            thread.IsBackground = true;
-            thread.Start();
-        }
-    }
+
+		public TaskInit(IUpdater updater) => _updater = updater;
+
+
+		public void OnListInitialized(object source, EventArgs e)
+		{
+			Thread thread = new Thread(new ThreadStart(() =>
+			{
+				_updater.UpdatePopularityRates(Receipt);
+			}))
+			{
+				IsBackground = true
+			};
+			thread.Start();
+		}
+	}
 }
