@@ -15,19 +15,17 @@ namespace Logic.DataManagement
     {
     		private readonly ITextProcessing _textProcessing;
  -        	private readonly IUpdater _updater;
- 		public Converter(ITextProcessing textProcessing, IUpdater updater)
+ 		
 		public delegate void ListInitializedEventHandler(object source, EventArgs args);
 		public event ListInitializedEventHandler ListInitialized;
 		private readonly ITextProcessing _textProcessing;
 
 
-        public Converter(ITextProcessing textProcessing)
-        {
-            _textProcessing = textProcessing;
-            _updater = updater;
-        }
-
-
+	public Converter(ITextProcessing textProcessing, IUpdater updater)
+	{
+		_textProcessing = textProcessing;
+        	_updater = updater;
+	}
 
         public IEnumerable<Product> GetProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
         {
