@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSE.BackEnd;
+using Logic.DataManagement;
 
 namespace CSE.FrontEnd
 {
@@ -54,7 +55,7 @@ namespace CSE.FrontEnd
         {
             try
             {
-               ProcessReceipt processReceipt = new ProcessReceipt(_file);
+			   ProcessReceipt processReceipt = new ProcessReceipt(_file);
                 //Uncomment as soon as method is implemented.
                 processReceipt.ManipulateData();
             }
