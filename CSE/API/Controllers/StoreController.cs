@@ -23,12 +23,13 @@ namespace API.Controllers
             _dataModel = dataModel;
         }
 
-        public IActionResult GetCheapest(IEnumerable<string> products)
+        [Route("api/Store/GetCheapest")]
+        public IActionResult GetCheapest([FromBody]List<string> products)
         {
-          
             Tuple<Store, decimal> cheapestStore;
             cheapestStore = _cheapestStore.GetCheapestStore(products);
-            return Ok(cheapestStore);
+            string cheapest = cheapestStore.Item1.ToString();
+            return Ok(cheapest);
         }
 
         [HttpGet()]
