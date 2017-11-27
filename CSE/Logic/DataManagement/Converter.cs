@@ -3,11 +3,8 @@ using Logic.ImageAnalysis;
 using Logic.Models;
 using System.Drawing;
 using System.Linq;
-using System.IO;
 using System;
-using System.Threading;
 using Logic.Database;
-using System.Diagnostics;
 
 namespace Logic.DataManagement
 {
