@@ -3,28 +3,32 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using Logic.Metadata;
+using System.Configuration;
 
 namespace Logic.Database
 {
     public class Reader : IReader
     {
-		private SqlConnection _con;
-		private SqlDataReader _reader;
+	private SqlConnection _con;
+	private SqlDataReader _reader;
     private readonly IConfiguration _configuration;
 
     public Reader(IConfiguration configuration) => _configuration = configuration;
 
 		public void OpenConnection()
 		{
-
-            _con = new SqlConnection
-            {
-                ConnectionString = _configuration["DatabaseConnectionString"]
-            };
-			      _con.Open();
+			try
+			{
+				_con.ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
+				_con.Open();
+			}
+			catch (ConnectionFailedException)
+			{
+				throw new ConnectionFailedException(_con.ConnectionString);
+			}
 		}
 
-		public void CloseConnection()
+			public void CloseConnection()
 		{
 			_reader.Close();
 			_con.Close();
@@ -46,8 +50,11 @@ namespace Logic.Database
         {
             List<string> productList = new List<string>();
             SqlCommand cmd = new SqlCommand("SELECT DISTINCT name, shopid FROM product "
-                                            + "WHERE shopid = '" + storeId + "';", _con);
-            _reader = cmd.ExecuteReader();
+                                            + "WHERE shopid = @SN;", _con);
+
+			cmd.Parameters.AddWithValue("@SN", storeId);
+
+			_reader = cmd.ExecuteReader();
             while (_reader.Read())
             {
                 productList.Add(_reader.GetString(0).Trim());
@@ -61,9 +68,12 @@ namespace Logic.Database
             //List<string> productList = new List<string>();
             SqlCommand cmd = new SqlCommand("SELECT DISTINCT p.name, p.price, p.shopid, s.name, s.id " +
                                                     "FROM product p, shop s " +
-                                                    "WHERE s.name = '" + store.ToString() + 
-                                                    "' AND s.id = p.shopid;", _con);
-            _reader = cmd.ExecuteReader();
+                                                    "WHERE s.name = @SN " + 
+                                                    "AND s.id = p.shopid;", _con);
+
+			cmd.Parameters.AddWithValue("@SN", store.ToString());
+
+			_reader = cmd.ExecuteReader();
             while (_reader.Read())
             {
                 //Debug.WriteLine(reader.GetDecimal(1));
@@ -78,9 +88,12 @@ namespace Logic.Database
 
 			SqlCommand cmd = new SqlCommand("SELECT DISTINCT h.price, r.date, h.product, r.shopid " +
 													"FROM history h, receipt r " +
-													 "WHERE h.receiptid = r.id " +
-													 "AND h.product = '" + productName +
-													 "' AND r.shopid = '" + storeName + "';", _con);
+													"WHERE h.receiptid = r.id " +
+													"AND h.product = @PN AND r.shopid = @SN;", _con);
+
+			cmd.Parameters.AddWithValue("@PN", productName);
+			cmd.Parameters.AddWithValue("@SN", storeName);
+
 			_reader = cmd.ExecuteReader();
 			while (_reader.Read())
 			{

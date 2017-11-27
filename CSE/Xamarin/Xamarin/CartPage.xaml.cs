@@ -28,6 +28,13 @@ namespace Xamarin
             GetData();
         }
 
+        public CartPage(List<string> _selected)
+        {
+            InitializeComponent();
+            selected = _selected;
+            GetData();
+        }
+
         public async Task GetAPIData()
         {
             try
@@ -102,5 +109,14 @@ namespace Xamarin
         {
             item = ListView.SelectedItem.ToString();
         }
+
+        async void ViewCartButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ViewCartPage(selected));
+        }
     }
 }
+//public IEnumerable<string> GetEn()
+//{
+//    return selected;
+//}

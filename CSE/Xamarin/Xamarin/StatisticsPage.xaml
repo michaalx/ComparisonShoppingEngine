@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
-             x:Class="Xamarin.StatisticsPage">
+               xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
+             x:Class="Xamarin.StatisticsPage"
+             Padding="20">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="MainToolbar" Text="Main" Clicked="MainToolbar_Clicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <oxy:PlotView Model="{Binding  model}" VerticalOptions="Center" HorizontalOptions="Center" />
+        <StackLayout>
+            <Picker x:Name="picker" Title="Select a store" />
+            <ListView x:Name="list"/>
+            <Button x:Name="Button" Text="View graph" Clicked="Button_Clicked"/>
+            <oxy:PlotView Model="{Binding  model}" VerticalOptions="Center" HorizontalOptions="Center" />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
