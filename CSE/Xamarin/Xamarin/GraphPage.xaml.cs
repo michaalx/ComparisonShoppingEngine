@@ -7,6 +7,10 @@ using Xamarin.Forms.Xaml;
 using RestSharp.Portable;
 using RestSharp.Portable.HttpClient;
 using System.Diagnostics;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+using OxyPlot.Xamarin.Forms;
+using OxyPlot;
 
 namespace Xamarin
 {
