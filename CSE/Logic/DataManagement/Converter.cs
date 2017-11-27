@@ -3,29 +3,25 @@ using Logic.ImageAnalysis;
 using Logic.Models;
 using System.Drawing;
 using System.Linq;
-using System.IO;
 using System;
-using System.Threading;
 using Logic.Database;
-using System.Diagnostics;
 
 namespace Logic.DataManagement
 {
 	public class Converter : IConverter
     {
-    		private readonly ITextProcessing _textProcessing;
- -        	private readonly IUpdater _updater;
+        private readonly IUpdater _updater;
  		
 		public delegate void ListInitializedEventHandler(object source, EventArgs args);
 		public event ListInitializedEventHandler ListInitialized;
 		private readonly ITextProcessing _textProcessing;
 
 
-	public Converter(ITextProcessing textProcessing, IUpdater updater)
-	{
-		_textProcessing = textProcessing;
-        	_updater = updater;
-	}
+	    public Converter(ITextProcessing textProcessing, IUpdater updater)
+	    {
+		    _textProcessing = textProcessing;
+        	    _updater = updater;
+	    }
 
         public IEnumerable<Product> GetProducts(IEnumerable<KeyValuePair<string, decimal>> detailsOfProducts)
         {
@@ -44,6 +40,7 @@ namespace Logic.DataManagement
             }
             return dictionary.Values.ToList();
         }
+
         /// <summary>
         /// Main method of converting image to 
         /// Receipt instance that holds:
@@ -54,11 +51,9 @@ namespace Logic.DataManagement
         /// <param name="textProcessing"></param>
         /// <param name="image"></param>
         /// <returns>Receipt instance.</returns>
-
-
-        public Receipt ConvertImageToReceipt(string imageArgs)
-      {
-      			var ti = new TaskInit();
+        public Receipt ConvertImageToReceipt(byte[] imageArgs)
+        {
+      		var ti = new TaskInit();
 			var imageProcessing = new ImageProcessing();
 			
 			// var image = (Bitmap)Image.FromStream(new MemoryStream(Convert.FromBase64String(imageArgs)));
