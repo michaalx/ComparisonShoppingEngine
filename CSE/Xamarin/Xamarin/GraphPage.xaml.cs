@@ -1,12 +1,7 @@
-﻿using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
-using OxyPlot.Xamarin.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using RestSharp.Portable;
@@ -27,12 +22,10 @@ namespace Xamarin
             Norfa = 4
         }
 
-        const string path = "http://192.168.0.106:5000/api/"; //use your IP - command, ipconfig
+        const string path = "http://192.168.0.104:5000/api/"; //use your IP - command, ipconfig
         string item;
         string storeName;
-        LineSeries line;
         List<String> productList;
-        Dictionary<DateTime, decimal> listForDays;
         List<Dictionary<DateTime, decimal>> listOfLists = new List<Dictionary<DateTime, decimal>>();
 
         public GraphPage()
@@ -49,14 +42,11 @@ namespace Xamarin
             picker.SelectedIndexChanged += async (sender, args) =>
             {
                 storeName = picker.SelectedItem.ToString();
-                //storeName = (Store)Enum.Parse(typeof(Store), selected);
                 await GetProductsData();
                 list.ItemsSource = productList;
-                list.ItemSelected += async (sender2, args2) =>
+                list.ItemSelected += (sender2, args2) =>
                 {
                     item = list.SelectedItem.ToString();
-                    //picker.IsVisible = false;
-                    //list.IsVisible = false;
                     button.IsVisible = true;
                     button.IsEnabled = true;
                 };

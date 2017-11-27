@@ -27,7 +27,7 @@ namespace Xamarin
             Norfa = 4
         }
 
-        string path = "http://192.168.0.106:5000/api/"; //use your IP - command, ipconfig
+        string path = "http://192.168.8.108:5000/api/"; //use your IP - command, ipconfig
         string item = "Pienas";
         Store storeName = Store.IKI;
         LineSeries line;

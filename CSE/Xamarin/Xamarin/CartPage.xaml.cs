@@ -8,6 +8,8 @@ using RestSharp.Portable.HttpClient;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Diagnostics;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace Xamarin
 {
@@ -15,17 +17,15 @@ namespace Xamarin
     public partial class CartPage : ContentPage
     {
 
-        const string path = "http://192.168.0.106:5000/api/";
+        const string path = "http://192.168.8.108:5000/api/";
         List<string> list;
         List<string> selected = new List<string>();
         string item;
-        //IEnumerable<string> selectedEn;
 
         public CartPage()
         {
             InitializeComponent();
             GetData();
-
         }
 
         public async Task GetAPIData()
@@ -36,7 +36,7 @@ namespace Xamarin
                 using (var client = new RestClient(new Uri(path1)))
                 {
                     var request = new RestRequest(Method.GET);
-                    var result = await client.Execute<IEnumerable<String>>(request);
+                    var result = await client.Execute<IEnumerable<string>>(request);
                     list = result.Data.ToList();
                 }
             }
@@ -46,17 +46,30 @@ namespace Xamarin
             }
         }
 
-        async Task GetCheapest()
+        private async Task<Dictionary<string,decimal>> GetCheapest()
         {
-            string path2 = path;
-            using (var client = new RestClient(new Uri(path2)))
+            var path2 = path + "Store";
+            try
             {
-                var request = new RestRequest("CheapestStore", Method.GET);
-                request.AddParameter("products", selected);
-                //request.Parameters.Add("products", selected);
-                var result = await client.Execute<IEnumerable<String>>(request);
-                list = result.Data.ToList();
+                HttpClient client = new HttpClient();
+                var json = JsonConvert.SerializeObject(selected);
+                var request = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(path2, request);
+                if (!response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("ERROR:  Products Not Posted." + response.ReasonPhrase);
+                    return null;
+                }
+                var responseJson = await response.Content.ReadAsStringAsync();
+                var store = JsonConvert.DeserializeObject<Dictionary<string, decimal>>(responseJson);
+                return store;
             }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception == " + e.Message);
+                return null;
+            }
+
         }
 
         public async void GetData()
@@ -65,11 +78,6 @@ namespace Xamarin
             ListView.ItemsSource = list;
         }
 
-        //public IEnumerable<string> GetEn()
-        //{
-        //    return selected;
-        //}
-
         async void MainToolbar_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MainPage());
@@ -77,9 +85,7 @@ namespace Xamarin
 
         async void CheapestStoreButton_Clicked(object sender, EventArgs e)
         {
-            //selectedEn = GetEn();
             await GetCheapest();
-            //await Navigation.PushAsync(new MapPage());
         }
 
         private void RemoveItemButton_Clicked(object sender, EventArgs e)

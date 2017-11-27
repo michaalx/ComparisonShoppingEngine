@@ -14,7 +14,7 @@ namespace Xamarin
     public partial class InsertReceiptPage : ContentPage
     {
         string strFile;
-        const string path = "http://172.26.193.238:5000/api/"; //use your IP - command, ipconfig
+        const string path = "http://192.168.0.104:5000/api/"; //use your IP - command, ipconfig
 
         public InsertReceiptPage()
         {
