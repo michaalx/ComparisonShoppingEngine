@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Logic.DataManagement;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using System;
 
 namespace API.Controllers
 {
@@ -17,11 +20,23 @@ namespace API.Controllers
         /// Should be changed to HttpPost.
         /// </summary>
         /// <param name="image"></param>
-        [HttpGet]
-        public void Post(byte[] image)
+        [HttpPost]
+        [Consumes("multipart/form-data")]
+        public async Task Post(IFormFile file)
         {
-            _converter.SaveReceipt(image);
-            return;
+            using (var stream = file.OpenReadStream())
+            {
+                var fileBytes = new byte[file.Length];
+                await stream.ReadAsync(fileBytes, 0, (int)file.Length);
+                try
+                {
+                    _converter.SaveReceipt(fileBytes);
+                }
+                catch(Exception e)
+                {
+
+                }
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Plugin.Media;
 using RestSharp.Portable;
+using RestSharp.Portable.Deserializers;
 using RestSharp.Portable.HttpClient;
 using System;
 using System.Diagnostics;
@@ -15,7 +16,7 @@ namespace Xamarin
     {
 
         string strFile = ""; 
-        const string path = "http://172.26.193.238:5000/api/"; //use your IP - command, ipconfig
+        const string path = "http://192.168.8.108:5000/api/"; //use your IP - command, ipconfig
 
         public InsertReceiptPage()
         {
@@ -49,7 +50,7 @@ namespace Xamarin
 
                     await DisplayAlert("File Location", file.Path, "OK");
 
-                    //await PreparePhoto(file);
+                    await PreparePhoto(file);
                     //await PutPhoto();
                 }
                 catch (Exception e)
@@ -57,22 +58,6 @@ namespace Xamarin
                     Debug.WriteLine("Error  == " + e.Message);
                 }
             };
-
-            async Task PreparePhoto(Plugin.Media.Abstractions.MediaFile file)
-            {
-                try
-                {
-                    var stream = file.GetStream();
-                    var bytes = new byte[stream.Length];
-                    await stream.ReadAsync(bytes, 0, (int)stream.Length);
-                    strFile = Convert.ToBase64String(bytes);
-                    await PutPhoto();
-                }
-                catch(Exception e)
-                {
-                    Debug.WriteLine("Error  == " + e.Message);
-                }
-            }
 
             pickPhoto.Clicked += async (sender, args) =>
             {
@@ -93,12 +78,35 @@ namespace Xamarin
             };
         }
 
-        public async Task PutPhoto()
+        private async Task PreparePhoto(Plugin.Media.Abstractions.MediaFile file)
         {
-            using (var client = new RestClient(new Uri(path)))
+            try
             {
-                var request = new RestRequest("Receipt/" + strFile, Method.GET);
-                await client.Execute<string>(request);
+                var stream = file.GetStream();
+                var bytes = new byte[stream.Length];
+                await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                await PutPhoto(bytes, Path.GetFileName(file.Path));
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error  == " + e.Message);
+            }
+        }
+
+        private async Task PutPhoto(byte[] fileBytes, string fileName)
+        {
+            var request = new RestRequest(Method.POST);
+            request.AddFile("file", fileBytes, fileName, "multipart/form-data");
+            using (var client = new RestClient(new Uri($"{path}Receipt")))
+            {
+                try
+                {
+                    await client.Execute(request);
+                }
+                catch(Exception e)
+                {
+                    throw;
+                }
             }
         }
         
