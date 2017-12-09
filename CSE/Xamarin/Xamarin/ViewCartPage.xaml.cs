@@ -1,11 +1,10 @@
-﻿using RestSharp.Portable;
-using RestSharp.Portable.HttpClient;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,8 +14,10 @@ namespace Xamarin
     public partial class ViewCartPage : ContentPage
     {
         List<string> _selected = new List<string>();
-        Dictionary<decimal, string> cheapest;
-        const string path = "http://192.168.0.106:5000/api/"; //use your IP - command, ipconfig
+        Dictionary<string, decimal> cheapest;
+        string path = Models.Constants.Path;
+        string storeName;
+        string storePrice;
 
         public ViewCartPage(List<string> selected)
         {
@@ -32,20 +33,40 @@ namespace Xamarin
 
         async void CheapestStoreButton_Clicked(object sender, EventArgs e)
         {
-            //await GetCheapest();
-            await Navigation.PushAsync(new MapPage());
+            cheapest = await GetCheapest();
+            foreach (var dict in cheapest)
+            {
+                storeName = dict.Key.ToString();
+                storePrice = dict.Value.ToString("#.##");
+            }
+
+            await DisplayAlert("Cheapest store found", $"Cart price at {storeName}: {storePrice}€.", "OK");
+
+            await Navigation.PushAsync(new MapPage(storeName));
         }
 
-        async Task GetCheapest()
+        private async Task<Dictionary<string, decimal>> GetCheapest()
         {
-            string path2 = path;
-            using (var client = new RestClient(new Uri(path2)))
+            var path2 = path + "Store";
+            try
             {
-                var request = new RestRequest("CheapestStore", Method.GET);
-                request.AddParameter("products", _selected);
-                //request.AddBody(selected);
-                var result = await client.Execute<Dictionary<decimal, string>>(request);
-                cheapest = result.Data;
+                HttpClient client = new HttpClient();
+                var json = JsonConvert.SerializeObject(_selected);
+                var request = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(path2, request);
+                if (!response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("ERROR:  Products Not Posted." + response.ReasonPhrase);
+                    return null;
+                }
+                var responseJson = await response.Content.ReadAsStringAsync();
+                var store = JsonConvert.DeserializeObject<Dictionary<string, decimal>>(responseJson);
+                return store;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception == " + e.Message);
+                return null;
             }
         }
 

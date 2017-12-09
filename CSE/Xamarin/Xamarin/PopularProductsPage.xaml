@@ -8,14 +8,10 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="ListView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button x:Name="addToCartButton" Text="Add to cart" Clicked="addToCartButton_Clicked"/>
+            <ListView x:Name="ListView" ItemSelected="ListView_ItemSelected"/>
+            <Button x:Name="AddItemButton" Text="Add Item" Clicked="AddItemButton_Clicked"/>
+            <Button x:Name="RemoveItemButton" Text="Remove Item" Clicked="RemoveItemButton_Clicked"/>
+            <Button x:Name="ViewCartButton" Text="View cart" Clicked="ViewCartButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

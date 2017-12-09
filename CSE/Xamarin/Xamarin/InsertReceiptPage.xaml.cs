@@ -15,8 +15,7 @@ namespace Xamarin
     public partial class InsertReceiptPage : ContentPage
     {
 
-        string strFile = ""; 
-        const string path = "http://192.168.8.108:5000/api/"; //use your IP - command, ipconfig
+        string path = Models.Constants.Path;
 
         public InsertReceiptPage()
         {
@@ -34,7 +33,7 @@ namespace Xamarin
 
                     if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                     {
-                        await DisplayAlert("Uh oh", "No camera avaialble.", "OK");
+                        await DisplayAlert("Uh oh", "No camera available.", "OK");
                         return;
                     }
 
@@ -50,7 +49,7 @@ namespace Xamarin
 
                     await DisplayAlert("File Location", file.Path, "OK");
 
-                    await PreparePhoto(file);
+                    //await PreparePhoto(file);
                     //await PutPhoto();
                 }
                 catch (Exception e)
@@ -103,7 +102,7 @@ namespace Xamarin
                 {
                     await client.Execute(request);
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     throw;
                 }
