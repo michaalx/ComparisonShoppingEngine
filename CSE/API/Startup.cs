@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Logic.DataManagement;
-using Logic.Database;
-using Logic.Functions;
-using Logic.Graph;
+using LogicLibrary.DataManagement;
+using LogicLibrary.Database;
+using LogicLibrary.Functions;
+using LogicLibrary.Graph;
 
 namespace API
 {

@@ -1,9 +1,9 @@
 ﻿using System;
-using Logic.Functions;
+using LogicLibrary.Functions;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Logic.Metadata;
-using Logic.Database;
+using LogicLibrary.Metadata;
+using LogicLibrary.Database;
 
 namespace API.Controllers
 {

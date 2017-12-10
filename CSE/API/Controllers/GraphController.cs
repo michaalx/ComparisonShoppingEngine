@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Logic.Graph;
-using Logic.Database;
+using LogicLibrary.Graph;
+using LogicLibrary.Database;
 
 namespace API.Controllers
 {

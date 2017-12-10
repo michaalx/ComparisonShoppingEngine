@@ -1,10 +1,8 @@
-﻿using System;
+﻿using LogicLibrary.Metadata;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LogicLibrary.Metadata;
 
-namespace API.Models
+namespace LogicLibrary.Models
 {
     public class Receipt
     {
@@ -17,8 +15,5 @@ namespace API.Models
             StoreName = storeName;
             Timestamp = timestamp;
         }
-        ///
-
-
     }
 }
