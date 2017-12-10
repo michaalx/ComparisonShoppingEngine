@@ -55,12 +55,6 @@
     <Compile Include="RegistrationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSE\CSE.csproj">
-      <Project>{2d6ee36f-6f2b-4d2f-85fe-3e32ed91690a}</Project>
-      <Name>CSE</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
