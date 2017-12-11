@@ -1,6 +1,5 @@
 ﻿using Plugin.Media;
 using RestSharp.Portable;
-using RestSharp.Portable.Deserializers;
 using RestSharp.Portable.HttpClient;
 using System;
 using System.Diagnostics;
@@ -8,6 +7,9 @@ using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.ProjectOxford.Vision;
+using Microsoft.ProjectOxford.Vision.Contract;
+using System.Text;
 
 namespace Xamarin
 {
@@ -16,6 +18,9 @@ namespace Xamarin
     {
 
         string path = Models.Constants.Path;
+        string key = Models.Constants.VisionKey;
+        OcrResults text;
+        string result;
 
         public InsertReceiptPage()
         {
@@ -46,11 +51,11 @@ namespace Xamarin
 
                     if (file == null)
                         return;
+                    
+                    await UseVision(file);
+                    EditOcrResults(text);
+                    //Debug.WriteLine(result);
 
-                    await DisplayAlert("File Location", file.Path, "OK");
-
-                    //await PreparePhoto(file);
-                    //await PutPhoto();
                 }
                 catch (Exception e)
                 {
@@ -73,85 +78,90 @@ namespace Xamarin
                 if (file == null)
                     return;
 
-                await PreparePhoto(file);
+                await UseVision(file);
+                EditOcrResults(text);
+                Debug.WriteLine(result);
+
             };
         }
 
-        private async Task PreparePhoto(Plugin.Media.Abstractions.MediaFile file)
+        void EditOcrResults(OcrResults results)
         {
-            try
+            StringBuilder stringBuilder = new StringBuilder();
+            if (results != null && results.Regions != null)
             {
-                var stream = file.GetStream();
-                var bytes = new byte[stream.Length];
-                await stream.ReadAsync(bytes, 0, (int)stream.Length);
-                await PutPhoto(bytes, Path.GetFileName(file.Path));
+                stringBuilder.Append(" ");
+                stringBuilder.AppendLine();
+                foreach (var item in results.Regions)
+                {
+                    foreach (var line in item.Lines)
+                    {
+                        foreach (var word in line.Words)
+                        {
+                            stringBuilder.Append(word.Text);
+                            stringBuilder.Append(" ");
+                        }
+                        stringBuilder.AppendLine();
+                    }
+                    stringBuilder.AppendLine();
+                }
             }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error  == " + e.Message);
-            }
+            result = stringBuilder.ToString();
         }
 
-        private async Task PutPhoto(byte[] fileBytes, string fileName)
-        {
-            var request = new RestRequest(Method.POST);
-            request.AddFile("file", fileBytes, fileName, "multipart/form-data");
-            using (var client = new RestClient(new Uri($"{path}Receipt")))
-            {
-                try
-                {
-                    await client.Execute(request);
-                }
-                catch(Exception)
-                {
-                    throw;
-                }
-            }
-        }
-        
+        //private async Task PreparePhoto(Plugin.Media.Abstractions.MediaFile file)
+        //{
+        //    try
+        //    {
+        //        var stream = file.GetStream();
+        //        var bytes = new byte[stream.Length];
+        //        await stream.ReadAsync(bytes, 0, (int)stream.Length);
+        //        await PutPhoto(bytes, Path.GetFileName(file.Path));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Debug.WriteLine("Error  == " + e.Message);
+        //    }
+        //}
+
+        //private async Task PutPhoto(byte[] fileBytes, string fileName)
+        //{
+        //    var request = new RestRequest(Method.POST);
+        //    request.AddFile("file", fileBytes, fileName, "multipart/form-data");
+        //    using (var client = new RestClient(new Uri($"{path}Receipt")))
+        //    {
+        //        try
+        //        {
+        //            await client.Execute(request);
+        //        }
+        //        catch(Exception)
+        //        {
+        //            throw;
+        //        }
+        //    }
+        //}
+
         async void MainToolbar_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MainPage());
         }
+
+        async Task UseVision(Plugin.Media.Abstractions.MediaFile file)
+        {
+            
+            try
+            {
+                var apiRoot = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0";
+                var client = new VisionServiceClient(key, apiRoot);
+                using (var photoStream = file.GetStream())
+                {
+                    text = await client.RecognizeTextAsync(photoStream);
+                }
+            }
+            catch(ClientException e)
+            {
+                Debug.WriteLine("Error  == " + e.ToString());
+            }
+        }
     }
 }
-//file.Dispose();
-
-//image.Source = ImageSource.FromStream(() =>
-//{
-//    var stream = file.GetStream();
-//    file.Dispose();
-//    return stream;
-//});
-//using (var image.Source = ImageSource.FromFile(file.Path))
-//{
-//    using (MemoryStream m = new MemoryStream())
-//    {
-//        image.Save(m, image.RawFormat);
-//        byte[] imageBytes = m.ToArray();
-//        // Convert byte[] to Base64 String
-//        string base64String = Convert.ToBase64String(imageBytes);
-//        return base64String;
-//    }
-//}
-
-//image.Source = ImageSource.FromStream(() =>
-//{
-//    var stream = file.GetStream();
-//    file.Dispose();
-//    return stream;
-//});
-
-//public string ImageToString(string path)
-
-//{
-
-//    if (path == null)
-//        throw new ArgumentNullException("path");
-
-//    //Image im = Image.FromFile(path);
-//    //MemoryStream ms = new MemoryStream();
-//    //im.Save(ms, im.RawFormat);
-//    //byte[] array = ms.ToArray();
-//    //return Convert.ToBase64String(array);
-//}
