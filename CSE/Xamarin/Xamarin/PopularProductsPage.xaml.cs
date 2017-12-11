@@ -4,25 +4,26 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Xamarin
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PopularProductsPage : ContentPage
-	{
-        const string path = "http://192.168.0.104:5000/api/"; //use your IP - command, ipconfig
-        List<Tuple<string, string, decimal>> productList;
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class PopularProductsPage : ContentPage
+    {
+        string path = Models.Constants.Path;
+        List<string> productList;
+        List<string> selected = new List<string>();
+        string item;
 
-        public PopularProductsPage ()
-		{
-			InitializeComponent();
+        public PopularProductsPage()
+        {
+            InitializeComponent();
             CreateList();
-		}
-        
+        }
+
         public async Task GetProductsData()
         {
             try
@@ -32,8 +33,8 @@ namespace Xamarin
                 using (var client = new RestClient(new Uri(path1)))
                 {
                     var request = new RestRequest(Method.GET);
-                    var result = await client.Execute<List<Tuple<string, string, decimal>>>(request);
-                    productList = result.Data;
+                    var result = await client.Execute<List<string>>(request);
+                    productList = result.Data.Distinct().ToList();
                 }
             }
             catch (Exception e)
@@ -45,13 +46,8 @@ namespace Xamarin
         async void CreateList()
         {
             await GetProductsData();
-            var cell = new DataTemplate(typeof(TextCell));
 
-            foreach(var item in productList)
-            {
-
-            }
-            //ListView.ItemsSource = productList.Item1;
+            ListView.ItemsSource = productList;
         }
 
         async void mainToolbar_Clicked(object sender, EventArgs e)
@@ -59,9 +55,24 @@ namespace Xamarin
             await Navigation.PushAsync(new MainPage());
         }
 
-        private void addToCartButton_Clicked(object sender, EventArgs e)
+        private void RemoveItemButton_Clicked(object sender, EventArgs e)
         {
+            selected.Remove(item);
+        }
 
+        private void AddItemButton_Clicked(object sender, EventArgs e)
+        {
+            selected.Add(item);
+        }
+
+        async void ViewCartButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ViewCartPage(selected));
+        }
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            item = ListView.SelectedItem.ToString();
         }
     }
 }

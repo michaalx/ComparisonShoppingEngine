@@ -1,10 +1,5 @@
 ﻿using System.Collections.Generic;
-using Logic.Models;
 using Logic.Database;
-using Logic.Metadata;
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Logic.Functions
 {
@@ -14,14 +9,14 @@ namespace Logic.Functions
 
         public PopularProducts(IDataModel dataModel) => _dataModel = dataModel;
 
-        public IEnumerable<Product> GetPopularProducts()
+        public IEnumerable<string> GetPopularProducts()
         {
             var sqlResult = _dataModel.PopularProducts();
-            var productsList = new List<Product>();
+            var productsList = new List<string>();
             foreach(var query in sqlResult)
             {
               //  var storeName = (Store)Enum.Parse(typeof(Store), query.Item4);
-                productsList.Add(new Product(query.Item1, query.Item3, query.Item2, query.Item4));
+                productsList.Add(query.Item1);
             }
             return productsList;
         }

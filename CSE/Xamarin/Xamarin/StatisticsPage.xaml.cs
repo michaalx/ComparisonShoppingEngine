@@ -27,8 +27,7 @@ namespace Xamarin
             Norfa = 4
         }
 
-
-        const string path = "http://192.168.0.106:5000/api/"; //use your IP - command, ipconfig
+        string path = Models.Constants.Path;
         string item;
         string storeName;
         List<String> productList;
@@ -40,7 +39,7 @@ namespace Xamarin
             Button.IsVisible = false;
             Button.IsEnabled = false;
             List<Store> stores = Enum.GetValues(typeof(Store)).Cast<Store>().ToList();
-            foreach(var store in stores)
+            foreach (var store in stores)
             {
                 picker.Items.Add(store.ToString());
             }
@@ -48,7 +47,7 @@ namespace Xamarin
             picker.SelectedIndexChanged += async (sender, args) =>
             {
                 storeName = picker.SelectedItem.ToString();
-                
+
                 await GetProductsData();
                 list.ItemsSource = productList;
                 list.ItemSelected += (sender2, args2) =>
@@ -59,13 +58,13 @@ namespace Xamarin
                 };
             };
         }
-        
+
         public async Task GetProductsData()
         {
             try
             {
                 string path1 = path + $"graph/{storeName.ToString()}";
-                
+
                 using (var client = new RestClient(new Uri(path1)))
                 {
                     var request = new RestRequest(Method.GET);

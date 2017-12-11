@@ -17,15 +17,21 @@ namespace Logic.Database
 
 		public void OpenConnection()
 		{
-			try
-			{
-				_con.ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
-				_con.Open();
-			}
-			catch (ConnectionFailedException)
-			{
-				throw new ConnectionFailedException(_con.ConnectionString);
-			}
+            _con = new SqlConnection
+            {
+                ConnectionString = _configuration["DatabaseConnectionString"]
+            };
+            _con.Open();
+                                    
+            //try
+			//{
+			//	_con.ConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
+			//	_con.Open();
+			//}
+			//catch (ConnectionFailedException)
+			//{
+			//	throw new ConnectionFailedException(_con.ConnectionString);
+			//}
 		}
 
 			public void CloseConnection()
