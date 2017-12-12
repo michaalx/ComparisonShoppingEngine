@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Logic\Logic.csproj" />
+    <ProjectReference Include="..\LogicCore\LogicCore.csproj" />
   </ItemGroup>
 
 </Project>

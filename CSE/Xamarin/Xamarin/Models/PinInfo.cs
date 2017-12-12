@@ -15,7 +15,7 @@ namespace Xamarin.MapModel
         string path;
         public List<StoreInfo> stores = new List<StoreInfo>();
         private string placesPath = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
-        string key = Models.Constants.Key;
+        string key = "AIzaSyBGWA-e4F9FXwBrc1aCnq31m6LujasAchg";
 
         public PinInfo(double lat, double lon, string StoreName)
         {

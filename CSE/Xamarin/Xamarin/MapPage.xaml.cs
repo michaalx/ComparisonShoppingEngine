@@ -4,6 +4,8 @@ using Xamarin.Forms.Maps;
 using Plugin.Geolocator;
 using System.Threading.Tasks;
 using Plugin.Permissions.Abstractions;
+using RestSharp.Portable.HttpClient;
+using RestSharp.Portable;
 
 namespace Xamarin
 {
@@ -12,11 +14,10 @@ namespace Xamarin
         Plugin.Geolocator.Abstractions.Position savedPosition;
         Map map;
         string storeName = "maxima";
-        string path = Models.Constants.Path;
+        string path = "http://192.168.0.104:5000/api/"; //use your IP - command, ipconfig
 
-        public MapPage(string store)
+        public MapPage()
         {
-            storeName = store;
             InitializeComponent();
             GetMap();
         }

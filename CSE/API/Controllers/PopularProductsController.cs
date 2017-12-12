@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Logic.Functions;
-using System.Threading.Tasks;
+using LogicCore.Functions;
 
 namespace API.Controllers
 {

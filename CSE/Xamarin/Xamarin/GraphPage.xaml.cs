@@ -26,11 +26,12 @@ namespace Xamarin
             Norfa = 4
         }
 
-        string path = Models.Constants.Path;
+        string path = "http://192.168.0.106:5000/api/"; //use your IP - command, ipconfig
         string item = "Pienas";
         Store storeName = Store.IKI;
         LineSeries line;
         Dictionary<DateTime, decimal> listForDays;
+
         List<Dictionary<DateTime, decimal>> listOfLists = new List<Dictionary<DateTime, decimal>>();
 
         public GraphPage(string it, string store)
@@ -46,6 +47,7 @@ namespace Xamarin
             try
             {
                 path += "graph/?item=" + item + "&storeName=" + ((int)storeName).ToString();
+                var pathh = path;
                 using (var client = new RestClient(new Uri(path)))
                 {
                     var request = new RestRequest(Method.GET);

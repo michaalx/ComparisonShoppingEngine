@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Logic.Graph;
-using Logic.Database;
+﻿using Microsoft.AspNetCore.Mvc;
+using LogicCore.Database;
+using LogicCore.Graph;
 
 namespace API.Controllers
 {
