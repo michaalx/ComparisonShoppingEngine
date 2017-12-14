@@ -1,3 +1,7 @@
+using Business.Features;
+using DataBase.Context;
+using DataBase.Models;
+using DataBase.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +11,7 @@ using Logic.DataManagement;
 using Logic.Database;
 using Logic.Functions;
 using Logic.Graph;
+using Microsoft.EntityFrameworkCore;
 
 namespace API
 {
@@ -28,7 +33,12 @@ namespace API
         {
             // Add framework services.
             services.AddMvc();
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddScoped<IRepository<Product>, ProductRepository>();
+            services.AddScoped<IFavoriteProducts, FavoriteProducts>();
+            
+            services.AddTransient<RecordRepository>();
             services.AddTransient<IPopularProducts, PopularProducts>();
             services.AddTransient<IDataModel, DataModel>();
             services.AddTransient<IReader, Reader>();
