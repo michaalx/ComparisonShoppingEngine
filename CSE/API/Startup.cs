@@ -1,4 +1,6 @@
+using Business.Features;
 using DataBase.Context;
+using DataBase.Models;
 using DataBase.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,7 +35,9 @@ namespace API
             services.AddMvc();
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddTransient<ProductRepository>();
+            services.AddScoped<IRepository<Product>, ProductRepository>();
+            services.AddScoped<IFavoriteProducts, FavoriteProducts>();
+            
             services.AddTransient<RecordRepository>();
             services.AddTransient<IPopularProducts, PopularProducts>();
             services.AddTransient<IDataModel, DataModel>();
