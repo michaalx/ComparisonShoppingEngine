@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Business.Features;
 using Microsoft.AspNetCore.Mvc;
-using Logic.Graph;
-using Logic.Database;
 
 namespace API.Controllers
 {
@@ -13,35 +7,34 @@ namespace API.Controllers
     [Route("api/Graph")]
     public class GraphController : Controller
     {
-        private readonly IDataModel _dataModel;
+        private readonly IGraphData _graphData;
         private readonly IGraphOperations _graphOperations;
 
-        public GraphController(IGraphOperations graphOperations, IDataModel dataModel)
+        /*private readonly IDataModel _dataModel;
+        private readonly IGraphOperations _graphOperations;
+        */
+        public GraphController(IGraphData graphData, IGraphOperations graphOperations)
         {
-            _dataModel = dataModel;
+            _graphData = graphData;
             _graphOperations = graphOperations;
         }
 
         [HttpGet()]
-        public IActionResult GetProducts(string item, int storeName)
+        public IActionResult GetProducts(string item, int storeNum)
         {
-            //Dependency Injection (new approach).   
             _graphOperations.SetItem(item);
-            _graphOperations.SetStoreName(storeName);
-            var listToReturn = _graphOperations.GetList();
+            _graphOperations.SetStoreName(storeNum);
 
-            //Item is product name, storeName is number of store in enum
-            //var go = new GraphOperations(item, storeName);
-            // var listToReturn = go.GetList();
-            return Ok(listToReturn);
-            
+            var result = _graphOperations.GetList();
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetOneStore(int id)
         {
-            var listToReturn = _dataModel.OneStore(id);
-            return Ok(listToReturn);
+            var result = _graphData.GetProducts(id);
+            return Ok(result);
         }
+        
     }
 }
