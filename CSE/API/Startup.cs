@@ -35,6 +35,17 @@ namespace API
             services.AddScoped<IFavoriteProducts, FavoriteProducts>();
             services.AddScoped<IReceiptManager, ReceiptManager>();
             services.AddScoped<ITextProcessing, TextProcessing>();
+            
+            services.AddTransient<RecordRepository>();
+            services.AddTransient<IPopularProducts, PopularProducts>();
+            services.AddTransient<IDataModel, DataModel>();
+            services.AddTransient<IReader, Reader>();
+            services.AddTransient<IUpdater, Updater>();
+            services.AddTransient<ICheapest, Cheapest>();
+            services.AddTransient<ITextProcessing, TextProcessing>();
+            services.AddTransient<IConverter, Converter>();
+            services.AddTransient<ICheapestStore, CheapestStore>();
+            services.AddTransient<IGraphOperations, GraphOperations>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

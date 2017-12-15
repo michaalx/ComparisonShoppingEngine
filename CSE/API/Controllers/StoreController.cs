@@ -1,5 +1,6 @@
 ﻿using System;
 using Logic.Functions;
+using Business.Features;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Logic.Metadata;
@@ -11,10 +12,10 @@ namespace API.Controllers
     [Route("api/Store")]
     public class StoreController : Controller
     {
-        private readonly ICheapestStore _cheapestStore;
+        private readonly ICheapest _cheapestStore;
         private readonly IDataModel _dataModel;
 
-        public StoreController(ICheapestStore cheapestStore, IDataModel dataModel)
+        public StoreController(ICheapest cheapestStore, IDataModel dataModel)
         {
             _cheapestStore = cheapestStore;
             _dataModel = dataModel;
@@ -30,11 +31,8 @@ namespace API.Controllers
         [HttpPost]
         public Dictionary<string, decimal> PostProducts([FromBody]List<string> products)
         {
-            Tuple<Store, decimal> cheapestStore;
-            cheapestStore = _cheapestStore.GetCheapestStore(products);
-            var cheapest = new Dictionary<string, decimal>();
-            cheapest.Add(cheapestStore.Item1.ToString(), cheapestStore.Item2);
-            return cheapest;
+            var cheapestStore = _cheapestStore.GetCheapest(products);
+            return cheapestStore;
         }
     }
 }
