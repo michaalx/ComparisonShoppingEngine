@@ -32,7 +32,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj" />
     <ProjectReference Include="..\DataBase\DataBase.csproj" />
-    <ProjectReference Include="..\Logic\Logic.csproj" />
   </ItemGroup>
 
 </Project>
