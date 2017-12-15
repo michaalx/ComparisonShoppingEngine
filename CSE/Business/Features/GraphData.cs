@@ -50,7 +50,7 @@ namespace Business.Features
                           {
                               product.Name
                           })
-                    .Select(x => x.Name).ToList();
+                    .Select(x => x.Name).Distinct().ToList();
 
                 return productsList;     
             }

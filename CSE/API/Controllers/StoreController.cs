@@ -1,10 +1,7 @@
-﻿using System;
-using Logic.Functions;
+﻿
 using Business.Features;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Logic.Metadata;
-using Logic.Database;
 
 namespace API.Controllers
 {
@@ -13,18 +10,16 @@ namespace API.Controllers
     public class StoreController : Controller
     {
         private readonly ICheapest _cheapestStore;
-        private readonly IDataModel _dataModel;
 
-        public StoreController(ICheapest cheapestStore, IDataModel dataModel)
+        public StoreController(ICheapest cheapestStore)
         {
             _cheapestStore = cheapestStore;
-            _dataModel = dataModel;
         }
 
         [HttpGet]
         public IActionResult GetProducts()
         {
-            var listToReturn = _dataModel.GetAllStores();
+            var listToReturn = _cheapestStore.GetProducts();
             return Ok(listToReturn);
         }
 

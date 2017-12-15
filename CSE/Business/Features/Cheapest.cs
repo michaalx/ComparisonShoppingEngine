@@ -8,12 +8,14 @@ namespace Business.Features
     public class Cheapest: ICheapest
     {
         private readonly DataContext _dataContext;
+        private readonly DataContext __dataContext;
         decimal lowestSum = decimal.MaxValue;
         Store cheapestStore;
 
         public Cheapest(DataContext dataContext)
         {
             _dataContext = dataContext;
+            __dataContext = dataContext;
         }
 
         public Dictionary<string, decimal> GetCheapest(List<string> products)
@@ -50,6 +52,15 @@ namespace Business.Features
         {
             IQueryable<Store> temp = from store in _dataContext.Stores select store;
             return temp.ToList();
+        }
+
+        public List<string> GetProducts()
+        {
+            using (__dataContext)
+            {
+                var products = __dataContext.Products.Select(x => x.Name).Distinct().ToList();
+                return products;
+            }
         }
     }
 }

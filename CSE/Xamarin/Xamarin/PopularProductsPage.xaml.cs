@@ -28,7 +28,7 @@ namespace Xamarin
         {
             try
             {
-                string path1 = path + "PopularProducts";
+                string path1 = path + "Features";
 
                 using (var client = new RestClient(new Uri(path1)))
                 {

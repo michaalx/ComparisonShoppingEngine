@@ -1,7 +1,4 @@
-﻿using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
-using OxyPlot.Xamarin.Forms;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,17 +17,18 @@ namespace Xamarin
     {
         public enum Store
         {
-            Maxima = 0,
-            IKI = 1,
-            Rimi = 2,
-            Lidl = 3,
-            Norfa = 4
+            Maxima = 2,
+            IKI,
+            Rimi,
+            Lidl,
+            Norfa
         }
 
         string path = Models.Constants.Path;
         string item;
         string storeName;
         List<String> productList;
+        Store store;
         List<Dictionary<DateTime, decimal>> listOfLists = new List<Dictionary<DateTime, decimal>>();
 
         public StatisticsPage()
@@ -47,6 +45,7 @@ namespace Xamarin
             picker.SelectedIndexChanged += async (sender, args) =>
             {
                 storeName = picker.SelectedItem.ToString();
+                store = (Store)Enum.Parse(typeof(Store), storeName);
 
                 await GetProductsData();
                 list.ItemsSource = productList;
@@ -63,7 +62,7 @@ namespace Xamarin
         {
             try
             {
-                string path1 = path + $"graph/{storeName.ToString()}";
+                string path1 = path + $"graph/{((int)store).ToString()}";
 
                 using (var client = new RestClient(new Uri(path1)))
                 {

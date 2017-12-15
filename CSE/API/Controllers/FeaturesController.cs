@@ -1,6 +1,6 @@
 ﻿using Business.Features;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Diagnostics;
 namespace API.Controllers
 {
     [Produces("application/json")]
@@ -24,7 +24,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadReceipt(string receipt)
+        public IActionResult UploadReceipt([FromBody]string receipt)
         {
             var result = _receiptManager.Insert(receipt);
             return Ok(result);
