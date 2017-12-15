@@ -19,11 +19,11 @@ namespace Xamarin
     {
         public enum Store
         {
-            Maxima = 0,
-            IKI = 1,
-            Rimi = 2,
-            Lidl = 3,
-            Norfa = 4
+            Maxima = 2,
+            IKI,
+            Rimi,
+            Lidl,
+            Norfa 
         }
 
         string path = Models.Constants.Path;
@@ -45,7 +45,7 @@ namespace Xamarin
         {
             try
             {
-                path += "graph/?item=" + item + "&storeName=" + ((int)storeName).ToString();
+                path += "graph/?item=" + item + "&storeNum=" + ((int)storeName).ToString();
                 using (var client = new RestClient(new Uri(path)))
                 {
                     var request = new RestRequest(Method.GET);
