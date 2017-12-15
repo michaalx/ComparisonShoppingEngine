@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataBase.Context;
-using DataBase.Models;
-using DataBase.Repositories;
 
 namespace Business.Features
 {
@@ -38,7 +36,10 @@ namespace Business.Features
                             key= grouping.Key,
                             quantitySum = grouping.Sum(x => x.Quantity)
                         })
-                    .OrderByDescending(x => x.quantitySum).Select(x => x.key).ToList();
+                    .OrderByDescending(x => x.quantitySum).Select(x => x.key)
+                    .Skip(0)
+                    .Take(5)
+                    .ToList();
                 return productList;
             }
         }
