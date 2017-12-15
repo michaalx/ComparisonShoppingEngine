@@ -1,4 +1,5 @@
 using Business.Features;
+using Business.TextProcessing;
 using DataBase.Context;
 using DataBase.Models;
 using DataBase.Repositories;
@@ -7,10 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Logic.DataManagement;
-using Logic.Database;
-using Logic.Functions;
-using Logic.Graph;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -35,18 +32,9 @@ namespace API
             services.AddMvc();
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddScoped<IRepository<Product>, ProductRepository>();
             services.AddScoped<IFavoriteProducts, FavoriteProducts>();
-            
-            services.AddTransient<RecordRepository>();
-            services.AddTransient<IPopularProducts, PopularProducts>();
-            services.AddTransient<IDataModel, DataModel>();
-            services.AddTransient<IReader, Reader>();
-            services.AddTransient<IUpdater, Updater>();
-            services.AddTransient<ITextProcessing, TextProcessing>();
-            services.AddTransient<IConverter, Converter>();
-            services.AddTransient<ICheapestStore, CheapestStore>();
-            services.AddTransient<IGraphOperations, GraphOperations>();
+            services.AddScoped<IReceiptManager, ReceiptManager>();
+            services.AddScoped<ITextProcessing, TextProcessing>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
