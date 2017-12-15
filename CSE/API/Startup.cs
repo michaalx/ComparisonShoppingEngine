@@ -1,7 +1,6 @@
 using Business.Features;
 using Business.TextProcessing;
 using DataBase.Context;
-using DataBase.Models;
 using DataBase.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +36,6 @@ namespace API
             services.AddScoped<IGraphData, GraphData>();
             services.AddScoped<ITextProcessing, TextProcessing>();
             services.AddScoped<IGraphOperations, GraphOperations>();
-            
             services.AddTransient<RecordRepository>();
             services.AddTransient<ICheapest, Cheapest>();
             services.AddTransient<ITextProcessing, TextProcessing>();

@@ -10,6 +10,8 @@ using Xamarin.Forms.Xaml;
 using Microsoft.ProjectOxford.Vision;
 using Microsoft.ProjectOxford.Vision.Contract;
 using System.Text;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace Xamarin
 {
@@ -54,6 +56,7 @@ namespace Xamarin
                     
                     await UseVision(file);
                     EditOcrResults(text);
+                    await PutPhoto(result);
                     //Debug.WriteLine(result);
 
                 }
@@ -80,8 +83,7 @@ namespace Xamarin
 
                 await UseVision(file);
                 EditOcrResults(text);
-                Debug.WriteLine(result);
-
+                await PutPhoto(result);
             };
         }
 
@@ -124,22 +126,15 @@ namespace Xamarin
         //    }
         //}
 
-        //private async Task PutPhoto(byte[] fileBytes, string fileName)
-        //{
-        //    var request = new RestRequest(Method.POST);
-        //    request.AddFile("file", fileBytes, fileName, "multipart/form-data");
-        //    using (var client = new RestClient(new Uri($"{path}Receipt")))
-        //    {
-        //        try
-        //        {
-        //            await client.Execute(request);
-        //        }
-        //        catch(Exception)
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //}
+        private async Task PutPhoto(string file)
+        {
+            string path2 = path + "Features";
+            HttpClient client = new HttpClient();
+            var json = JsonConvert.SerializeObject(file);
+            var request = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(path2, request);
+            Debug.WriteLine(response);
+        }
 
         async void MainToolbar_Clicked(object sender, EventArgs e)
         {
