@@ -34,7 +34,9 @@ namespace API
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddScoped<IFavoriteProducts, FavoriteProducts>();
             services.AddScoped<IReceiptManager, ReceiptManager>();
+            services.AddScoped<IGraphData, GraphData>();
             services.AddScoped<ITextProcessing, TextProcessing>();
+            services.AddScoped<IGraphOperations, GraphOperations>();
             
             services.AddTransient<RecordRepository>();
             services.AddTransient<ICheapest, Cheapest>();
