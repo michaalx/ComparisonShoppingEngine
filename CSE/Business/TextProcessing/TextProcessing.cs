@@ -58,19 +58,19 @@ namespace Business.TextProcessing
                 {
                     return "Maxima";
                 }
-                if (line.Contains(_configuration["Rimi"]))
+                if (line.ToUpper().Contains(_configuration["Rimi"]))
                 {
                     return "Rimi";
                 }
-                if (line.Contains(_configuration["Iki"]))
+                if (line.ToUpper().Contains(_configuration["Iki"]))
                 {
                     return "Iki";
                 }
-                if (line.Contains(_configuration["Norfa"]))
+                if (line.ToUpper().Contains(_configuration["Norfa"]))
                 {
                     return "Norfa";
                 }
-                if (line.Contains(_configuration["Lidl"]))
+                if (line.ToUpper().Contains(_configuration["Lidl"]))
                 {
                     return "Lidl";
                 }
